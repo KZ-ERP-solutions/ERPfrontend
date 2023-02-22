@@ -1,13 +1,15 @@
-import { Button, Typography } from '@mui/material'
+import { Route, Routes } from 'react-router-dom'
+import ErrorPage from './pages/ErrorPage'
+import Index from './pages/Index'
+import Marketing from './pages/Marketing'
 
 function App() {
   return (
-    <div className="App">
-      <Typography>Welcome to KEL</Typography>
-      <Button variant="outlined" color="primary">
-        {'Guide me throw the app >'}
-      </Button>
-    </div>
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/marketing" element={<Marketing />} />
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
   )
 }
 
