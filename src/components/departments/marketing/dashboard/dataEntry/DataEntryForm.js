@@ -311,7 +311,143 @@ const DataEntryForm = ({ close, handleSubmit, submitting }) => {
           </Grid>
           
 
+          {/* Buyer */}
 
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography variant="body1" fontWeight={500} sx={{ mb: 2 }}>
+              Address of buyer
+              </Typography>
+              <FormControl sx={{ width: '100%' }}>
+                <TextField
+                  fullWidth
+                  //   disabled={submitting}
+                  size="small"
+                  id="buyer_org"
+                  name="buyer_org"
+                  label="Organization"
+                  value={formik.values.buyer_org}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.buyer_org && Boolean(formik.errors.buyer_org)
+                  }
+                  helperText={formik.touched.buyer_org && formik.errors.buyer_org}
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl sx={{ width: '100%' }}>
+              <TextField
+                  fullWidth
+                  //   disabled={submitting}
+                  size="small"
+                  id="buyer_addr_line1"
+                  name="buyer_addr_line1"
+                  label="Address Line-1"
+                  value={formik.values.buyer_addr_line1}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.buyer_addr_line1 && Boolean(formik.errors.buyer_addr_line1)
+                  }
+                  helperText={formik.touched.buyer_addr_line1 && formik.errors.buyer_addr_line1}
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl sx={{ width: '100%' }}>
+              <TextField
+                  fullWidth
+                  //   disabled={submitting}
+                  size="small"
+                  id="buyer_addr_line2"
+                  name="buyer_addr_line2"
+                  label="Address Line-2"
+                  value={formik.values.buyer_addr_line2}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.buyer_addr_line2 && Boolean(formik.errors.buyer_addr_line2)
+                  }
+                  helperText={formik.touched.buyer_addr_line2 && formik.errors.buyer_addr_line2}
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl sx={{ width: '100%' }}>
+              <TextField
+                  fullWidth
+                  //   disabled={submitting}
+                  size="small"
+                  id="buyer_addr_line3"
+                  name="buyer_addr_line3"
+                  label="Address Line-3"
+                  value={formik.values.buyer_addr_line3}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.buyer_addr_line3 && Boolean(formik.errors.buyer_addr_line3)
+                  }
+                  helperText={formik.touched.buyer_addr_line3 && formik.errors.buyer_addr_line3}
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl sx={{ width: '100%' }}>
+                <TextField
+                  fullWidth
+                  //   disabled={submitting}
+                  size="small"
+                  id="buyer_pine"
+                  name="buyer_pin"
+                  type={"number"}
+                  label="PIN"
+                  value={formik.values.buyer_pin}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.buyer_pin && Boolean(formik.errors.buyer_pin)
+                  }
+                  helperText={formik.touched.buyer_pin && formik.errors.buyer_pin}
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl sx={{ width: '100%' }}>
+                <TextField
+                  fullWidth
+                  //   disabled={submitting}
+                  size="small"
+                  id="buyer_phone_no"
+                  name="buyer_phone_no"
+                  label="Phone No"
+                  value={formik.values.buyer_phone_no}
+                  onChange={formik.handleChange}
+                  error={formik.touched.buyer_phone_no && Boolean(formik.errors.buyer_phone_no)}
+                  helperText={formik.touched.buyer_phone_no && formik.errors.buyer_phone_no}
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl sx={{ width: '100%' }}>
+                <TextField
+                  fullWidth
+                  //   disabled={submitting}
+                  size="small"
+                  id="buyer_gst_no"
+                  name="buyer_gst_no"
+                  label="GST No"
+                  value={formik.values.buyer_gst_no}
+                  onChange={formik.handleChange}
+                  error={formik.touched.buyer_gst_no && Boolean(formik.errors.buyer_gst_no)}
+                  helperText={formik.touched.buyer_gst_no && formik.errors.consignee_gst_no}
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+          
                   
 
 
