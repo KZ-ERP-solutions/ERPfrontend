@@ -42,6 +42,24 @@
     "note": "",
     "remarks": ""
   },
+  "prr_adv": {
+    "prr_no": "",
+    "prr_date": "",
+    "amount": "",
+    "mode_of_payment": "",
+    "purpose": "",
+    "remarks": "",
+    "billing_status": ""
+  },
+  "prr_bal": {
+    "prr_no": "",
+    "prr_date": "",
+    "amount": "",
+    "mode_of_payment": "",
+    "purpose": "",
+    "remarks": "",
+    "billing_status": ""
+  },
   "item_details": {
     "items": [
       {
