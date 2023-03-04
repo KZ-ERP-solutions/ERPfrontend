@@ -5,6 +5,7 @@ import orders from '../dashboard/orders.json'
 
 const DashboardTemplate = () => {
   // state used to forcefully update component after data entry
+  // eslint-disable-next-line no-unused-vars
   const [forceUpdate, setForceUpdate] = useState(false)
 
   return (

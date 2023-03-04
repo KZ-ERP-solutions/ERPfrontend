@@ -16,7 +16,6 @@ import {
 } from '@mui/material'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
-import initialValues from './initialValues.json'
 import db from './db.json'
 import AddIcon from '@mui/icons-material/Add'
 

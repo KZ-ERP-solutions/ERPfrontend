@@ -37,6 +37,7 @@ const steps = [
 const DataEntry = ({ updateList }) => {
   const [dataEntryForm, setDataEntryForm] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
+  // eslint-disable-next-line no-unused-vars
   const [submitting, setSubmitting] = useState(false)
 
   const nextStep = () => {
