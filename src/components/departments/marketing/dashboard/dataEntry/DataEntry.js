@@ -152,6 +152,7 @@ const DataEntry = ({ updateList }) => {
       <Button
         variant="contained"
         onClick={sendAPIData}
+        sx={{mr:2}}
         disableElevation>
         Test API
       </Button>
