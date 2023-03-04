@@ -7,7 +7,6 @@ import {
   Grow,
   IconButton,
   Step,
-  StepButton,
   StepLabel,
   Stepper,
   Typography,
@@ -18,6 +17,10 @@ import CloseIcon from '@mui/icons-material/Close'
 import Form1 from './Form1'
 import Form2 from './Form2'
 import Form3 from './Form3'
+import Form4 from './Form4'
+import db from './db.json'
+import orders from '../orders.json'
+import initialValues from './initialValues.json'
 
 const SlideUP = React.forwardRef(function Transition(props, ref) {
   return <Grow direction="up" ref={ref} {...props} />
@@ -30,13 +33,10 @@ const steps = [
   'Item details',
 ]
 
-const DataEntry = () => {
+const DataEntry = ({ updateList }) => {
   const [dataEntryForm, setDataEntryForm] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
-
-  const handleStepChange = (step) => {
-    setActiveStep(step)
-  }
+  const [submitting, setSubmitting] = useState(false)
 
   const nextStep = () => {
     setActiveStep((prev) => prev + 1)
@@ -54,11 +54,39 @@ const DataEntry = () => {
     setDataEntryForm(false)
   }
 
+  //removes empty fields
+  const getCleanObject = (jsObj) => {
+    for (const [key, value] of Object.entries(jsObj)) {
+      if (value === '' || value === undefined || value === null)
+        delete jsObj[key]
+    }
+    return jsObj
+  }
+
+  const onSubmit = (formData) => {
+    const cleanObject = getCleanObject(formData)
+    db = { ...initialValues, ...db, ...cleanObject }
+    console.log(db)
+  }
+
+  const onFinalSubmit = (formData) => {
+    db = { ...initialValues, ...db, ...formData }
+    orders.orders.push(db)
+    console.log(orders)
+    updateList()
+    setActiveStep(0)
+  }
+
   const getForm = () => {
     switch (activeStep) {
       case 0:
         return (
-          <Form1 close={() => handleDataEntryClose()} next={() => nextStep()} />
+          <Form1
+            close={() => handleDataEntryClose()}
+            next={() => nextStep()}
+            handleSubmit={(formData) => onSubmit(formData)}
+            submitting={submitting}
+          />
         )
       case 1:
         return (
@@ -66,6 +94,8 @@ const DataEntry = () => {
             close={() => handleDataEntryClose()}
             prev={() => prevStep()}
             next={() => nextStep()}
+            handleSubmit={(formData) => onSubmit(formData)}
+            submitting={submitting}
           />
         )
       case 2:
@@ -74,11 +104,27 @@ const DataEntry = () => {
             close={() => handleDataEntryClose()}
             prev={() => prevStep()}
             next={() => nextStep()}
+            handleSubmit={(formData) => onSubmit(formData)}
+            submitting={submitting}
+          />
+        )
+      case 3:
+        return (
+          <Form4
+            close={() => handleDataEntryClose()}
+            prev={() => prevStep()}
+            handleSubmit={(formData) => onFinalSubmit(formData)}
+            submitting={submitting}
           />
         )
       default:
         return (
-          <Form1 close={() => handleDataEntryClose()} next={() => nextStep()} />
+          <Form1
+            close={() => handleDataEntryClose()}
+            next={() => nextStep()}
+            handleSubmit={(formData) => onSubmit(formData)}
+            submitting={submitting}
+          />
         )
     }
   }
@@ -127,9 +173,7 @@ const DataEntry = () => {
             <Stepper nonLinear activeStep={activeStep} alternativeLabel>
               {steps.map((label, index) => (
                 <Step key={label}>
-                  <StepButton onClick={() => handleStepChange(index)}>
-                    <StepLabel>{label}</StepLabel>
-                  </StepButton>
+                  <StepLabel>{label}</StepLabel>
                 </Step>
               ))}
             </Stepper>

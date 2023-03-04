@@ -8,15 +8,14 @@ import {
   Typography,
 } from '@mui/material'
 import { useFormik } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import initialValues from './initialValues.json'
 
-const Form1 = ({ close, next }) => {
+const Form1 = ({ close, next, handleSubmit, submitting }) => {
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
-      console.log(values)
-      next()
+      handleSubmit(values)
     },
   })
 
@@ -33,7 +32,8 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  autoFocus
+                  disabled={submitting}
                   size="small"
                   id="woso_no"
                   name="woso_no"
@@ -52,7 +52,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="woso_date"
                   name="woso_date"
@@ -73,7 +73,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="customer"
                   name="customer"
@@ -92,7 +92,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="po_no"
                   name="po_no"
@@ -109,7 +109,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="po_date"
                   name="po_date"
@@ -128,7 +128,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="item"
                   name="item"
@@ -152,7 +152,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="consignee_org"
                   name="consignee_org"
@@ -174,7 +174,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="consignee_addr_line1"
                   name="consignee_addr_line1"
@@ -197,7 +197,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="consignee_addr_line2"
                   name="consignee_addr_line2"
@@ -220,7 +220,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="consignee_addr_line3"
                   name="consignee_addr_line3"
@@ -243,7 +243,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="consignee_pine"
                   name="consignee_pin"
@@ -265,7 +265,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="consignee_phone_no"
                   name="consignee_phone_no"
@@ -288,7 +288,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="consignee_gst_no"
                   name="consignee_gst_no"
@@ -318,7 +318,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="buyer_org"
                   name="buyer_org"
@@ -339,7 +339,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="buyer_addr_line1"
                   name="buyer_addr_line1"
@@ -362,7 +362,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="buyer_addr_line2"
                   name="buyer_addr_line2"
@@ -385,7 +385,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="buyer_addr_line3"
                   name="buyer_addr_line3"
@@ -408,7 +408,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="buyer_pine"
                   name="buyer_pin"
@@ -429,7 +429,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="buyer_phone_no"
                   name="buyer_phone_no"
@@ -452,7 +452,7 @@ const Form1 = ({ close, next }) => {
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
-                  //   disabled={submitting}
+                  disabled={submitting}
                   size="small"
                   id="buyer_gst_no"
                   name="buyer_gst_no"
@@ -473,21 +473,44 @@ const Form1 = ({ close, next }) => {
           </Grid>
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'end', mt: 2, gap: 2 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'end',
+            mt: 2,
+            gap: 2,
+          }}>
           <Button
             type="button"
             onClick={close}
             fontWeight={600}
-            // disabled={submitting}>
-          >
-            Back
+            disabled={submitting}
+         >
+            Close
           </Button>
           <Button
-            type="submit"
-            variant="contained"
+            type="button"
+            onClick={() => {
+              formik.handleSubmit()
+              close()
+            }}
             fontWeight={600}
+            sx={{ justifySelf: 'start' }}
+            variant="outlined"
+            disabled={submitting}>
+            Submit & Close
+          </Button>
+          <Button
+            type="button"
+            variant="contained"
+            onClick={() => {
+              formik.handleSubmit()
+              next()
+            }}
+            fontWeight={600}
+            disabled={submitting}
             disableElevation>
-            Next
+            Save & Next
           </Button>
         </Box>
       </form>
