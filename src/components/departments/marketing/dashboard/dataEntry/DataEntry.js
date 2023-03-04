@@ -86,6 +86,15 @@ const DataEntry = ({ updateList }) => {
       .catch((err) => console.log(err))
   }
 
+  const sendAPIData = () => {
+    api.marketing
+      .createOrder(db)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => console.log(err))
+  }
+
   const getForm = () => {
     switch (activeStep) {
       case 0:
@@ -140,6 +149,13 @@ const DataEntry = ({ updateList }) => {
 
   return (
     <div>
+      <Button
+        variant="contained"
+        onClick={sendAPIData}
+        disableElevation>
+        Test API
+      </Button>
+
       <Button
         variant="contained"
         endIcon={<AddIcon />}
