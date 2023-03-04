@@ -21,6 +21,7 @@ import Form4 from './Form4'
 import db from './db.json'
 import orders from '../orders.json'
 import initialValues from './initialValues.json'
+import api from '../../../../../utils/api'
 
 const SlideUP = React.forwardRef(function Transition(props, ref) {
   return <Grow direction="up" ref={ref} {...props} />
@@ -75,6 +76,13 @@ const DataEntry = ({ updateList }) => {
     console.log(orders)
     updateList()
     setActiveStep(0)
+
+    api.marketing
+      .createOrder(db)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => console.log(err))
   }
 
   const getForm = () => {
