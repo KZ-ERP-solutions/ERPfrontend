@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import { useFormik } from 'formik'
 import React from 'react'
-import initialValues from './initialValues.json'
+import initialValues from '../json/initialValues.json'
 
 const Form1 = ({ close, next, handleSubmit, submitting }) => {
   const formik = useFormik({

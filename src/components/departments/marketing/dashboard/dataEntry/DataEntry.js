@@ -14,13 +14,13 @@ import {
 import React, { useState } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import CloseIcon from '@mui/icons-material/Close'
-import Form1 from './Form1'
-import Form2 from './Form2'
-import Form3 from './Form3'
-import Form4 from './Form4'
-import db from './db.json'
+import Form1 from './Forms/Form1'
+import Form2 from './Forms/Form2'
+import Form3 from './Forms/Form3'
+import Form4 from './Forms/Form4'
+import db from './json/db.json'
 import orders from '../orders.json'
-import initialValues from './initialValues.json'
+import initialValues from './json/initialValues.json'
 import api from '../../../../../utils/api'
 
 const SlideUP = React.forwardRef(function Transition(props, ref) {
@@ -73,20 +73,18 @@ const DataEntry = ({ updateList }) => {
 
   const onFinalSubmit = (formData) => {
     db = { ...initialValues, ...db, ...formData }
-    orders.orders.push(db)
+    orders.orders.push({
+      id: orders.orders.length + 1,
+      item_names:
+        db.items.length > 0
+          ? db.items.map((item) => item.item_name).join(', ')
+          : '',
+      ...db,
+    })
     console.log(orders)
     updateList()
     setActiveStep(0)
 
-    api.marketing
-      .createOrder(db)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => console.log(err))
-  }
-
-  const sendAPIData = () => {
     api.marketing
       .createOrder(db)
       .then((res) => {
@@ -149,14 +147,6 @@ const DataEntry = ({ updateList }) => {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        onClick={sendAPIData}
-        sx={{mr:2}}
-        disableElevation>
-        Test API
-      </Button>
-
       <Button
         variant="contained"
         endIcon={<AddIcon />}

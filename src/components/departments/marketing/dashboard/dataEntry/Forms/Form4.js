@@ -16,7 +16,7 @@ import {
 } from '@mui/material'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
-import db from './db.json'
+import db from '../json/db.json'
 import AddIcon from '@mui/icons-material/Add'
 
 const itemsInitialValue = {
@@ -32,7 +32,7 @@ const itemsInitialValue = {
   dp: '',
   net_weight_per_unit: '',
   gross_weight_per_unit: '',
-  total_weigth: '',
+  total_weight: '',
   serial_no: '',
 }
 

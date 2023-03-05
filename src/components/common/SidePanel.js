@@ -7,8 +7,16 @@ import {
   Typography,
 } from '@mui/material'
 import React from 'react'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
+
+const navigationLinks = [
+  { name: 'Dashboard', path: '/marketing/dashboard' },
+  { name: 'Orders', path: '/marketing/orders' },
+]
 
 const SidePanel = () => {
+  const location = useLocation()
+
   return (
     <Box
       height={'100vh'}
@@ -21,25 +29,34 @@ const SidePanel = () => {
       </Typography>
 
       <List>
-        {['Dashboard', 'Orders'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton
+        {navigationLinks.map((item, index) => (
+          <ListItem key={item.name} disablePadding>
+            <Link
+              underline="none"
+              color="tertiary"
+              to={item.path}
+              component={RouterLink}
               sx={{
+                fontWeight: 500,
+                fontSize: '1.1rem',
+                color: 'text.primary',
                 px: 4,
                 py: 1.5,
+                width: '12rem',
                 my: 0.5,
-                bgcolor: index === 0 ? 'tertiary.light' : 'transparent',
+                bgcolor:
+                  location.pathname === item.path
+                    ? 'tertiary.light'
+                    : 'transparent',
                 '&:hover': {
-                  bgcolor: index === 0 ? 'tertiary.main' : 'tertiary.light',
+                  bgcolor:
+                    location.pathname === item.path
+                      ? 'tertiary.main'
+                      : 'tertiary.light',
                 },
               }}>
-              <Link
-                underline="none"
-                color="tertiary"
-                sx={{ fontWeight: 500, fontSize: '1.1rem' }}>
-                {text}
-              </Link>
-            </ListItemButton>
+              {item.name}
+            </Link>
           </ListItem>
         ))}
       </List>

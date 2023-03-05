@@ -9,9 +9,9 @@ import {
 } from '@mui/material'
 import { useFormik } from 'formik'
 import React from 'react'
-import initialValues from './initialValues.json'
+import initialValues from '../json/initialValues.json'
 
-const Form2 = ({ close, prev, next, handleSubmit, submitting }) => {
+const Form3 = ({ close, prev, next, handleSubmit, submitting }) => {
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
@@ -22,13 +22,12 @@ const Form2 = ({ close, prev, next, handleSubmit, submitting }) => {
   return (
     <Container disableGutters maxWidth="100%">
       <form onSubmit={formik.handleSubmit}>
-        <Box display={'flex'} gap={4} mt={3}>
+        <Box display={'flex'} gap={4}>
           <Grid container spacing={2}>
-            {/* delivery details  */}
-
+            {/* prr details advance */}
             <Grid item xs={12}>
               <Typography variant="body1" fontWeight={500} sx={{ mb: 2 }}>
-                Delivery Details
+                PRR Details ( For Advance Payment )
               </Typography>
               <FormControl sx={{ width: '100%' }}>
                 <TextField
@@ -36,17 +35,81 @@ const Form2 = ({ close, prev, next, handleSubmit, submitting }) => {
                   autoFocus
                   disabled={submitting}
                   size="small"
-                  id="buyer_tel_no"
-                  name="buyer_tel_no"
-                  label="Buyer telephone no"
-                  value={formik.values.buyer_tel_no}
+                  id="adv_prr_no"
+                  name="adv_prr_no"
+                  label="PRR no"
+                  value={formik.values.adv_prr_no}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.buyer_tel_no &&
-                    Boolean(formik.errors.buyer_tel_no)
+                    formik.touched.adv_prr_no &&
+                    Boolean(formik.errors.adv_prr_no)
                   }
                   helperText={
-                    formik.touched.buyer_tel_no && formik.errors.buyer_tel_no
+                    formik.touched.adv_prr_no && formik.errors.adv_prr_no
+                  }
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl sx={{ width: '100%' }}>
+                <TextField
+                  fullWidth
+                  disabled={submitting}
+                  size="small"
+                  type={'date'}
+                  id="adv_prr_date"
+                  name="adv_prr_date"
+                  value={formik.values.adv_prr_date}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.adv_prr_date &&
+                    Boolean(formik.errors.adv_prr_date)
+                  }
+                  helperText={
+                    formik.touched.adv_prr_date && formik.errors.adv_prr_date
+                  }
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl sx={{ width: '100%' }}>
+                <TextField
+                  fullWidth
+                  disabled={submitting}
+                  size="small"
+                  id="adv_amount"
+                  name="adv_amount"
+                  label="Amount"
+                  value={formik.values.adv_amount}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.adv_amount &&
+                    Boolean(formik.errors.adv_amount)
+                  }
+                  helperText={
+                    formik.touched.adv_amount && formik.errors.adv_amount
+                  }
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl sx={{ width: '100%' }}>
+                <TextField
+                  fullWidth
+                  disabled={submitting}
+                  size="small"
+                  id="adv_mode_of_payment"
+                  name="adv_mode_of_payment"
+                  label="Mode of Payment:Cash/EFT/DD"
+                  value={formik.values.adv_mode_of_payment}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.adv_mode_of_payment &&
+                    Boolean(formik.errors.adv_mode_of_payment)
+                  }
+                  helperText={
+                    formik.touched.adv_mode_of_payment &&
+                    formik.errors.adv_mode_of_payment
                   }
                 />
               </FormControl>
@@ -58,18 +121,17 @@ const Form2 = ({ close, prev, next, handleSubmit, submitting }) => {
                   fullWidth
                   disabled={submitting}
                   size="small"
-                  id="consignee_tel_no"
-                  name="consignee_tel_no"
-                  label="Consignee telephone no"
-                  value={formik.values.consignee_tel_no}
+                  id="adv_purpose"
+                  name="adv_purpose"
+                  label="Purpose"
+                  value={formik.values.adv_purpose}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.consignee_tel_no &&
-                    Boolean(formik.errors.consignee_tel_no)
+                    formik.touched.adv_purpose &&
+                    Boolean(formik.errors.adv_purpose)
                   }
                   helperText={
-                    formik.touched.consignee_tel_no &&
-                    formik.errors.consignee_tel_no
+                    formik.touched.adv_purpose && formik.errors.adv_purpose
                   }
                 />
               </FormControl>
@@ -81,17 +143,17 @@ const Form2 = ({ close, prev, next, handleSubmit, submitting }) => {
                   fullWidth
                   disabled={submitting}
                   size="small"
-                  id="payment_terms"
-                  name="payment_terms"
-                  label="Payment terms"
-                  value={formik.values.payment_terms}
+                  id="adv_remarks"
+                  name="adv_remarks"
+                  label="Deduction / Remarks"
+                  value={formik.values.adv_remarks}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.payment_terms &&
-                    Boolean(formik.errors.payment_terms)
+                    formik.touched.adv_remarks &&
+                    Boolean(formik.errors.adv_remarks)
                   }
                   helperText={
-                    formik.touched.payment_terms && formik.errors.payment_terms
+                    formik.touched.adv_remarks && formik.errors.adv_remarks
                   }
                 />
               </FormControl>
@@ -103,84 +165,18 @@ const Form2 = ({ close, prev, next, handleSubmit, submitting }) => {
                   fullWidth
                   disabled={submitting}
                   size="small"
-                  id="paying_authority"
-                  name="paying_authority"
-                  label="Paying authority"
-                  value={formik.values.paying_authority}
+                  id="adv_billing_status"
+                  name="adv_billing_status"
+                  label="Billing status"
+                  value={formik.values.adv_billing_status}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.paying_authority &&
-                    Boolean(formik.errors.paying_authority)
+                    formik.touched.adv_billing_status &&
+                    Boolean(formik.errors.adv_billing_status)
                   }
                   helperText={
-                    formik.touched.paying_authority &&
-                    formik.errors.paying_authority
-                  }
-                />
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12}>
-              <FormControl sx={{ width: '100%' }}>
-                <TextField
-                  fullWidth
-                  disabled={submitting}
-                  size="small"
-                  id="insurance"
-                  name="insurance"
-                  label="Insurance ( by us / party )"
-                  value={formik.values.insurance}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.insurance && Boolean(formik.errors.insurance)
-                  }
-                  helperText={
-                    formik.touched.insurance && formik.errors.insurance
-                  }
-                />
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12}>
-              <FormControl sx={{ width: '100%' }}>
-                <TextField
-                  fullWidth
-                  disabled={submitting}
-                  size="small"
-                  id="delivery_date"
-                  name="delivery_date"
-                  label="Delivery date"
-                  value={formik.values.delivery_date}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.delivery_date &&
-                    Boolean(formik.errors.delivery_date)
-                  }
-                  helperText={
-                    formik.touched.delivery_date && formik.errors.delivery_date
-                  }
-                />
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12}>
-              <FormControl sx={{ width: '100%' }}>
-                <TextField
-                  fullWidth
-                  disabled={submitting}
-                  size="small"
-                  id="delivery_place"
-                  name="delivery_place"
-                  label="Delivery place ( door / ex-works )"
-                  value={formik.values.delivery_place}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.delivery_place &&
-                    Boolean(formik.errors.delivery_place)
-                  }
-                  helperText={
-                    formik.touched.delivery_place &&
-                    formik.errors.delivery_place
+                    formik.touched.adv_billing_status &&
+                    formik.errors.adv_billing_status
                   }
                 />
               </FormControl>
@@ -188,111 +184,91 @@ const Form2 = ({ close, prev, next, handleSubmit, submitting }) => {
           </Grid>
 
           <Grid container spacing={2}>
+            {/* prr details balance */}
             <Grid item xs={12}>
-              <FormControl sx={{ width: '100%', pt: 5 }}>
-                <TextField
-                  fullWidth
-                  disabled={submitting}
-                  size="small"
-                  id="freight"
-                  name="freight"
-                  label="Freight ( paid / to pay )"
-                  value={formik.values.freight}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.freight && Boolean(formik.errors.freight)
-                  }
-                  helperText={formik.touched.freight && formik.errors.freight}
-                />
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12}>
+              <Typography variant="body1" fontWeight={500} sx={{ mb: 2 }}>
+                PRR Details ( For Balance Payment )
+              </Typography>
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
                   disabled={submitting}
                   size="small"
-                  id="mode_of_despatch"
-                  name="mode_of_despatch"
-                  label="Mode of despatch"
-                  value={formik.values.mode_of_despatch}
+                  id="bal_prr_no"
+                  name="bal_prr_no"
+                  label="PRR no"
+                  value={formik.values.bal_prr_no}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.mode_of_despatch &&
-                    Boolean(formik.errors.mode_of_despatch)
+                    formik.touched.bal_prr_no &&
+                    Boolean(formik.errors.bal_prr_no)
                   }
                   helperText={
-                    formik.touched.mode_of_despatch &&
-                    formik.errors.mode_of_despatch
+                    formik.touched.bal_prr_no && formik.errors.bal_prr_no
                   }
                 />
               </FormControl>
             </Grid>
-
             <Grid item xs={12}>
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
                   disabled={submitting}
                   size="small"
-                  id="inspection"
-                  name="inspection"
-                  label="Inspection"
-                  value={formik.values.inspection}
+                  type={'date'}
+                  id="bal_prr_date"
+                  name="bal_prr_date"
+                  value={formik.values.bal_prr_date}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.inspection &&
-                    Boolean(formik.errors.inspection)
+                    formik.touched.bal_prr_date &&
+                    Boolean(formik.errors.bal_prr_date)
                   }
                   helperText={
-                    formik.touched.inspection && formik.errors.inspection
+                    formik.touched.bal_prr_date && formik.errors.bal_prr_date
                   }
                 />
               </FormControl>
             </Grid>
-
             <Grid item xs={12}>
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
                   disabled={submitting}
                   size="small"
-                  id="special_instruction"
-                  name="special_instruction"
-                  label="Special instructions if any"
-                  value={formik.values.special_instruction}
+                  id="bal_amount"
+                  name="bal_amount"
+                  label="Amount"
+                  value={formik.values.bal_amount}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.special_instruction &&
-                    Boolean(formik.errors.special_instruction)
+                    formik.touched.bal_amount &&
+                    Boolean(formik.errors.bal_amount)
                   }
                   helperText={
-                    formik.touched.special_instruction &&
-                    formik.errors.special_instruction
+                    formik.touched.bal_amount && formik.errors.bal_amount
                   }
                 />
               </FormControl>
             </Grid>
-
             <Grid item xs={12}>
               <FormControl sx={{ width: '100%' }}>
                 <TextField
                   fullWidth
                   disabled={submitting}
                   size="small"
-                  id="despatch_additional_info"
-                  name="despatch_additional_info"
-                  label="Further despatch clear required"
-                  value={formik.values.despatch_additional_info}
+                  id="bal_mode_of_payment"
+                  name="bal_mode_of_payment"
+                  label="Mode of payment:Cash/EFT/DD"
+                  value={formik.values.bal_mode_of_payment}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.despatch_additional_info &&
-                    Boolean(formik.errors.despatch_additional_info)
+                    formik.touched.bal_mode_of_payment &&
+                    Boolean(formik.errors.bal_mode_of_payment)
                   }
                   helperText={
-                    formik.touched.despatch_additional_info &&
-                    formik.errors.despatch_additional_info
+                    formik.touched.bal_mode_of_payment &&
+                    formik.errors.bal_mode_of_payment
                   }
                 />
               </FormControl>
@@ -304,32 +280,63 @@ const Form2 = ({ close, prev, next, handleSubmit, submitting }) => {
                   fullWidth
                   disabled={submitting}
                   size="small"
-                  id="note"
-                  name="note"
-                  label="Note"
-                  value={formik.values.note}
-                  onChange={formik.handleChange}
-                  error={formik.touched.note && Boolean(formik.errors.note)}
-                  helperText={formik.touched.note && formik.errors.note}
-                />
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12}>
-              <FormControl sx={{ width: '100%' }}>
-                <TextField
-                  fullWidth
-                  disabled={submitting}
-                  size="small"
-                  id="remarks"
-                  name="remarks"
-                  label="Remarks"
-                  value={formik.values.remarks}
+                  id="bal_purpose"
+                  name="bal_purpose"
+                  label="Purpose"
+                  value={formik.values.bal_purpose}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.remarks && Boolean(formik.errors.remarks)
+                    formik.touched.bal_purpose &&
+                    Boolean(formik.errors.bal_purpose)
                   }
-                  helperText={formik.touched.remarks && formik.errors.remarks}
+                  helperText={
+                    formik.touched.bal_purpose && formik.errors.bal_purpose
+                  }
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl sx={{ width: '100%' }}>
+                <TextField
+                  fullWidth
+                  disabled={submitting}
+                  size="small"
+                  id="bal_remarks"
+                  name="bal_remarks"
+                  label="Deduction / Remarks"
+                  value={formik.values.bal_remarks}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.bal_remarks &&
+                    Boolean(formik.errors.bal_remarks)
+                  }
+                  helperText={
+                    formik.touched.bal_remarks && formik.errors.bal_remarks
+                  }
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl sx={{ width: '100%' }}>
+                <TextField
+                  fullWidth
+                  disabled={submitting}
+                  size="small"
+                  id="bal_billing_status"
+                  name="bal_billing_status"
+                  label="Billing status"
+                  value={formik.values.bal_billing_status}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.bal_billing_status &&
+                    Boolean(formik.errors.bal_billing_status)
+                  }
+                  helperText={
+                    formik.touched.bal_billing_status &&
+                    formik.errors.bal_billing_status
+                  }
                 />
               </FormControl>
             </Grid>
@@ -393,4 +400,4 @@ const Form2 = ({ close, prev, next, handleSubmit, submitting }) => {
   )
 }
 
-export default Form2
+export default Form3
