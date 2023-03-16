@@ -9,7 +9,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import TableSortLabel from '@mui/material/TableSortLabel'
 import { visuallyHidden } from '@mui/utils'
-import { styled, Typography } from '@mui/material'
+import { styled } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 function descendingComparator(a, b, orderBy) {

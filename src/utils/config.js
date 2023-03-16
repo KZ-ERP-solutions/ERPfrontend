@@ -1,4 +1,4 @@
-const REACT_APP_BACKEND_URL = 'http://127.0.0.1:8000/api'
+const REACT_APP_BACKEND_URL = process.env.REACT_APP_BACKEND_URI
 
 const config = { REACT_APP_BACKEND_URL }
 export default config

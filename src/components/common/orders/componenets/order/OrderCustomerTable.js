@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import stringFns from '../../../../../utils/stringFns'
@@ -91,7 +91,7 @@ const OrderCustomerTable = ({
           Buyer Address
         </Typography>
         <DataGrid
-          sx={{  bgcolor:'background.paper'}}
+          sx={{ bgcolor: 'background.paper' }}
           rows={rowsBuyer}
           columns={columnsBuyer}
           initialState={{
@@ -112,7 +112,7 @@ const OrderCustomerTable = ({
           Consignee Address
         </Typography>
         <DataGrid
-              sx={{  bgcolor:'background.paper'}}
+          sx={{ bgcolor: 'background.paper' }}
           rows={rowsBuyer}
           columns={columnsBuyer}
           initialState={{
@@ -125,7 +125,7 @@ const OrderCustomerTable = ({
           disableColumnMenu
           hideFooter
           rowHeight={35}
-          rowCount={rowsBuyer.length}
+          rowCount={rowsConsign.length}
         />
       </Grid>
     </Grid>
