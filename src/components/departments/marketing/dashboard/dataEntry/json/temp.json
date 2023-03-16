@@ -42,23 +42,17 @@
     "note": "",
     "remarks": ""
   },
-  "prr_adv": {
+  "prr": {
     "prr_no": "",
     "prr_date": "",
     "amount": "",
-    "mode_of_payment": "",
-    "purpose": "",
-    "remarks": "",
-    "billing_status": ""
-  },
-  "prr_bal": {
-    "prr_no": "",
-    "prr_date": "",
-    "amount": "",
-    "mode_of_payment": "",
-    "purpose": "",
-    "remarks": "",
-    "billing_status": ""
+    "payment_type": "// advance or balance",
+    "purpose_remarks": "",
+    "deduction": "",
+    "mode_of_payment": "// Cash, EFT or DD",
+    "billing_status": "",
+    "date_of_packing": "",
+    "time_of_packing": ""
   },
   "item_details": {
     "items": [

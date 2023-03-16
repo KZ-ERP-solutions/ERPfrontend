@@ -2,9 +2,11 @@ import axios from './axios'
 
 const api = {
   marketing: {
-    createOrder: async (formData) => {
-      const path = '/'
-      return axios.post(path, formData).then((response) => response)
+    order: {
+      list: async () => {
+        const path = '/marketing/list_order/'
+        return axios.get(path).then((res) => res.data)
+      },
     },
   },
 }

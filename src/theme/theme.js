@@ -12,6 +12,9 @@ let theme = createTheme({
       main: '#3d84a8',
     },
     tertiary: augmentColor({ color: { main: '#b3b1cd' } }),
+    gray: {
+      light: '#F8F8F8',
+    },
     background: {
       paper: '#f9f7f7',
     },

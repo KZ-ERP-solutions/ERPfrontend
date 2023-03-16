@@ -2,12 +2,12 @@ import { Box, Container, Grid } from '@mui/material'
 import React, { useState } from 'react'
 import DataEntry from '../dashboard/dataEntry/DataEntry'
 
-import Piechart from '../../../common/Dashboard/Piechart'
-import LowStock from '../../../common/Dashboard/LowStock'
-import Items from '../../../common/Dashboard/Items'
-import Payment from '../../../common/Dashboard/Payment'
-import EmployeeStatus from '../../../common/Dashboard/EmployeeStatus'
-import ComingSoon from '../../../common/Dashboard/ComingSoon'
+import Piechart from '../../../common/dashboard/Piechart'
+import LowStock from '../../../common/dashboard/LowStock'
+import Items from '../../../common/dashboard/Items'
+import Payment from '../../../common/dashboard/Payment'
+import EmployeeStatus from '../../../common/dashboard/EmployeeStatus'
+import ComingSoon from '../../../common/dashboard/ComingSoon'
 
 const DashboardTemplate = () => {
   // state used to forcefully update component after data entry
@@ -28,10 +28,10 @@ const DashboardTemplate = () => {
           maxWidth: '80vw',
         }}>
         <Grid container spacing={2}>
-          <Grid xs={4} >
+          <Grid xs={4}>
             <Piechart />
           </Grid>
-          <Grid xs={4} >
+          <Grid xs={4}>
             <EmployeeStatus />
           </Grid>
           <Grid xs={4}>
@@ -45,10 +45,9 @@ const DashboardTemplate = () => {
               <Payment />
             </Grid>
             <Grid xs={4}>
-            <ComingSoon />
+              <ComingSoon />
+            </Grid>
           </Grid>
-          </Grid>
-          
         </Grid>
       </Box>
     </Container>

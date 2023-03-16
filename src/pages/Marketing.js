@@ -1,17 +1,19 @@
 import { Container } from '@mui/material'
 import React, { useEffect } from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import SidePanel from '../components/common/SidePanel'
-import Orders from '../components/departments/marketing/dashboard/orders/Orders'
+import OrdersRoutes from '../components/common/orders/OrdersRoutes'
 import DashboardTemplate from '../components/departments/marketing/Templates/DashboardTemplate'
 
 const Marketing = () => {
+  const location = useLocation()
   const navigate = useNavigate()
+
   useEffect(() => {
-    navigate('/marketing/dashboard')
+    console.log(location.pathname)
+    if (location.pathname === '/marketing') navigate('/marketing/dashboard')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
   return (
     <Container maxWidth="100%" disableGutters sx={{ display: 'flex' }}>
       <SidePanel />
@@ -19,7 +21,7 @@ const Marketing = () => {
       {/* marketing routes  */}
       <Routes>
         <Route path="/dashboard" element={<DashboardTemplate />} />
-        <Route path="/orders" element={<Orders />} />
+        <Route path="/orders/*" element={<OrdersRoutes />} />
       </Routes>
     </Container>
   )

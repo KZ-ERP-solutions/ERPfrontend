@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow'
 import TableSortLabel from '@mui/material/TableSortLabel'
 import { visuallyHidden } from '@mui/utils'
 import { styled, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -88,10 +89,10 @@ EnhancedTableHead.propTypes = {
   columns: PropTypes.array.isRequired,
 }
 
-export default function MuiTable({ columns = [], rows = [] }) {
+export default function MuiTable({ columns = [], rows = [], orderFull = [] }) {
   const [order, setOrder] = React.useState('asc')
   const [orderBy, setOrderBy] = React.useState('calories')
-
+  const navigate = useNavigate()
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc'
     setOrder(isAsc ? 'desc' : 'asc')
@@ -118,36 +119,38 @@ export default function MuiTable({ columns = [], rows = [] }) {
             columns={columns}
           />
           <TableBody>
-            {rows.length > 0 ? (
-              stableSort(rows, getComparator(order, orderBy)).map(
-                (row, index) => {
-                  return (
-                    <TableRow
-                      hover
-                      sx={{ bgcolor: 'background.paper' }}
-                      // onClick={(event) => handleClick(event, row.name)}
-                      tabIndex={-1}>
-                      <TableCell padding="normal">{row.woso_no}</TableCell>
-                      <TableCell padding="normal">{row.woso_date}</TableCell>
-                      <TableCell padding="normal">{row.po_no}</TableCell>
-                      <TableCell padding="normal">
-                        {row.consignee_org}
-                      </TableCell>
-                      <TableCell padding="normal">{row.customer}</TableCell>
-                      <TableCell padding="normal">{row.items}</TableCell>
-                    </TableRow>
-                  )
-                }
-              )
-            ) : (
-              <TableRow hover sx={{ bgcolor: 'background.paper' }}>
-                <TableCell colSpan={columns?.length}>
-                  <Typography variant="body2" align="center">
-                    <i>No orders data</i>
-                  </Typography>
-                </TableCell>
-              </TableRow>
-            )}
+            {rows.length > 0
+              ? stableSort(rows, getComparator(order, orderBy)).map(
+                  (row, index) => {
+                    return (
+                      <TableRow
+                        key={row?.orderId}
+                        hover
+                        sx={{ bgcolor: 'background.paper' }}
+                        onClick={() =>
+                          navigate(
+                            `${
+                              row?.orderId
+                                ? `/marketing/orders/order/${row?.orderId}`
+                                : `/marketing/orders`
+                            }`,
+                            { state: { orders: orderFull } }
+                          )
+                        }
+                        tabIndex={-1}>
+                        <TableCell padding="normal">{row.woso_no}</TableCell>
+                        <TableCell padding="normal">{row.woso_date}</TableCell>
+                        <TableCell padding="normal">{row.po_no}</TableCell>
+                        <TableCell padding="normal">
+                          {row.consignee_org}
+                        </TableCell>
+                        <TableCell padding="normal">{row.customer}</TableCell>
+                        <TableCell padding="normal">{row.items}</TableCell>
+                      </TableRow>
+                    )
+                  }
+                )
+              : null}
           </TableBody>
         </Table>
       </TableContainer>

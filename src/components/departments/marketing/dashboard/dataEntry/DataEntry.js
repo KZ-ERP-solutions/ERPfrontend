@@ -19,7 +19,6 @@ import Form2 from './Forms/Form2'
 import Form3 from './Forms/Form3'
 import Form4 from './Forms/Form4'
 import db from './json/db.json'
-import orders from '../orders.json'
 import initialValues from './json/initialValues.json'
 import api from '../../../../../utils/api'
 
@@ -72,16 +71,6 @@ const DataEntry = ({ updateList }) => {
   }
 
   const onFinalSubmit = (formData) => {
-    db = { ...initialValues, ...db, ...formData }
-    orders.orders.push({
-      id: orders.orders.length + 1,
-      item_names:
-        db.items.length > 0
-          ? db.items.map((item) => item.item_name).join(', ')
-          : '',
-      ...db,
-    })
-    console.log(orders)
     updateList()
     setActiveStep(0)
 

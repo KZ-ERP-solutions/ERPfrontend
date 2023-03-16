@@ -1,10 +1,4 @@
-import {
-  Box,
-  Link,
-  List,
-  ListItem,
-  Typography,
-} from '@mui/material'
+import { Box, Link, List, ListItem, Typography } from '@mui/material'
 import React from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 
@@ -17,10 +11,7 @@ const SidePanel = () => {
   const location = useLocation()
 
   return (
-    <Box
-      height={'100vh'}
-      width={'10rem'}
-      sx={{ py: 2, bgcolor: (theme) => theme.palette.background.paper }}>
+    <Box height={'100vh'} width={'10rem'} sx={{ py: 2, bgcolor: 'white' }}>
       <Typography
         variant="h5"
         sx={{ fontWeight: 600, textAlign: 'center', mb: 2 }}>
@@ -43,15 +34,13 @@ const SidePanel = () => {
                 py: 1.5,
                 width: '12rem',
                 my: 0.5,
-                bgcolor:
-                  location.pathname === item.path
-                    ? 'tertiary.light'
-                    : 'transparent',
+                bgcolor: String(location.pathname).includes(item.path)
+                  ? 'tertiary.light'
+                  : 'transparent',
                 '&:hover': {
-                  bgcolor:
-                    location.pathname === item.path
-                      ? 'tertiary.main'
-                      : 'tertiary.light',
+                  bgcolor: String(location.pathname).includes(item.path)
+                    ? 'tertiary.main'
+                    : 'tertiary.light',
                 },
               }}>
               {item.name}
