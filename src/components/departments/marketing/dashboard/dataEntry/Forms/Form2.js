@@ -126,6 +126,29 @@ const Form2 = ({ close, prev, next, handleSubmit, submitting }) => {
                   fullWidth
                   disabled={submitting}
                   size="small"
+                  id="penalty_clause"
+                  name="penalty_clause"
+                  label="Penalty Clause "
+                  value={formik.values.penalty_clause}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.penalty_clause &&
+                    Boolean(formik.errors.penalty_clause)
+                  }
+                  helperText={
+                    formik.touched.penalty_clause &&
+                    formik.errors.penalty_clause
+                  }
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl sx={{ width: '100%' }}>
+                <TextField
+                  fullWidth
+                  disabled={submitting}
+                  size="small"
                   id="insurance"
                   name="insurance"
                   label="Insurance ( by us / party )"

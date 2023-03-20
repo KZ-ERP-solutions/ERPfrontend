@@ -18,9 +18,11 @@ import Form1 from './Forms/Form1'
 import Form2 from './Forms/Form2'
 import Form3 from './Forms/Form3'
 import Form4 from './Forms/Form4'
+import Form5 from './Forms/Form5'
 import db from './json/db.json'
 import initialValues from './json/initialValues.json'
 import api from '../../../../../utils/api'
+
 
 const SlideUP = React.forwardRef(function Transition(props, ref) {
   return <Grow direction="up" ref={ref} {...props} />
@@ -30,7 +32,10 @@ const steps = [
   'Order details',
   'Additional details',
   'Payment details',
+  'Dispatch',
   'Item details',
+  
+  
 ]
 
 const DataEntry = ({ updateList }) => {
@@ -105,7 +110,7 @@ const DataEntry = ({ updateList }) => {
         )
       case 2:
         return (
-          <Form3
+          <Form3 
             close={() => handleDataEntryClose()}
             prev={() => prevStep()}
             next={() => nextStep()}
@@ -113,7 +118,19 @@ const DataEntry = ({ updateList }) => {
             submitting={submitting}
           />
         )
-      case 3:
+
+        case 3:
+          return (
+            <Form5 
+              close={() => handleDataEntryClose()}
+              prev={() => prevStep()}
+              next={() => nextStep()}
+              handleSubmit={(formData) => onSubmit(formData)}
+              submitting={submitting}
+            />
+        )
+
+      case 4:
         return (
           <Form4
             close={() => handleDataEntryClose()}
@@ -122,6 +139,7 @@ const DataEntry = ({ updateList }) => {
             submitting={submitting}
           />
         )
+       
       default:
         return (
           <Form1
