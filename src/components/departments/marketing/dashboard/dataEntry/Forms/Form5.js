@@ -22,8 +22,8 @@ const Form5 = ({ close, prev, next, handleSubmit, submitting }) => {
   return (
     <Container disableGutters maxWidth="100%">
       <form onSubmit={formik.handleSubmit}>
-        <div>
-          <Box display={'flex'} gap={2} >
+        <div style={{marginLeft:"auto", marginRight:"auto"}}>
+          <Box display={'flex'} gap={2} sx={{marginLeft:'19rem'}}>
             <Grid container spacing={1}>
               {/* prr details advance */}
               <Grid item xs={12} rowSpacing={10}>
