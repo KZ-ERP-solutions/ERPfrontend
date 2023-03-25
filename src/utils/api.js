@@ -7,6 +7,10 @@ const api = {
         const path = '/marketing/list_order/'
         return axios.get(path).then((res) => res.data)
       },
+      create:async (order)=>{
+        const path = '/marketing/create_order/'
+        return axios.post(path,order).then((res) => res.data)
+      }
     },
   },
 }

@@ -34,8 +34,6 @@ const steps = [
   'Payment details',
   'Dispatch',
   'Item details',
-  
-  
 ]
 
 const DataEntry = ({ updateList }) => {
@@ -80,7 +78,7 @@ const DataEntry = ({ updateList }) => {
     setActiveStep(0)
 
     api.marketing
-      .createOrder(db)
+      .order.create(db)
       .then((res) => {
         console.log(res)
       })

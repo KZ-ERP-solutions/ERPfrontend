@@ -1,13 +1,6 @@
-import { Box, Container, Grid } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import React, { useState } from 'react'
 import DataEntry from '../dashboard/dataEntry/DataEntry'
-
-import Piechart from '../../../common/dashboard/Piechart'
-import LowStock from '../../../common/dashboard/LowStock'
-import Items from '../../../common/dashboard/Items'
-import Payment from '../../../common/dashboard/Payment'
-import EmployeeStatus from '../../../common/dashboard/EmployeeStatus'
-import ComingSoon from '../../../common/dashboard/ComingSoon'
 
 const DashboardTemplate = () => {
   // state used to forcefully update component after data entry
@@ -21,7 +14,7 @@ const DashboardTemplate = () => {
 
         <DataEntry updateList={() => setForceUpdate((prev) => !prev)} />
       </Box>
-      <Box
+      {/* <Box
         sx={{
           overflowY: 'auto',
           height: '90vh',
@@ -49,7 +42,7 @@ const DashboardTemplate = () => {
             </Grid>
           </Grid>
         </Grid>
-      </Box>
+      </Box> */}
     </Container>
   )
 }
