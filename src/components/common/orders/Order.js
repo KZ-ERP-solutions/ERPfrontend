@@ -79,8 +79,7 @@ const Order = () => {
         }))
       } else setData((prev) => ({ ...prev, orders: state.orders }))
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [orderId,state])
 
   const handleTabChange = (event, newValue) => {
     setCurrentTab(newValue)
