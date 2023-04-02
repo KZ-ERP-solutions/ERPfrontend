@@ -2,24 +2,26 @@ import { Box, Link, List, ListItem, Typography } from '@mui/material'
 import React from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 
-const navigationLinks = [
-  { name: 'Dashboard', path: '/marketing/dashboard' },
-  { name: 'Orders', path: '/marketing/orders' },
-]
-
 const SidePanel = () => {
   const location = useLocation()
+  const deptName = location.pathname.split('/')[1]
+  const deptNameCased = deptName.charAt(0).toUpperCase() + deptName.slice(1) // has to be changed to a sentence case => title case fn
+
+  const commonNavigationLinks = [
+    { name: 'Dashboard', path: `/${deptName}/dashboard` },
+    { name: 'Orders', path: `/${deptName}/orders` },
+  ]
 
   return (
     <Box height={'100vh'} width={'10rem'} sx={{ py: 2, bgcolor: 'white' }}>
       <Typography
         variant="h5"
         sx={{ fontWeight: 600, textAlign: 'center', mb: 2 }}>
-        Marketing
+        {deptNameCased}
       </Typography>
 
       <List>
-        {navigationLinks.map((item, index) => (
+        {commonNavigationLinks.map((item, index) => (
           <ListItem key={item.name} disablePadding>
             <Link
               underline="none"
@@ -47,6 +49,8 @@ const SidePanel = () => {
             </Link>
           </ListItem>
         ))}
+
+        {/* add rest of the dept menu link here as conditioned rendering */}
       </List>
     </Box>
   )

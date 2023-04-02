@@ -36,10 +36,10 @@ const Orders = () => {
       .list()
       .then((res) => {
         console.log(res)
-        setOrders(res?.oders.length > 0 ? res.oders : [])
+        setOrders(res?.orders.length > 0 ? res.orders : [])
         setOrdersMin(
-          res?.oders.length > 0
-            ? res.oders.map((order, index) => {
+          res?.orders.length > 0
+            ? res.orders.map((order, index) => {
                 const newOrder = {
                   id: index,
                   orderId: order?.no, //temporary; should change to id

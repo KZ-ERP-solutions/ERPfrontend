@@ -4,6 +4,7 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import SidePanel from '../components/common/SidePanel'
 import OrdersRoutes from '../components/common/orders/OrdersRoutes'
 import DashboardTemplate from '../components/departments/marketing/Templates/DashboardTemplate'
+import ErrorPage from './ErrorPage'
 
 const Marketing = () => {
   const location = useLocation()
@@ -22,6 +23,7 @@ const Marketing = () => {
       <Routes>
         <Route path="/dashboard" element={<DashboardTemplate />} />
         <Route path="/orders/*" element={<OrdersRoutes />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Container>
   )

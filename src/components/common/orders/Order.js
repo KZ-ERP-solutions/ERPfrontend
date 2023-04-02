@@ -142,9 +142,8 @@ const Order = () => {
             {'Order - '}
           </Typography>
           <Typography
-            variant="body1"
+            variant="h6"
             fontWeight={600}
-            component="i"
             sx={{ my: 2, display: 'inline' }}>
             {'wo/so no: '}
           </Typography>
@@ -155,7 +154,6 @@ const Order = () => {
             {orderId}
           </Typography>
         </div>
-        <OrderSearch orders={data.orders} />
       </Box>
 
       <Box sx={{ width: '100%', mt: 2 }}>

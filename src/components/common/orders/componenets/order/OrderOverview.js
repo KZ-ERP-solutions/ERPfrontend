@@ -4,7 +4,7 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableRow from '@mui/material/TableRow'
-import { Box,  Paper, Typography } from '@mui/material'
+import { Box, Grid, Paper, Typography } from '@mui/material'
 import { styled } from '@mui/system'
 
 function createData(parameter, value) {
@@ -80,14 +80,13 @@ export default function OrderOverview({ order }) {
   return (
     <Box sx={{ display: 'flex', gap: 4 }}>
       <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          flexBasis: '50%',
-          flexGrow: 0,
-          gap: 4,
-        }}>
-        <div>
+        display="grid"
+        gridTemplateColumns="repeat(12, 1fr)"
+        gap={3}
+        width="100%">
+
+        {/* details  */}
+        <Box gridColumn="span 6">
           <Typography variant="h6" sx={{ mb: 1 }}>
             Details
           </Typography>
@@ -110,9 +109,43 @@ export default function OrderOverview({ order }) {
               </TableBody>
             </Table>
           </TableContainer>
-        </div>
+        </Box>
 
-        <div>
+        {/* items  */}
+        {rowsItems && rowsItems.length > 0 ? (
+          <Box gridColumn="span 6" gridRow={`span ${rowsItems.length / 6}`}>
+            <Typography variant="h6" sx={{ mb: 1 }}>
+              Items
+            </Typography>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 300 }}>
+                <TableBody>
+                  {rowsItems.length > 0 &&
+                    rowsItems.map((row) => (
+                      <StyledTableRow key={row.name}>
+                        <TableCell component="th" scope="row">
+                          {row.parameter}
+                        </TableCell>
+                        <TableCell>{row.value}</TableCell>
+                      </StyledTableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
+        ) : (
+          <Box gridColumn="span 6">
+            <Typography variant="h6" sx={{ mb: 1 }}>
+              Items
+            </Typography>
+            <Typography variant="body1" color="text.secondary" align="center">
+              <i>0 items in list</i>
+            </Typography>
+          </Box>
+        )}
+
+        {/* status  */}
+        <Box gridColumn="span 6">
           <Typography variant="h6" sx={{ mb: 1 }}>
             Status
           </Typography>
@@ -135,9 +168,10 @@ export default function OrderOverview({ order }) {
               </TableBody>
             </Table>
           </TableContainer>
-        </div>
+        </Box>
 
-        <div>
+        {/* customer  */}
+        <Box gridColumn="span 6">
           <Typography variant="h6" sx={{ mb: 1 }}>
             Customer
           </Typography>
@@ -160,37 +194,7 @@ export default function OrderOverview({ order }) {
               </TableBody>
             </Table>
           </TableContainer>
-        </div>
-      </Box>
-
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          flexBasis: '50%',
-          flexGrow: 0,
-          gap: 4,
-        }}>
-        <div>
-          <Typography variant="h6" sx={{ mb: 1 }}>
-            Items
-          </Typography>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 300 }}>
-              <TableBody>
-                {rowsItems.length > 0 &&
-                  rowsItems.map((row) => (
-                    <StyledTableRow key={row.name}>
-                      <TableCell component="th" scope="row">
-                        {row.parameter}
-                      </TableCell>
-                      <TableCell>{row.value}</TableCell>
-                    </StyledTableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
+        </Box>
       </Box>
     </Box>
   )

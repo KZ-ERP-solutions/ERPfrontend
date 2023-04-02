@@ -86,7 +86,7 @@ const OrderCustomerTable = ({
       container
       sx={{ width: '100%', justifyContent: 'center', my: 5 }}
       columnSpacing={5}>
-      <Grid item sx={{ disply: 'flex', height: 305, width: '45%' }}>
+      <Grid item sx={{ disply: 'flex', height: 350, width: '45%' }}>
         <Typography variant="h6" sx={{ mb: 1 }}>
           Buyer Address
         </Typography>
@@ -107,7 +107,7 @@ const OrderCustomerTable = ({
           rowCount={rowsBuyer.length}
         />
       </Grid>
-      <Grid item sx={{ disply: 'flex', height: 305, width: '45%' }}>
+      <Grid item sx={{ disply: 'flex', height: 350, width: '45%' }}>
         <Typography variant="h6" sx={{ mb: 1 }}>
           Consignee Address
         </Typography>
