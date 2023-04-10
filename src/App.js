@@ -3,7 +3,7 @@ import ErrorPage from './pages/ErrorPage'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Marketing from './pages/Marketing'
-import Planning from './pages/Planning'
+import Planning from './pages/planning/Planning'
 import SuperAdmin from './pages/SuperAdmin'
 
 function App() {

@@ -1,4 +1,4 @@
-import { Box, Link, List, ListItem, Typography } from '@mui/material'
+import { Box, Divider, Link, List, ListItem, Typography } from '@mui/material'
 import React from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 
@@ -49,8 +49,65 @@ const SidePanel = () => {
             </Link>
           </ListItem>
         ))}
+        <Divider sx={{ my: 1 }} />
 
         {/* add rest of the dept menu link here as conditioned rendering */}
+        {deptName === 'planning' && (
+          <>
+            <ListItem disablePadding>
+              <Link
+                underline="none"
+                color="tertiary"
+                to={'/planning/bom'}
+                component={RouterLink}
+                sx={{
+                  fontWeight: 500,
+                  fontSize: '1.1rem',
+                  color: 'text.primary',
+                  px: 4,
+                  py: 1.5,
+                  width: '12rem',
+                  my: 0.5,
+                  bgcolor: String(location.pathname).includes('/planning/bom')
+                    ? 'tertiary.light'
+                    : 'transparent',
+                  '&:hover': {
+                    bgcolor: String(location.pathname).includes('/planning/bom')
+                      ? 'tertiary.main'
+                      : 'tertiary.light',
+                  },
+                }}>
+                BOM
+              </Link>
+            </ListItem>
+            <ListItem disablePadding>
+              <Link
+                underline="none"
+                color="tertiary"
+                to={'/planning/products'}
+                component={RouterLink}
+                sx={{
+                  fontWeight: 500,
+                  fontSize: '1.1rem',
+                  color: 'text.primary',
+                  px: 4,
+                  py: 1.5,
+                  width: '12rem',
+                  my: 0.5,
+                  bgcolor: String(location.pathname).includes('/planning/products')
+                    ? 'tertiary.light'
+                    : 'transparent',
+                  '&:hover': {
+                    bgcolor: String(location.pathname).includes('/planning/products')
+                      ? 'tertiary.main'
+                      : 'tertiary.light',
+                  },
+                }}>
+                Products
+              </Link>
+            </ListItem>
+          </>
+        )}
       </List>
     </Box>
   )

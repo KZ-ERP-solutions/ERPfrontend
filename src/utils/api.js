@@ -7,10 +7,24 @@ const api = {
         const path = '/marketing/list_order/'
         return axios.get(path).then((res) => res.data)
       },
-      create:async (order)=>{
+      create: async (order) => {
         const path = '/marketing/create_order/'
-        return axios.post(path,order).then((res) => res.data)
-      }
+        return axios.post(path, order).then((res) => res.data)
+      },
+    },
+  },
+  planning: {
+    bom: {
+      list: async () => {
+        const path = '/planning/list_bom'
+        return axios.get(path).then((res) => res.data)
+      },
+    },
+    product: {
+      list: async () => {
+        const path = '/planning/list_product'
+        return axios.get(path).then((res) => res.data)
+      },
     },
   },
 }

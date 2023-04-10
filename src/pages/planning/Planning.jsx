@@ -1,9 +1,11 @@
 import { Container } from '@mui/material'
 import React, { useEffect } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
-import OrdersRoutes from '../components/common/orders/OrdersRoutes'
-import SidePanel from '../components/common/SidePanel'
-import ErrorPage from './ErrorPage'
+import OrdersRoutes from '../../components/common/orders/OrdersRoutes'
+import SidePanel from '../../components/common/SidePanel'
+import ErrorPage from '../ErrorPage'
+import BOM from './BOM'
+import Products from './Products'
 
 const Planning = () => {
   const location = useLocation()
@@ -22,6 +24,8 @@ const Planning = () => {
       <Routes>
         {/* <Route path="/dashboard" element={<DashboardTemplate />} /> */}
         <Route path="/orders/*" element={<OrdersRoutes />} />
+        <Route exact path="/bom" element={<BOM />} />
+        <Route exact path="/products" element={<Products />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Container>
