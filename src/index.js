@@ -11,11 +11,15 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import theme from './theme/theme'
+import { Provider } from 'react-redux'
+import store from './utils/store'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <CssBaseline /> <App />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline /> <App />
+      </ThemeProvider>
+    </Provider>
   </BrowserRouter>
 )
