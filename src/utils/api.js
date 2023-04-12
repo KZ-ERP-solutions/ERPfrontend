@@ -26,6 +26,12 @@ const api = {
         return axios.get(path).then((res) => res.data)
       },
     },
+    material:{
+      list: async () => {
+        const path = '/planning/list_materials'
+        return axios.get(path).then((res) => res.data)
+      },
+    }
   },
 }
 

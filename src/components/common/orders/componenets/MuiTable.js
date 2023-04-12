@@ -91,7 +91,7 @@ EnhancedTableHead.propTypes = {
 
 export default function MuiTable({ columns = [], rows = [], orderFull = [] }) {
   const [order, setOrder] = React.useState('asc')
-  const [orderBy, setOrderBy] = React.useState('calories')
+  const [orderBy, setOrderBy] = React.useState('woso_date')
   const navigate = useNavigate()
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc'
@@ -131,8 +131,8 @@ export default function MuiTable({ columns = [], rows = [], orderFull = [] }) {
                           navigate(
                             `${
                               row?.orderId
-                                ? `/marketing/orders/order/${row?.orderId}`
-                                : `/marketing/orders`
+                                ? `order/${row?.orderId}`
+                                : ``
                             }`,
                             { state: { orders: orderFull } }
                           )

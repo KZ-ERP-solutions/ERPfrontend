@@ -5,6 +5,7 @@ import OrdersRoutes from '../../components/common/orders/OrdersRoutes'
 import SidePanel from '../../components/common/SidePanel'
 import ErrorPage from '../ErrorPage'
 import BOM from './BOM'
+import Materials from './Materials'
 import Products from './Products'
 
 const Planning = () => {
@@ -24,8 +25,9 @@ const Planning = () => {
       <Routes>
         {/* <Route path="/dashboard" element={<DashboardTemplate />} /> */}
         <Route path="/orders/*" element={<OrdersRoutes />} />
-        <Route exact path="/bom" element={<BOM />} />
+        {/* <Route exact path="/bom" element={<BOM />} /> */}
         <Route exact path="/products" element={<Products />} />
+        <Route exact path="/materials" element={<Materials />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Container>

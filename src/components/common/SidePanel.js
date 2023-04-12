@@ -54,8 +54,8 @@ const SidePanel = () => {
         {/* add rest of the dept menu link here as conditioned rendering */}
         {deptName === 'planning' && (
           <>
-            <ListItem disablePadding>
-              <Link
+            {/* <ListItem disablePadding>
+             <Link
                 underline="none"
                 color="tertiary"
                 to={'/planning/bom'}
@@ -79,7 +79,7 @@ const SidePanel = () => {
                 }}>
                 BOM
               </Link>
-            </ListItem>
+            </ListItem> */}
             <ListItem disablePadding>
               <Link
                 underline="none"
@@ -94,16 +94,50 @@ const SidePanel = () => {
                   py: 1.5,
                   width: '12rem',
                   my: 0.5,
-                  bgcolor: String(location.pathname).includes('/planning/products')
+                  bgcolor: String(location.pathname).includes(
+                    '/planning/products'
+                  )
                     ? 'tertiary.light'
                     : 'transparent',
                   '&:hover': {
-                    bgcolor: String(location.pathname).includes('/planning/products')
+                    bgcolor: String(location.pathname).includes(
+                      '/planning/products'
+                    )
                       ? 'tertiary.main'
                       : 'tertiary.light',
                   },
                 }}>
                 Products
+              </Link>
+            </ListItem>
+            <ListItem disablePadding>
+              <Link
+                underline="none"
+                color="tertiary"
+                to={'/planning/materials'}
+                component={RouterLink}
+                sx={{
+                  fontWeight: 500,
+                  fontSize: '1.1rem',
+                  color: 'text.primary',
+                  px: 4,
+                  py: 1.5,
+                  width: '12rem',
+                  my: 0.5,
+                  bgcolor: String(location.pathname).includes(
+                    '/planning/materials'
+                  )
+                    ? 'tertiary.light'
+                    : 'transparent',
+                  '&:hover': {
+                    bgcolor: String(location.pathname).includes(
+                      '/planning/materials'
+                    )
+                      ? 'tertiary.main'
+                      : 'tertiary.light',
+                  },
+                }}>
+                Materials
               </Link>
             </ListItem>
           </>
