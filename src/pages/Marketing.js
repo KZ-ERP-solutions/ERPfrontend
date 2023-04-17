@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import SidePanel from '../components/common/SidePanel'
 import OrdersRoutes from '../components/common/orders/OrdersRoutes'
-import DashboardTemplate from '../components/departments/marketing/Templates/DashboardTemplate'
+import DashboardTemplate from '../components/marketing/Templates/DashboardTemplate'
 import ErrorPage from './ErrorPage'
 
 const Marketing = () => {
