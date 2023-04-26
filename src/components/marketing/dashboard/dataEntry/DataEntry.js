@@ -19,10 +19,8 @@ import Form2 from './Forms/Form2'
 import Form3 from './Forms/Form3'
 import Form4 from './Forms/Form4'
 import Form5 from './Forms/Form5'
-import db from './json/db.json'
 import initialValues from './json/initialValues.json'
 import api from '../../../../utils/api'
-
 
 const SlideUP = React.forwardRef(function Transition(props, ref) {
   return <Grow direction="up" ref={ref} {...props} />
@@ -41,6 +39,7 @@ const DataEntry = ({ updateList }) => {
   const [activeStep, setActiveStep] = useState(0)
   // eslint-disable-next-line no-unused-vars
   const [submitting, setSubmitting] = useState(false)
+  const [values, setValues] = useState({})
 
   const nextStep = () => {
     setActiveStep((prev) => prev + 1)
@@ -69,16 +68,18 @@ const DataEntry = ({ updateList }) => {
 
   const onSubmit = (formData) => {
     const cleanObject = getCleanObject(formData)
-    db = { ...initialValues, ...db, ...cleanObject }
-    console.log(db)
+    setValues((prev) => ({ ...prev, ...cleanObject }))
+    console.log({ ...values, ...cleanObject })
+
+    if (activeStep === 4) onFinalSubmit()
   }
 
-  const onFinalSubmit = (formData) => {
+  const onFinalSubmit = () => {
     updateList()
     setActiveStep(0)
 
-    api.marketing
-      .order.create(db)
+    api.marketing.order
+      .create(values)
       .then((res) => {
         console.log(res)
       })
@@ -108,7 +109,7 @@ const DataEntry = ({ updateList }) => {
         )
       case 2:
         return (
-          <Form3 
+          <Form3
             close={() => handleDataEntryClose()}
             prev={() => prevStep()}
             next={() => nextStep()}
@@ -117,15 +118,15 @@ const DataEntry = ({ updateList }) => {
           />
         )
 
-        case 3:
-          return (
-            <Form5 
-              close={() => handleDataEntryClose()}
-              prev={() => prevStep()}
-              next={() => nextStep()}
-              handleSubmit={(formData) => onSubmit(formData)}
-              submitting={submitting}
-            />
+      case 3:
+        return (
+          <Form5
+            close={() => handleDataEntryClose()}
+            prev={() => prevStep()}
+            next={() => nextStep()}
+            handleSubmit={(formData) => onSubmit(formData)}
+            submitting={submitting}
+          />
         )
 
       case 4:
@@ -133,11 +134,12 @@ const DataEntry = ({ updateList }) => {
           <Form4
             close={() => handleDataEntryClose()}
             prev={() => prevStep()}
-            handleSubmit={(formData) => onFinalSubmit(formData)}
+            handleSubmit={(formData) => onSubmit(formData)}
             submitting={submitting}
+            woso_no={values?.woso_no ? values.woso_no : initialValues.woso_no}
           />
         )
-       
+
       default:
         return (
           <Form1

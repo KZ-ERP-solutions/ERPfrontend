@@ -16,7 +16,6 @@ import {
 } from '@mui/material'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
-import db from '../json/db.json'
 import AddIcon from '@mui/icons-material/Add'
 
 const itemsInitialValue = {
@@ -36,7 +35,7 @@ const itemsInitialValue = {
   serial_no: '',
 }
 
-const Form4 = ({ close, prev, handleSubmit, submitting }) => {
+const Form4 = ({ close, prev, handleSubmit, submitting ,woso_no}) => {
   const [showForm, setShowForm] = useState(false)
   const [items, setItems] = useState([])
   const [showDelete, setShowDelete] = useState(false)
@@ -164,7 +163,7 @@ const Form4 = ({ close, prev, handleSubmit, submitting }) => {
                   <TableCell>{item.quantity}</TableCell>
                   <TableCell>{item.unit}</TableCell>
                   <TableCell>{item.model}</TableCell>
-                  <TableCell>{db.woso_no}</TableCell>
+                  <TableCell>{woso_no}</TableCell>
                   <TableCell>{item.basic_rate}</TableCell>
                   <TableCell>{item.basic_amount}</TableCell>
                   <TableCell>{item.dp}</TableCell>
@@ -270,7 +269,7 @@ const Form4 = ({ close, prev, handleSubmit, submitting }) => {
                 </TableCell>
                 <TableCell>1</TableCell>
                 <TableCell>SL 225 VS</TableCell>
-                <TableCell>{db.woso_no}</TableCell>
+                <TableCell>{woso_no}</TableCell>
                 <TableCell>
                   <FormControl sx={{ width: '100%' }}>
                     <TextField
