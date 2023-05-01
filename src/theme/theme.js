@@ -1,9 +1,9 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme } from '@mui/material/styles';
 
-const { palette } = createTheme()
-const { augmentColor } = palette
+const { palette } = createTheme();
+const { augmentColor } = palette;
 
-let theme = createTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: '#48466d',
@@ -22,6 +22,6 @@ let theme = createTheme({
       primary: '#222222',
     },
   },
-})
+});
 
-export default theme
+export default theme;

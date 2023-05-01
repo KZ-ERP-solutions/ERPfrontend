@@ -1,38 +1,38 @@
-import axios from './axios'
+import axios from './axios';
 
 const api = {
   marketing: {
     order: {
       list: async () => {
-        const path = '/marketing/list_order/'
-        return axios.get(path).then((res) => res.data)
+        const path = '/marketing/list_order/';
+        return axios.get(path).then((res) => res.data);
       },
       create: async (order) => {
-        const path = '/marketing/create_order/'
-        return axios.post(path, order).then((res) => res.data)
+        const path = '/marketing/create_order/';
+        return axios.post(path, order).then((res) => res.data);
       },
     },
   },
   planning: {
     bom: {
       list: async () => {
-        const path = '/planning/list_bom'
-        return axios.get(path).then((res) => res.data)
+        const path = '/planning/list_bom';
+        return axios.get(path).then((res) => res.data);
       },
     },
     product: {
       list: async () => {
-        const path = '/planning/list_product'
-        return axios.get(path).then((res) => res.data)
+        const path = '/planning/Product_api';
+        return axios.get(path).then((res) => res.data);
       },
     },
-    material:{
+    material: {
       list: async () => {
-        const path = '/planning/list_materials'
-        return axios.get(path).then((res) => res.data)
+        const path = '/planning/list_materials';
+        return axios.get(path).then((res) => res.data);
       },
-    }
+    },
   },
-}
+};
 
-export default api
+export default api;

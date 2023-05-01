@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import {
   Box,
   Button,
@@ -6,63 +5,63 @@ import {
   Container,
   Paper,
   TextField,
-  Typography
-} from '@mui/material'
-import { useFormik } from 'formik'
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router'
-import * as Yup from 'yup'
+  Typography,
+} from '@mui/material';
+import { useFormik } from 'formik';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router';
+import * as Yup from 'yup';
 
-import { login } from '../slices/auth'
+import { login } from '../slices/auth';
 
 const initialValues = {
   username: '',
-  password: ''
-}
+  password: '',
+};
 
 const validationSchema = Yup.object().shape({
   username: Yup.string()
-  .required('Username is required')
-  .min(6, 'Username must be at least 6 characters')
-  .max(20, 'Username must not exceed 20 characters'),
-  password: Yup.string().required('This field is required!')
-})
+    .required('Username is required')
+    .min(6, 'Username must be at least 6 characters')
+    .max(20, 'Username must not exceed 20 characters'),
+  password: Yup.string().required('This field is required!'),
+});
 
 function Login() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { isLoggedIn } = useSelector((state) => state.auth)
-  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = (formValue) => {
-    const { username, password } = formValue
+    const { username, password } = formValue;
     // console.log(formValue)
-    setLoading(true)
+    setLoading(true);
 
     dispatch(login({ username, password }))
       .unwrap()
       .then(() => {
-        navigate('/admin')
-        window.location.reload()
-        setLoading(false)
+        navigate('/admin');
+        window.location.reload();
+        setLoading(false);
       })
       .catch((err) => {
-        console.log(err)
-        setLoading(false)
-      })
-  }
+        console.log(err);
+        setLoading(false);
+      });
+  };
 
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      handleLogin(values)
-    }
-  })
+      handleLogin(values);
+    },
+  });
 
   if (isLoggedIn) {
-    return <Navigate to="/" />
+    return <Navigate to="/" />;
   }
 
   return (
@@ -73,7 +72,7 @@ function Login() {
         display: 'flex',
         height: '100vh',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
       }}
     >
       <Box
@@ -84,7 +83,7 @@ function Login() {
           backdropFilter: 'blur(3px) saturate(120%)',
           backgroundColor: 'rgba(255, 255, 255,0.1)',
           p: 4,
-          borderRadius: 5
+          borderRadius: 5,
         }}
       >
         <Box
@@ -93,7 +92,7 @@ function Login() {
             alignItems: 'center',
             width: '100%',
             justifyContent: 'center',
-            mb: 1
+            mb: 1,
           }}
         >
           <Typography
@@ -104,10 +103,10 @@ function Login() {
               ml: 1,
               fontWeight: 700,
               letterSpacing: '.3rem',
-              textDecoration: 'none'
+              textDecoration: 'none',
             }}
           >
-           KEL ERP
+            KEL ERP
           </Typography>
         </Box>
         <Typography
@@ -126,7 +125,7 @@ function Login() {
             display: 'flex',
             flexDirection: 'column',
             gap: '1rem',
-            alignItems: 'center'
+            alignItems: 'center',
           }}
         >
           <TextField
@@ -173,7 +172,7 @@ function Login() {
         </form>
       </Box>
     </Container>
-  )
+  );
 }
 
-export default Login
+export default Login;

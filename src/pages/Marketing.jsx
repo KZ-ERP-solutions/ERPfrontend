@@ -3,36 +3,31 @@ import React, { useEffect } from 'react';
 import {
   Route, Routes, useLocation, useNavigate,
 } from 'react-router-dom';
-import OrdersRoutes from '../../components/common/orders/OrdersRoutes';
-import SidePanel from '../../components/common/SidePanel';
-import ErrorPage from '../ErrorPage';
-import Materials from './Materials';
-import Products from './Products';
-import Dashboard from '../Dashboard';
+import SidePanel from '../components/common/SidePanel';
+import OrdersRoutes from '../components/common/orders/OrdersRoutes';
+import Dashboard from './Dashboard';
+import ErrorPage from './ErrorPage';
 
-function Planning() {
+function Marketing() {
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log(location.pathname);
-    if (location.pathname === '/planning') navigate('/planning/dashboard');
+    if (location.pathname === '/marketing') navigate('/marketing/dashboard');
   }, []);
   return (
     <Container maxWidth="100%" disableGutters sx={{ display: 'flex' }}>
       <SidePanel />
 
-      {/* planning routes  */}
+      {/* marketing routes  */}
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/orders/*" element={<OrdersRoutes />} />
-        {/* <Route exact path="/bom" element={<BOM />} /> */}
-        <Route exact path="/products" element={<Products />} />
-        <Route exact path="/materials" element={<Materials />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Container>
   );
 }
 
-export default Planning;
+export default Marketing;

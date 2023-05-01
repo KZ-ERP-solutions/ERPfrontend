@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import api from '../../utils/api'
+import React, { useEffect, useState } from 'react';
+import api from '../../utils/api';
 
-const Materials = () => {
-  const [materials, setMaterials] = useState([])
+function Materials() {
+  const [materials, setMaterials] = useState([]);
 
   useEffect(() => {
     api.planning.material
       .list()
       .then((res) => {
-        console.log(res)
-        setMaterials(res)
+        console.log(res);
+        setMaterials(res);
       })
-      .catch((err) => console.log(err))
-  }, [])
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div>
@@ -29,7 +29,7 @@ const Materials = () => {
           ))} */}
       </li>
     </div>
-  )
+  );
 }
 
-export default Materials
+export default Materials;

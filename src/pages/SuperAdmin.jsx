@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-const SuperAdmin = () => {
+function SuperAdmin() {
   return (
     <div>SuperAdmin</div>
-  )
+  );
 }
 
-export default SuperAdmin
+export default SuperAdmin;
