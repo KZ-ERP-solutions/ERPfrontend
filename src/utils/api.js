@@ -19,10 +19,26 @@ const api = {
         const path = '/planning/list_bom';
         return axios.get(path).then((res) => res.data);
       },
+      getById: async (id) => {
+        const path = `/planning/get_bom_excel/${id}`;
+        return axios
+          .get(path, {
+            responseType: 'blob',
+          })
+          .then((res) => res.data);
+      },
     },
     product: {
+      getById: async (id) => {
+        const path = `/planning/Product_api/${id}`;
+        return axios.get(path).then((res) => res.data);
+      },
       list: async () => {
         const path = '/planning/Product_api';
+        return axios.get(path).then((res) => res.data);
+      },
+      suggestions: async () => {
+        const path = '/planning/product_suggestions';
         return axios.get(path).then((res) => res.data);
       },
     },
