@@ -1,17 +1,21 @@
 import { Box, Container } from '@mui/material';
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import DataEntry from '../components/marketing/dataEntry/DataEntry';
+import BOM from '../components/planning/BOM';
 
 function Dashboard() {
+  const location = useLocation();
+  const deptName = location.pathname.split('/')[1];
   // state used to forcefully update component after data entry
   // eslint-disable-next-line no-unused-vars
   const [forceUpdate, setForceUpdate] = useState(false);
 
   return (
     <Container maxWidth="100%" sx={{ py: 4 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'end', gap: 2 }}>
         {/* Add other navigation tabs of dahboard here */}
-
+        {deptName === 'planning' && <BOM />}
         <DataEntry updateList={() => setForceUpdate((prev) => !prev)} />
       </Box>
       {/* <Box
