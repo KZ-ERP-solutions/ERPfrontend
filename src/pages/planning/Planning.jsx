@@ -9,6 +9,7 @@ import ErrorPage from '../ErrorPage';
 import Materials from './Materials';
 import Products from './Products';
 import Dashboard from '../Dashboard';
+import Notification from './Notification';
 
 function Planning() {
   const location = useLocation();
@@ -29,6 +30,7 @@ function Planning() {
         {/* <Route exact path="/bom" element={<BOM />} /> */}
         <Route exact path="/products" element={<Products />} />
         <Route exact path="/materials" element={<Materials />} />
+        <Route exact path="/notification" element={<Notification />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Container>
