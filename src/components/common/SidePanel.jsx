@@ -1,8 +1,9 @@
 import {
   Box, Divider, Link, List, ListItem, Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
+import api from '../../utils/api';
 
 function SidePanel() {
   const location = useLocation();
@@ -13,7 +14,16 @@ function SidePanel() {
     { name: 'Dashboard', path: `/${deptName}/dashboard` },
     { name: 'Orders', path: `/${deptName}/orders` },
   ];
+  // const [notification, setNotification] = useState([]);
 
+  // useEffect(() => {
+  //   api.planning.notification
+  //     .list()
+  //     .then((res) => {
+  //       setNotification(res.list);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
   return (
     <Box height="100vh" width="10rem" sx={{ py: 2, bgcolor: 'white' }}>
       <Typography

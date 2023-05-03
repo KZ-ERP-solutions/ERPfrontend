@@ -26,17 +26,49 @@ function Notification() {
   return (
     <Container maxWidth="100%" sx={{ bgcolor: '#F9F7F7' }}>
       <Grid>
-        <h2 style={{ margin: '0', paddingTop: '2rem' }}>Notification</h2>
+        <h2
+          style={{ margin: '0', paddingTop: '2rem', paddingBottom: '0.5rem' }}
+        >
+          Notification
+        </h2>
       </Grid>
       <Grid>
         <TableContainer sx={{ maxWidth: '100%' }}>
           <Table sx={{ maxWidth: '100%' }}>
-            <TableHead>
+            <TableHead
+              sx={{
+                bgcolor: '#c2c0d7',
+              }}
+            >
               <TableRow>
-                <TableCell>Matcode</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Current Quantity</TableCell>
-                <TableCell>Safe Stock</TableCell>
+                <TableCell
+                  sx={{
+                    fontSize: '18px',
+                  }}
+                >
+                  Matcode
+                </TableCell>
+                <TableCell
+                  sx={{
+                    fontSize: '18px',
+                  }}
+                >
+                  Name
+                </TableCell>
+                <TableCell
+                  sx={{
+                    fontSize: '18px',
+                  }}
+                >
+                  Current Quantity
+                </TableCell>
+                <TableCell
+                  sx={{
+                    fontSize: '18px',
+                  }}
+                >
+                  Safe Stock
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
