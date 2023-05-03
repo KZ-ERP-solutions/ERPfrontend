@@ -146,6 +146,37 @@ function SidePanel() {
                 Materials
               </Link>
             </ListItem>
+            <ListItem disablePadding>
+              <Link
+                underline="none"
+                color="tertiary"
+                to="/planning/notification"
+                component={RouterLink}
+                sx={{
+                  fontWeight: 500,
+                  fontSize: '1.1rem',
+                  color: 'text.primary',
+                  px: 4,
+                  py: 1.5,
+                  width: '12rem',
+                  my: 0.5,
+                  bgcolor: String(location.pathname).includes(
+                    '/planning/notification',
+                  )
+                    ? 'tertiary.light'
+                    : 'transparent',
+                  '&:hover': {
+                    bgcolor: String(location.pathname).includes(
+                      '/planning/notification',
+                    )
+                      ? 'tertiary.main'
+                      : 'tertiary.light',
+                  },
+                }}
+              >
+                Notifications
+              </Link>
+            </ListItem>
           </>
         )}
       </List>
