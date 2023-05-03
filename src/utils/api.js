@@ -48,6 +48,12 @@ const api = {
         return axios.get(path).then((res) => res.data);
       },
     },
+    notification: {
+      list: async () => {
+        const path = '/planning/notify_limit/';
+        return axios.get(path).then((res) => res.data);
+      },
+    },
   },
 };
 
