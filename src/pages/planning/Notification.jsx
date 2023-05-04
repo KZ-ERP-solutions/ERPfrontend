@@ -7,21 +7,29 @@ import {
   TableHead,
   TableRow,
   Container,
+  LinearProgress,
 } from '@mui/material';
+import Box from '@mui/material/Box';
 import React, { useEffect, useState } from 'react';
 import api from '../../utils/api';
 
 function Notification() {
   const [notification, setNotification] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     api.planning.notification
       .list()
       .then((res) => {
         console.log(res);
         setNotification(res.list);
+        setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
   }, []);
   return (
     <Container maxWidth="100%" sx={{ bgcolor: '#F9F7F7' }}>
@@ -71,18 +79,28 @@ function Notification() {
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {notification.map((data) => (
-                <TableRow key={data.matcode} component="th" scope="row">
-                  <TableCell>{data.matcode}</TableCell>
-                  <TableCell>{data.name}</TableCell>
-                  <TableCell sx={{ bgcolor: '#FFD9D9', color: '#FF0000' }}>
-                    {data.qty}
-                  </TableCell>
-                  <TableCell>{data.safe_stock}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+            {loading ? (
+              <TableRow>
+                <TableCell colSpan={4}>
+                  <Box sx={{ width: '100%' }}>
+                    <LinearProgress />
+                  </Box>
+                </TableCell>
+              </TableRow>
+            ) : (
+              <TableBody>
+                {notification.map((data) => (
+                  <TableRow key={data.matcode} component="th" scope="row">
+                    <TableCell>{data.matcode}</TableCell>
+                    <TableCell>{data.name}</TableCell>
+                    <TableCell sx={{ bgcolor: '#FFD9D9', color: '#FF0000' }}>
+                      {data.qty}
+                    </TableCell>
+                    <TableCell>{data.safe_stock}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            )}
           </Table>
         </TableContainer>
       </Grid>
