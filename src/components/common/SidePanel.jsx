@@ -14,16 +14,27 @@ function SidePanel() {
     { name: 'Dashboard', path: `/${deptName}/dashboard` },
     { name: 'Orders', path: `/${deptName}/orders` },
   ];
-  // const [notification, setNotification] = useState([]);
+  const [notification, setNotification] = useState([]);
 
-  // useEffect(() => {
-  //   api.planning.notification
-  //     .list()
-  //     .then((res) => {
-  //       setNotification(res.list);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
+  useEffect(() => {
+    api.planning.notification
+      .list()
+      .then((res) => {
+        setNotification(res.list);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const [data, setData] = useState(false);
+
+  useEffect(() => {
+    if (notification && notification.length > 0) {
+      setData(notification.length);
+    } else {
+      setData(false);
+    }
+  }, [notification]);
+  console.log(data);
   return (
     <Box height="100vh" width="10rem" sx={{ py: 2, bgcolor: 'white' }}>
       <Typography
@@ -168,13 +179,15 @@ function SidePanel() {
                   color: 'text.primary',
                   px: 4,
                   py: 1.5,
-                  width: '12rem',
+                  width: '10rem',
                   my: 0.5,
-                  bgcolor: String(location.pathname).includes(
-                    '/planning/notification',
-                  )
-                    ? 'tertiary.light'
-                    : 'transparent',
+                  bgcolor: data
+                    ? '#FA9884'
+                    : String(location.pathname).includes(
+                      '/planning/notification',
+                    )
+                      ? 'tertiary.light'
+                      : 'transparent',
                   '&:hover': {
                     bgcolor: String(location.pathname).includes(
                       '/planning/notification',

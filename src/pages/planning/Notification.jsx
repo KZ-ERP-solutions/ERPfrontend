@@ -76,7 +76,9 @@ function Notification() {
                 <TableRow key={data.matcode} component="th" scope="row">
                   <TableCell>{data.matcode}</TableCell>
                   <TableCell>{data.name}</TableCell>
-                  <TableCell sx={{ bgcolor: '#E76161' }}>{data.qty}</TableCell>
+                  <TableCell sx={{ bgcolor: '#FFD9D9', color: '#FF0000' }}>
+                    {data.qty}
+                  </TableCell>
                   <TableCell>{data.safe_stock}</TableCell>
                 </TableRow>
               ))}
