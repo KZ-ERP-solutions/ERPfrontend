@@ -10,6 +10,7 @@ import Materials from './Materials';
 import Products from './Products';
 import Dashboard from '../Dashboard';
 import Notification from './Notification';
+import Stocks from './Stocks';
 
 function Planning() {
   const location = useLocation();
@@ -30,7 +31,8 @@ function Planning() {
         {/* <Route exact path="/bom" element={<BOM />} /> */}
         <Route exact path="/products" element={<Products />} />
         <Route exact path="/materials" element={<Materials />} />
-        <Route exact path="/notification" element={<Notification />} />
+        <Route exact path="/stocks" element={<Stocks />} />
+        <Route exact path="/notifications" element={<Notification />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Container>
