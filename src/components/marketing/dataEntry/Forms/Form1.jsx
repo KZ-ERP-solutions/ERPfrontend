@@ -12,10 +12,10 @@ import React from 'react';
 import initialValues from '../json/initialValues.json';
 
 function Form1({
-  close, next, handleSubmit, submitting,
+  close, next, handleSubmit, submitting, values,
 }) {
   const formik = useFormik({
-    initialValues,
+    initialValues: values,
     onSubmit: (values) => {
       handleSubmit(values);
     },

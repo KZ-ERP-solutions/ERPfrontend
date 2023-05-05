@@ -39,7 +39,7 @@ function DataEntry({ updateList }) {
   const [activeStep, setActiveStep] = useState(0);
   // eslint-disable-next-line no-unused-vars
   const [submitting, setSubmitting] = useState(false);
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState(initialValues);
 
   const nextStep = () => {
     setActiveStep((prev) => prev + 1);
@@ -58,12 +58,12 @@ function DataEntry({ updateList }) {
   };
 
   // removes empty fields
-  // const getCleanObject = (jsObj) => {
-  //   for (const [key, value] of Object.entries(jsObj)) {
-  //     if (value === '' || value === undefined || value === null) delete jsObj[key];
-  //   }
-  //   return jsObj;
-  // };
+  const getCleanObject = (jsObj) => {
+    for (const [key, value] of Object.entries(jsObj)) {
+      if (value === '' || value === undefined || value === null) delete jsObj[key];
+    }
+    return jsObj;
+  };
 
   const onFinalSubmit = () => {
     updateList();
@@ -78,7 +78,7 @@ function DataEntry({ updateList }) {
   };
 
   const onSubmit = (formData) => {
-    // const cleanObject = getCleanObject(formData);
+    const cleanObject = getCleanObject(formData);
     setValues((prev) => ({ ...prev, ...formData }));
     console.log({ ...values, ...formData });
 
@@ -94,6 +94,7 @@ function DataEntry({ updateList }) {
             next={() => nextStep()}
             handleSubmit={(formData) => onSubmit(formData)}
             submitting={submitting}
+            values={values}
           />
         );
       case 1:
@@ -103,7 +104,7 @@ function DataEntry({ updateList }) {
             prev={() => prevStep()}
             next={() => nextStep()}
             handleSubmit={(formData) => onSubmit(formData)}
-            submitting={submitting}
+            submitting={submitting}            values={values}
           />
         );
       case 2:
@@ -113,7 +114,7 @@ function DataEntry({ updateList }) {
             prev={() => prevStep()}
             next={() => nextStep()}
             handleSubmit={(formData) => onSubmit(formData)}
-            submitting={submitting}
+            submitting={submitting}            values={values}
           />
         );
 
@@ -124,7 +125,7 @@ function DataEntry({ updateList }) {
             prev={() => prevStep()}
             next={() => nextStep()}
             handleSubmit={(formData) => onSubmit(formData)}
-            submitting={submitting}
+            submitting={submitting}            values={values}
           />
         );
 
@@ -135,7 +136,7 @@ function DataEntry({ updateList }) {
             prev={() => prevStep()}
             handleSubmit={(formData) => onSubmit(formData)}
             submitting={submitting}
-            woso_no={values?.woso_no ? values.woso_no : initialValues.woso_no}
+            woso_no={values?.woso_no ? values.woso_no : initialValues.woso_no}            values={values}
           />
         );
 
@@ -145,7 +146,7 @@ function DataEntry({ updateList }) {
             close={() => handleDataEntryClose()}
             next={() => nextStep()}
             handleSubmit={(formData) => onSubmit(formData)}
-            submitting={submitting}
+            submitting={submitting}            values={values}
           />
         );
     }
