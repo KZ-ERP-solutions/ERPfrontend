@@ -126,6 +126,7 @@ function BOM() {
             renderInput={(params) => (
               <TextField
                 label={inputValue === '' ? 'Search by product' : ''}
+                autoFocus
                 {...params}
                 InputProps={{
                   ...params.InputProps,
