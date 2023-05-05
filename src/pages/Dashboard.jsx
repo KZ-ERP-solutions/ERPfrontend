@@ -1,9 +1,17 @@
-import { Box, Container } from '@mui/material';
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import {
+  Box,
+  Container,
+  IconButton,
+  ListItem,
+  ListItemText,
+  Menu,
+} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import DataEntry from '../components/marketing/dataEntry/DataEntry';
 import BOM from '../components/planning/BOM';
+import api from '../utils/api';
 
 function Dashboard() {
   const location = useLocation();
@@ -11,6 +19,23 @@ function Dashboard() {
   // state used to forcefully update component after data entry
   // eslint-disable-next-line no-unused-vars
   const [forceUpdate, setForceUpdate] = useState(false);
+  const [alerts, setAlerts] = useState([]);
+  const [anchorEl, setAnchorEl] = useState();
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  useEffect(() => {
+    api.planning.notification
+      .list()
+      .then((res) => {
+        console.log(`alerts are${res}`);
+        setAlerts(res.list);
+      })
+      .catch((err) => {
+        console.log(`err(alert) are${err}`);
+      });
+  }, [anchorEl]);
 
   return (
     <Container maxWidth="100%" sx={{ py: 4 }}>
@@ -18,9 +43,53 @@ function Dashboard() {
         {/* Add other navigation tabs of dahboard here */}
         {deptName === 'planning' && <BOM />}
         <DataEntry updateList={() => setForceUpdate((prev) => !prev)} />
-        <NotificationsIcon
-          sx={{ height: 'auto', color: '#48466d', fontSize: '30px' }}
-        />
+        <IconButton
+          id="button"
+          onClick={handleClick}
+          aria-controls={open ? 'menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+        >
+          <NotificationsIcon
+            sx={{ height: 'auto', color: '#48466d', fontSize: '30px' }}
+          />
+        </IconButton>
+        <Menu
+          id="menu"
+          open={open}
+          onClose={() => setAnchorEl(false)}
+          anchorEl={anchorEl}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        >
+          {alerts.map((data) => (
+            <ListItem key={data.matcode}>
+              <ListItemText
+                primary="Low Stock"
+                secondary={(
+                  <p>
+                    Quantity of Item
+                    {' '}
+                    {data.matcode}
+                    {' '}
+                    is currently below safe
+                    stock count
+                    {' '}
+                    <br />
+                    <Link
+                      style={{ textDecorationLine: 'none' }}
+                      to="/planning/stocks"
+                    >
+                      View Stocks
+                    </Link>
+                    {' '}
+                  </p>
+                )}
+              />
+            </ListItem>
+          ))}
+        </Menu>
       </Box>
       {/* <Box
         sx={{
