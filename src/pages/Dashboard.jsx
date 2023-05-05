@@ -1,6 +1,7 @@
 import { Box, Container } from '@mui/material';
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import DataEntry from '../components/marketing/dataEntry/DataEntry';
 import BOM from '../components/planning/BOM';
 
@@ -17,6 +18,9 @@ function Dashboard() {
         {/* Add other navigation tabs of dahboard here */}
         {deptName === 'planning' && <BOM />}
         <DataEntry updateList={() => setForceUpdate((prev) => !prev)} />
+        <NotificationsIcon
+          sx={{ height: 'auto', color: '#48466d', fontSize: '30px' }}
+        />
       </Box>
       {/* <Box
         sx={{

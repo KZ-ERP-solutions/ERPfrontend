@@ -47,19 +47,10 @@ function Stocks() {
           >
             Low Stock
           </Button>
-          <Dialog open={open}>
+          <Dialog open={open} onClose={() => setOpen(false)}>
             <DialogContent>
               <Notification />
             </DialogContent>
-            <DialogActions>
-              <Button
-                variant="contained"
-                onClick={() => setOpen(false)}
-                sx={{ margin: '0.5rem' }}
-              >
-                Close
-              </Button>
-            </DialogActions>
           </Dialog>
           <Button variant="contained" sx={{ padding: '7px 25px' }}>
             Add
