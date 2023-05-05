@@ -4,7 +4,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
   Grid,
   Table,
   TableBody,
@@ -49,12 +48,17 @@ function Stocks() {
             Low Stock
           </Button>
           <Dialog open={open}>
-            <DialogTitle>Low Stock Alert</DialogTitle>
             <DialogContent>
               <Notification />
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => setOpen(false)}>Close</Button>
+              <Button
+                variant="contained"
+                onClick={() => setOpen(false)}
+                sx={{ margin: '0.5rem' }}
+              >
+                Close
+              </Button>
             </DialogActions>
           </Dialog>
           <Button variant="contained" sx={{ padding: '7px 25px' }}>

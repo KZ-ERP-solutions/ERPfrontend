@@ -32,8 +32,8 @@ function Notification() {
   }, []);
   return (
     <Container maxWidth="100%" sx={{ bgcolor: '#F9F7F7' }}>
-      <h2 style={{ margin: '0', paddingTop: '2rem', paddingBottom: '0.5rem' }}>
-        Notification
+      <h2 style={{ margin: '0', paddingBottom: '0.5rem' }}>
+        Stock Alerts
       </h2>
 
       <TableContainer>
