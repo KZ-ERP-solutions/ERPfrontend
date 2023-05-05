@@ -1,7 +1,7 @@
 import {
+  Badge,
   Box,
   Container,
-  Divider,
   IconButton,
   List,
   ListItem,
@@ -23,6 +23,7 @@ function Dashboard() {
   const [forceUpdate, setForceUpdate] = useState(false);
   const [alerts, setAlerts] = useState([]);
   const [anchorEl, setAnchorEl] = useState();
+  const [value, setValue] = useState(false);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -39,6 +40,14 @@ function Dashboard() {
       });
   }, [anchorEl]);
 
+  useEffect(() => {
+    if (alerts && alerts.length > 0) {
+      setValue(alerts.length);
+    } else {
+      setValue(false);
+    }
+  }, [alerts]);
+
   return (
     <Container maxWidth="100%" sx={{ py: 4 }}>
       <Box sx={{ display: 'flex', justifyContent: 'end', gap: 2 }}>
@@ -52,9 +61,15 @@ function Dashboard() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <NotificationsIcon
-            sx={{ height: 'auto', color: '#48466d', fontSize: '30px' }}
-          />
+          <Badge color='primary' variant='dot' invisible={!value}>
+            <NotificationsIcon
+              sx={{
+                height: 'auto',
+                color: '#48466d',
+                fontSize: '30px',
+              }}
+            />
+          </Badge>
         </IconButton>
         <Menu
           id="menu"
@@ -66,34 +81,32 @@ function Dashboard() {
           }}
         >
           {alerts.map((data) => (
-            <List>
-              <ListItem key={data.matcode}>
-                <ListItemText
-                  primary="Low Stock"
-                  secondary={(
-                    <div style={{ display: 'inline' }}>
-                      <p style={{ display: 'inline' }}>Quantity of Item </p>
-                      <p style={{ display: 'inline', color: 'black' }}>
-                        {data.matcode}
-                      </p>
-                      <p style={{ display: 'inline' }}>
-                        {' '}
-                        is currently below safe stock count
-                        {' '}
-                        <br />
-                        <Link
-                          style={{ textDecorationLine: 'none' }}
-                          to="/planning/stocks"
-                        >
-                          View Stocks
-                        </Link>
-                        {' '}
-                      </p>
-                    </div>
-                  )}
-                />
-              </ListItem>
-            </List>
+            <ListItem key={data.matcode}>
+              <ListItemText
+                primary="Low Stock"
+                secondary={(
+                  <div style={{ display: 'inline' }}>
+                    <p style={{ display: 'inline' }}>Quantity of Item </p>
+                    <p style={{ display: 'inline', color: 'black' }}>
+                      {data.matcode}
+                    </p>
+                    <p style={{ display: 'inline' }}>
+                      {' '}
+                      is currently below safe stock count
+                      {' '}
+                      <br />
+                      <Link
+                        style={{ textDecorationLine: 'none' }}
+                        to="/planning/stocks"
+                      >
+                        View Stocks
+                      </Link>
+                      {' '}
+                    </p>
+                  </div>
+                )}
+              />
+            </ListItem>
           ))}
         </Menu>
       </Box>
