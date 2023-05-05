@@ -1,7 +1,9 @@
 import {
   Box,
   Container,
+  Divider,
   IconButton,
+  List,
   ListItem,
   ListItemText,
   Menu,
@@ -64,30 +66,34 @@ function Dashboard() {
           }}
         >
           {alerts.map((data) => (
-            <ListItem key={data.matcode}>
-              <ListItemText
-                primary="Low Stock"
-                secondary={(
-                  <p>
-                    Quantity of Item
-                    {' '}
-                    {data.matcode}
-                    {' '}
-                    is currently below safe
-                    stock count
-                    {' '}
-                    <br />
-                    <Link
-                      style={{ textDecorationLine: 'none' }}
-                      to="/planning/stocks"
-                    >
-                      View Stocks
-                    </Link>
-                    {' '}
-                  </p>
-                )}
-              />
-            </ListItem>
+            <List>
+              <ListItem key={data.matcode}>
+                <ListItemText
+                  primary="Low Stock"
+                  secondary={(
+                    <div style={{ display: 'inline' }}>
+                      <p style={{ display: 'inline' }}>Quantity of Item </p>
+                      <p style={{ display: 'inline', color: 'black' }}>
+                        {data.matcode}
+                      </p>
+                      <p style={{ display: 'inline' }}>
+                        {' '}
+                        is currently below safe stock count
+                        {' '}
+                        <br />
+                        <Link
+                          style={{ textDecorationLine: 'none' }}
+                          to="/planning/stocks"
+                        >
+                          View Stocks
+                        </Link>
+                        {' '}
+                      </p>
+                    </div>
+                  )}
+                />
+              </ListItem>
+            </List>
           ))}
         </Menu>
       </Box>
