@@ -1,6 +1,10 @@
 import {
   Button,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Grid,
   Table,
   TableBody,
@@ -11,9 +15,11 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import api from '../../utils/api';
+import Notification from './StockAlert';
 
 function Stocks() {
   const [stock, setStock] = useState([]);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     api.planning.stock
       .list()
@@ -34,9 +40,27 @@ function Stocks() {
         alignItems="center"
       >
         <h2>Stocks</h2>
-        <Button variant="contained" sx={{ padding: '7px 25px' }}>
-          Add
-        </Button>
+        <Grid justifyContent="flex-end">
+          <Button
+            onClick={() => setOpen(true)}
+            variant="contained"
+            sx={{ padding: '7px 25px', margin: '10px' }}
+          >
+            Low Stock
+          </Button>
+          <Dialog open={open}>
+            <DialogTitle>Low Stock Alert</DialogTitle>
+            <DialogContent>
+              <Notification />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setOpen(false)}>Close</Button>
+            </DialogActions>
+          </Dialog>
+          <Button variant="contained" sx={{ padding: '7px 25px' }}>
+            Add
+          </Button>
+        </Grid>
       </Grid>
       <TableContainer>
         <Table>
