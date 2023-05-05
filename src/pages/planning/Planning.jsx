@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import React, { useEffect } from 'react';
 import {
   Route, Routes, useLocation, useNavigate,
@@ -25,16 +25,18 @@ function Planning() {
       <SidePanel />
 
       {/* planning routes  */}
-      <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/orders/*" element={<OrdersRoutes />} />
-        {/* <Route exact path="/bom" element={<BOM />} /> */}
-        <Route exact path="/products" element={<Products />} />
-        <Route exact path="/materials" element={<Materials />} />
-        <Route exact path="/stocks" element={<Stocks />} />
-        <Route exact path="/notifications" element={<Notification />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+      <Box flexGrow={1}>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/orders/*" element={<OrdersRoutes />} />
+          {/* <Route exact path="/bom" element={<BOM />} /> */}
+          <Route exact path="/products" element={<Products />} />
+          <Route exact path="/materials" element={<Materials />} />
+          <Route exact path="/stocks" element={<Stocks />} />
+          <Route exact path="/notifications" element={<Notification />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </Box>
     </Container>
   );
 }

@@ -114,8 +114,8 @@ function Form1({
                   disabled={submitting}
                   size="small"
                   id="po_date"
+                  type="date"
                   name="po_date"
-                  label="PO date"
                   value={formik.values.po_date}
                   onChange={formik.handleChange}
                   error={

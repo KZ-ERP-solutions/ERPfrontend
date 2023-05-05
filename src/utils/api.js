@@ -33,8 +33,8 @@ const api = {
         const path = `/planning/Product_api/${id}`;
         return axios.get(path).then((res) => res.data);
       },
-      list: async () => {
-        const path = '/planning/Product_api';
+      list: async (page) => {
+        const path = `/planning/Product_api/?page=${page}`;
         return axios.get(path).then((res) => res.data);
       },
       suggestions: async () => {

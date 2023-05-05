@@ -1,34 +1,41 @@
 import React, { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
 import api from '../../utils/api';
+import ProductsTable from '../../components/planning/ProductsTable';
 
 function Products() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState({ results: [], count: 0 });
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     api.planning.product
-      .list()
+      .list(page + 1)
       .then((res) => {
         console.log(res);
         setProducts(res);
+        setLoading(false);
       })
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [page]);
+
+  const handlePageChange = (newPage) => setPage(newPage);
 
   return (
-    <div>
-      <li>
-        {products.length > 0
-          && products.map((product) => (
-            <li>
-              <code>
-                <pre style={{ whiteSpace: 'pre-wrap' }}>
-                  {JSON.stringify(product, undefined, 2)}
-                </pre>
-              </code>
-            </li>
-          ))}
-      </li>
-    </div>
+    <Box sx={{ p: 3 }}>
+      <ProductsTable
+        rows={products.results}
+        page={page}
+        rowsPerPage={products.results.length}
+        count={products.count}
+        loading={loading}
+        changePage={(event, newPage) => handlePageChange(newPage)}
+      />
+    </Box>
   );
 }
 

@@ -72,6 +72,8 @@ function Form4({
 
   const handleFinalSubmit = () => {
     const submitValue = {
+      item:
+        items.length > 0 ? items.map((item) => item.item_name).join(', ') : '',
       items: [
         ...items.map((item) => {
           const { isChecked, ...newItem } = item;
@@ -97,9 +99,13 @@ function Form4({
 
   return (
     <Container maxWidth="100%" disableGutters>
-      <Box sx={{
-        display: 'flex', justifyContent: 'end', mb: 1, gap: 2,
-      }}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'end',
+          mb: 1,
+          gap: 2,
+        }}
       >
         <Button
           variant="contained"
@@ -202,9 +208,7 @@ function Form4({
                       error={
                         formik.touched.is_std && Boolean(formik.errors.is_std)
                       }
-                      helperText={
-                        formik.touched.is_std && formik.errors.is_std
-                      }
+                      helperText={formik.touched.is_std && formik.errors.is_std}
                     >
                       <MenuItem value>Std</MenuItem>
                       <MenuItem value={false}>Non-std</MenuItem>
@@ -465,8 +469,8 @@ function Form4({
             variant="body2"
             color={(theme) => theme.palette.text.secondary}
           >
-            Select items to remove from the list using checkbox at the beginning of
-            table
+            Select items to remove from the list using checkbox at the beginning
+            of table
           </Typography>
           <Button
             type="button"

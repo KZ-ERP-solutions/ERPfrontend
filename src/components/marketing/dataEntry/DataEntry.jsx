@@ -68,9 +68,9 @@ function DataEntry({ updateList }) {
   const onFinalSubmit = () => {
     updateList();
     setActiveStep(0);
-
+    console.log({ ...initialValues, ...values });
     api.marketing.order
-      .create(values)
+      .create({ ...initialValues, ...values })
       .then((res) => {
         console.log(res);
       })
@@ -78,7 +78,7 @@ function DataEntry({ updateList }) {
   };
 
   const onSubmit = (formData) => {
-    const cleanObject = getCleanObject(formData);
+    // const cleanObject = getCleanObject(formData);
     setValues((prev) => ({ ...prev, ...formData }));
     console.log({ ...values, ...formData });
 
@@ -104,7 +104,8 @@ function DataEntry({ updateList }) {
             prev={() => prevStep()}
             next={() => nextStep()}
             handleSubmit={(formData) => onSubmit(formData)}
-            submitting={submitting}            values={values}
+            submitting={submitting}
+            values={values}
           />
         );
       case 2:
@@ -114,7 +115,8 @@ function DataEntry({ updateList }) {
             prev={() => prevStep()}
             next={() => nextStep()}
             handleSubmit={(formData) => onSubmit(formData)}
-            submitting={submitting}            values={values}
+            submitting={submitting}
+            values={values}
           />
         );
 
@@ -125,7 +127,8 @@ function DataEntry({ updateList }) {
             prev={() => prevStep()}
             next={() => nextStep()}
             handleSubmit={(formData) => onSubmit(formData)}
-            submitting={submitting}            values={values}
+            submitting={submitting}
+            values={values}
           />
         );
 
@@ -136,7 +139,8 @@ function DataEntry({ updateList }) {
             prev={() => prevStep()}
             handleSubmit={(formData) => onSubmit(formData)}
             submitting={submitting}
-            woso_no={values?.woso_no ? values.woso_no : initialValues.woso_no}            values={values}
+            woso_no={values?.woso_no ? values.woso_no : initialValues.woso_no}
+            values={values}
           />
         );
 
@@ -146,7 +150,8 @@ function DataEntry({ updateList }) {
             close={() => handleDataEntryClose()}
             next={() => nextStep()}
             handleSubmit={(formData) => onSubmit(formData)}
-            submitting={submitting}            values={values}
+            submitting={submitting}
+            values={values}
           />
         );
     }
