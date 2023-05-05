@@ -48,6 +48,12 @@ const api = {
         return axios.get(path).then((res) => res.data);
       },
     },
+    stock: {
+      list: async () => {
+        const path = '/planning/Stock_api/';
+        return axios.get(path).then((res) => res.data);
+      },
+    },
     notification: {
       list: async () => {
         const path = '/planning/notify_limit/';
