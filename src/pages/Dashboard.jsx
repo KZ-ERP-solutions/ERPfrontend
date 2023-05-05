@@ -3,7 +3,6 @@ import {
   Box,
   Container,
   IconButton,
-  List,
   ListItem,
   ListItemText,
   Menu,
@@ -61,7 +60,7 @@ function Dashboard() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Badge color='primary' variant='dot' invisible={!value}>
+          <Badge color="primary" variant="dot" invisible={!value}>
             <NotificationsIcon
               sx={{
                 height: 'auto',
@@ -92,7 +91,7 @@ function Dashboard() {
                     </p>
                     <p style={{ display: 'inline' }}>
                       {' '}
-                      is currently below safe stock count
+                      is currently below safe count
                       {' '}
                       <br />
                       <Link

@@ -9,7 +9,6 @@ import ErrorPage from '../ErrorPage';
 import Materials from './Materials';
 import Products from './Products';
 import Dashboard from '../Dashboard';
-import Notification from './Notification';
 import Stocks from './Stocks';
 
 function Planning() {
@@ -33,7 +32,6 @@ function Planning() {
           <Route exact path="/products" element={<Products />} />
           <Route exact path="/materials" element={<Materials />} />
           <Route exact path="/stocks" element={<Stocks />} />
-          <Route exact path="/notifications" element={<Notification />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Box>

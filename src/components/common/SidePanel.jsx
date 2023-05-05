@@ -1,9 +1,8 @@
 import {
   Box, Divider, Link, List, ListItem, Typography,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import api from '../../utils/api';
 
 function SidePanel() {
   const location = useLocation();
@@ -14,27 +13,7 @@ function SidePanel() {
     { name: 'Dashboard', path: `/${deptName}/dashboard` },
     { name: 'Orders', path: `/${deptName}/orders` },
   ];
-  const [notification, setNotification] = useState([]);
 
-  useEffect(() => {
-    api.planning.notification
-      .list()
-      .then((res) => {
-        setNotification(res.list);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const [data, setData] = useState(false);
-
-  useEffect(() => {
-    if (notification && notification.length > 0) {
-      setData(notification.length);
-    } else {
-      setData(false);
-    }
-  }, [notification]);
-  console.log(data);
   return (
     <Box height="100vh" width="10rem" sx={{ py: 2, bgcolor: 'white' }}>
       <Typography
@@ -196,39 +175,6 @@ function SidePanel() {
                 }}
               >
                 Stocks
-              </Link>
-            </ListItem>
-            <ListItem disablePadding>
-              <Link
-                underline="none"
-                color="tertiary"
-                to="/planning/notifications"
-                component={RouterLink}
-                sx={{
-                  fontWeight: 500,
-                  fontSize: '1.1rem',
-                  color: 'text.primary',
-                  px: 4,
-                  py: 1.5,
-                  width: '10rem',
-                  my: 0.5,
-                  bgcolor: data
-                    ? '#FA9884'
-                    : String(location.pathname).includes(
-                      '/planning/notifications',
-                    )
-                      ? 'tertiary.light'
-                      : 'transparent',
-                  '&:hover': {
-                    bgcolor: String(location.pathname).includes(
-                      '/planning/notifications',
-                    )
-                      ? 'tertiary.main'
-                      : 'tertiary.light',
-                  },
-                }}
-              >
-                Notifications
               </Link>
             </ListItem>
           </>
