@@ -164,6 +164,7 @@ function DataEntry({ updateList }) {
         endIcon={<AddIcon />}
         onClick={openDataEntryForm}
         disableElevation
+        sx={{ height: '100%' }}
       >
         Data Entry
       </Button>

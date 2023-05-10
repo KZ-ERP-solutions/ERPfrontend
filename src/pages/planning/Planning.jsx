@@ -9,7 +9,7 @@ import ErrorPage from '../ErrorPage';
 import Materials from './Materials';
 import Products from './Products';
 import Dashboard from '../Dashboard';
-import Stocks from './Stocks';
+import Stocks from './stock/Stocks';
 
 function Planning() {
   const location = useLocation();

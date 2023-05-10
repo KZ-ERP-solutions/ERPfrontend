@@ -93,7 +93,11 @@ function BOM() {
 
   return (
     <>
-      <Button variant="contained" onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        sx={{ height: 'auto' }}
+        onClick={handleClickOpen}
+      >
         Generate BOM
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth="sm">

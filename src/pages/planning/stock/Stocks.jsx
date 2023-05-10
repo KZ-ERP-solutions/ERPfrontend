@@ -1,9 +1,10 @@
 import {
+  Box,
   Button,
   Container,
   Dialog,
   DialogContent,
-  Grid,
+  LinearProgress,
   Table,
   TableBody,
   TableCell,
@@ -12,38 +13,56 @@ import {
   TableRow,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import api from '../../utils/api';
+import api from '../../../utils/api';
 import Notification from './StockAlert';
+import StockAdd from './StockAdd';
 
 function Stocks() {
   const [stock, setStock] = useState([]);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     api.planning.stock
       .list()
       .then((res) => {
+        setLoading(true);
         console.log(`stock is${res}`);
         setStock(res);
+        setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         console.log(`stock has${err}`);
       });
   }, []);
   return (
     <Container maxWidth="100%" sx={{ bgcolor: '#f9f7f7', paddingTop: '1rem' }}>
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
       >
-        <h2>Stocks</h2>
-        <Grid justifyContent="flex-end">
-          <Button
-            onClick={() => setOpen(true)}
-            variant="contained"
-            sx={{ padding: '7px 25px', margin: '10px' }}
-          >
+        <h2
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            textAlign: 'left',
+            margin: '0px',
+          }}
+        >
+          Stocks
+        </h2>
+        <div
+          style={{
+            textAlign: 'right',
+            display: 'flex',
+            justifyContent: 'flex-end',
+            margin: '10px',
+          }}
+        >
+          <Button onClick={() => setOpen(true)} variant="contained">
             Low Stock
           </Button>
           <Dialog open={open} onClose={() => setOpen(false)}>
@@ -51,11 +70,10 @@ function Stocks() {
               <Notification />
             </DialogContent>
           </Dialog>
-          <Button variant="contained" sx={{ padding: '7px 25px' }}>
-            Add
-          </Button>
-        </Grid>
-      </Grid>
+          <StockAdd />
+        </div>
+      </Box>
+
       <TableContainer>
         <Table>
           <TableHead>
@@ -102,17 +120,26 @@ function Stocks() {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {stock.map((data) => (
-              <TableRow key={data.matcode}>
-                <TableCell>{data.matcode}</TableCell>
-                <TableCell>{data.grn_no}</TableCell>
-                <TableCell>{data.date}</TableCell>
-                <TableCell>{data.qty}</TableCell>
-                <TableCell>{data.remark}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+
+          {loading ? (
+            <TableRow>
+              <TableCell colSpan={5}>
+                <LinearProgress />
+              </TableCell>
+            </TableRow>
+          ) : (
+            <TableBody>
+              {stock.map((data) => (
+                <TableRow key={data.matcode}>
+                  <TableCell>{data.matcode}</TableCell>
+                  <TableCell>{data.grn_no}</TableCell>
+                  <TableCell>{data.date}</TableCell>
+                  <TableCell>{data.qty}</TableCell>
+                  <TableCell>{data.remark}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          )}
         </Table>
       </TableContainer>
     </Container>

@@ -75,9 +75,7 @@ function Dashboard() {
           open={open}
           onClose={() => setAnchorEl(false)}
           anchorEl={anchorEl}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
+          sx={{ marginTop: '0.5rem' }}
         >
           {alerts.map((data) => (
             <ListItem key={data.matcode}>
