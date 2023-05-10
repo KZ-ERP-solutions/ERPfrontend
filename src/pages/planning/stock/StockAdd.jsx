@@ -9,7 +9,6 @@ import {
 } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import axios from 'axios';
 import api from '../../../utils/api';
 
 function StockAdd() {
@@ -19,18 +18,21 @@ function StockAdd() {
     initialValues: {
       matcode: '',
       qty: '',
-      safe_stock:'',
+      safe_stock: '',
     },
     onSubmit: async (values) => {
-      const { ...data } = values;
+      // const { ...data } = values;
 
-      await axios
-        .post('http://127.0.0.1:8000/api/planning/Stock_api/', data)
-        .catch((err) => console.log(` stock api error:${err}`));
-      // api.planning.stock
-      //   .add(values)
-      //   .then((res) => console.log(res))
-      //   .catch((err) => console.log(`add stock err: ${err}`));
+      // await axios
+      //   .post('http://127.0.0.1:8000/api/planning/Stock_api/', data)
+      //   .catch((err) => console.log(` stock api error:${err}`));
+      api.planning.stock
+        .add(values)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(`add stock err: ${err}`));
+
+      formik.resetForm();
+      location.reload();
     },
   });
   return (
@@ -42,7 +44,7 @@ function StockAdd() {
       >
         Add
       </Button>
-      <Dialog open={open}>
+      <Dialog onClick={() => setOpen(false)} open={open}>
         <DialogTitle>Stock Data Entry Form</DialogTitle>
         <DialogContent>
           <Container sx={{ padding: '10px' }}>
@@ -58,8 +60,7 @@ function StockAdd() {
                 value={formik.values.matcode}
                 onChange={formik.handleChange}
               />
-   
-           
+
               <TextField
                 fullWidth
                 margin="dense"
@@ -71,7 +72,7 @@ function StockAdd() {
                 value={formik.values.qty}
                 onChange={formik.handleChange}
               />
-        
+
               <TextField
                 fullWidth
                 margin="dense"

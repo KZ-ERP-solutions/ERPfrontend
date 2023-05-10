@@ -13,6 +13,7 @@ import {
   TableRow,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { DataGrid } from '@mui/x-data-grid';
 import api from '../../../utils/api';
 import Notification from './StockAlert';
 import StockAdd from './StockAdd';
@@ -34,7 +35,7 @@ function Stocks() {
         setLoading(false);
         console.log(`stock has${err}`);
       });
-  }, []);
+  }, [api.planning.stock.list]);
   return (
     <Container maxWidth="100%" sx={{ bgcolor: '#f9f7f7', paddingTop: '1rem' }}>
       <Box
@@ -86,7 +87,7 @@ function Stocks() {
               >
                 Matcode
               </TableCell>
-           <TableCell
+              <TableCell
                 sx={{
                   bgcolor: '#c2c0d7',
                   fontSize: '18px',
@@ -94,7 +95,7 @@ function Stocks() {
               >
                 Title
               </TableCell>
-           
+
               <TableCell
                 sx={{
                   bgcolor: '#c2c0d7',
@@ -103,7 +104,6 @@ function Stocks() {
               >
                 Quantity
               </TableCell>
-            
             </TableRow>
           </TableHead>
 
@@ -118,17 +118,18 @@ function Stocks() {
               {stock.map((data) => (
                 <TableRow key={data.matcode}>
                   <TableCell>{data.matcode}</TableCell>
-             <TableCell>{data.title}</TableCell>
-                
+                  <TableCell>{data.title}</TableCell>
+
                   <TableCell>{data.qty}</TableCell>
-                  
-                  
                 </TableRow>
               ))}
             </TableBody>
           )}
         </Table>
       </TableContainer>
+      {/* <div>
+        <DataGrid rows={stock} columns="5" />
+      </div> */}
     </Container>
   );
 }
