@@ -86,22 +86,15 @@ function Stocks() {
               >
                 Matcode
               </TableCell>
-              <TableCell
+           <TableCell
                 sx={{
                   bgcolor: '#c2c0d7',
                   fontSize: '18px',
                 }}
               >
-                GRN No
+                Title
               </TableCell>
-              <TableCell
-                sx={{
-                  bgcolor: '#c2c0d7',
-                  fontSize: '18px',
-                }}
-              >
-                Date
-              </TableCell>
+           
               <TableCell
                 sx={{
                   bgcolor: '#c2c0d7',
@@ -110,14 +103,7 @@ function Stocks() {
               >
                 Quantity
               </TableCell>
-              <TableCell
-                sx={{
-                  bgcolor: '#c2c0d7',
-                  fontSize: '18px',
-                }}
-              >
-                Remarks
-              </TableCell>
+            
             </TableRow>
           </TableHead>
 
@@ -132,10 +118,11 @@ function Stocks() {
               {stock.map((data) => (
                 <TableRow key={data.matcode}>
                   <TableCell>{data.matcode}</TableCell>
-                  <TableCell>{data.grn_no}</TableCell>
-                  <TableCell>{data.date}</TableCell>
+             <TableCell>{data.title}</TableCell>
+                
                   <TableCell>{data.qty}</TableCell>
-                  <TableCell>{data.remark}</TableCell>
+                  
+                  
                 </TableRow>
               ))}
             </TableBody>
