@@ -19,9 +19,7 @@ function StockAdd() {
     initialValues: {
       matcode: '',
       qty: '',
-      remark: '',
-      grn_no: '',
-      date: '',
+      safe_stock:'',
     },
     onSubmit: async (values) => {
       const { ...data } = values;
@@ -60,28 +58,8 @@ function StockAdd() {
                 value={formik.values.matcode}
                 onChange={formik.handleChange}
               />
-              <TextField
-                fullWidth
-                margin="dense"
-                id="grn_no"
-                name="grn_no"
-                label="GRN No"
-                variant="outlined"
-                size="small"
-                value={formik.values.grn_no}
-                onChange={formik.handleChange}
-              />
-              <TextField
-                fullWidth
-                type="date"
-                margin="dense"
-                id="date"
-                name="date"
-                variant="outlined"
-                size="small"
-                value={formik.values.date}
-                onChange={formik.handleChange}
-              />
+   
+           
               <TextField
                 fullWidth
                 margin="dense"
@@ -93,15 +71,16 @@ function StockAdd() {
                 value={formik.values.qty}
                 onChange={formik.handleChange}
               />
+        
               <TextField
                 fullWidth
                 margin="dense"
-                id="remark"
-                name="remark"
-                label="Remarks"
+                id="safe_stock"
+                name="safe_stock"
+                label="Safe stock"
                 variant="outlined"
                 size="small"
-                value={formik.values.remark}
+                value={formik.values.safe_stock}
                 onChange={formik.handleChange}
               />
             </form>
