@@ -57,6 +57,10 @@ const api = {
         const path = '/planning/Stock_api/';
         return axios.post(path, values).then((res) => res.data);
       },
+      edit: async (values) => {
+        const path = '/planning/Stock_api/';
+        return axios.put(path, values).then((res) => res.data);
+      },
     },
     notification: {
       list: async () => {

@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   Dialog,
+  DialogActions,
   DialogContent,
   LinearProgress,
   Table,
@@ -13,21 +14,22 @@ import {
   TableRow,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
 import api from '../../../utils/api';
 import Notification from './StockAlert';
 import StockAdd from './StockAdd';
+import StockEdit from './StockEdit';
 
 function Stocks() {
   const [stock, setStock] = useState([]);
   const [open, setOpen] = useState(false);
+  const [editopen, setEditOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     api.planning.stock
       .list()
       .then((res) => {
         setLoading(true);
-        console.log(`stock is${res}`);
+        console.log(res);
         setStock(res);
         setLoading(false);
       })
@@ -116,13 +118,18 @@ function Stocks() {
           ) : (
             <TableBody>
               {stock.map((data) => (
-                <TableRow key={data.matcode}>
+                <TableRow key={data.matcode} onClick={() => setEditOpen(true)}>
                   <TableCell>{data.matcode}</TableCell>
                   <TableCell>{data.title}</TableCell>
 
                   <TableCell>{data.qty}</TableCell>
                 </TableRow>
               ))}
+              <Dialog open={editopen} onClose={() => setEditOpen(false)}>
+                <DialogContent>
+                  <StockEdit/>
+                </DialogContent>
+              </Dialog>
             </TableBody>
           )}
         </Table>

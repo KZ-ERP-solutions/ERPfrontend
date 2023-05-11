@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Container } from '@mui/material';
 import api from '../../utils/api';
 
 function Materials() {
@@ -15,20 +16,9 @@ function Materials() {
   }, []);
 
   return (
-    <div>
-      <li>
-        {/* {materials.length > 0 &&
-          materials.map((material) => (
-            <li>
-              <code>
-                <pre style={{ whiteSpace: 'pre-wrap' }}>
-                  {JSON.stringify(material, undefined, 2)}
-                </pre>
-              </code>
-            </li>
-          ))} */}
-      </li>
-    </div>
+    <Container maxWidth="100%">
+      <h1>hi</h1>
+    </Container>
   );
 }
 
