@@ -107,7 +107,13 @@ function AddOrderForm({ handleSubmit }) {
         />
       </FormControl>
 
-      <Box sx={{ mt: 0.5, display: 'flex', justifyContent: 'end' }}>
+      <Box sx={{
+        mt: 0.5, display: 'flex', justifyContent: 'end', gap: 2,
+      }}
+      >
+        <Button variant="outlined" type="button">
+          Cancel
+        </Button>
         <Button variant="contained" type="submit">
           Add
         </Button>
