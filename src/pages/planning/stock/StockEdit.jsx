@@ -1,28 +1,42 @@
+/* eslint-disable react/destructuring-assignment */
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import api from '../../../utils/api';
 
-function StockEdit() {
+function StockEdit(info) {
+  const [data, setData] = useState('');
+
+  useEffect(() => {
+    api.planning.stock
+      .list()
+      .then((res) => setData(res))
+      .catch((err) => console.log(err));
+  }, []);
   const formik = useFormik({
     initialValues: {
-      matcode: '',
-      title: '',
-      qty: '',
-      Date: '',
+      matcode: info.info.matcode,
+      title: info.info.title,
+      qty: info.info.qty,
+      Date: new Date().toISOString().split('T')[0],
       grn_no: '',
     },
     onSubmit: async (values) => {
-      axios
+      await axios
         .put('http://127.0.0.1:8000/api/planning/Stock_api/', values)
-        .then((res) => console.log(`put sucess${res}`))
+        .then((res) => console.log(res))
         .catch((err) => console.log(err));
+      location.reload();
+      // api.planning.stock
+      //   .edit(values)
+      //   .then((res) => console.log(res))
+      //   .catch((err) => console.log(err));
     },
   });
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} key={data.matcode}>
         <TextField
           fullWidth
           margin="dense"
@@ -31,7 +45,7 @@ function StockEdit() {
           label="Matcode"
           variant="outlined"
           size="small"
-          value={formik.values.matcode || ''}
+          value={formik.values.matcode}
           onChange={formik.handleChange}
         />
         <TextField
