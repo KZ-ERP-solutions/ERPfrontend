@@ -65,6 +65,10 @@ const api = {
         const path = '/planning/Stock_api/';
         return axios.put(path, values).then((res) => res.data);
       },
+      log: async () => {
+        const path = '/planning/stock_log/';
+        return axios.get(path).then((res) => res.data);
+      },
     },
     notification: {
       list: async () => {

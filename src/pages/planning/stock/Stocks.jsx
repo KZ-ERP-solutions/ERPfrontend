@@ -17,6 +17,7 @@ import api from '../../../utils/api';
 import Notification from './StockAlert';
 import StockAdd from './StockAdd';
 import StockEdit from './StockEdit';
+import StockLog from './StockLog';
 
 function Stocks() {
   const [stock, setStock] = useState([]);
@@ -79,6 +80,7 @@ function Stocks() {
             </DialogContent>
           </Dialog>
           <StockAdd />
+          <StockLog/>
         </div>
       </Box>
 
