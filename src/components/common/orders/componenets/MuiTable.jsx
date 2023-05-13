@@ -84,7 +84,7 @@ function EnhancedTableHead(props) {
   );
 }
 
-export default function MuiTable({ columns = [], rows = [], orderFull = [] }) {
+export default function MuiTable({ columns = [], rows = [] }) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('woso_date');
   const navigate = useNavigate();
@@ -121,18 +121,15 @@ export default function MuiTable({ columns = [], rows = [], orderFull = [] }) {
                   key={row?.orderId}
                   hover
                   sx={{ bgcolor: 'background.paper' }}
-                  onClick={() => navigate(
-                    `${row?.orderId ? `order/${row?.orderId}` : ''}`,
-                    { state: { orders: orderFull } },
-                  )}
+                  onClick={() => navigate(`${row?.no ? `order/${row.no}` : ''}`)}
                   tabIndex={-1}
                 >
-                  <TableCell padding="normal">{row.woso_no}</TableCell>
-                  <TableCell padding="normal">{row.woso_date}</TableCell>
+                  <TableCell padding="normal">{row.no}</TableCell>
+                  <TableCell padding="normal">{row.date}</TableCell>
                   <TableCell padding="normal">{row.po_no}</TableCell>
-                  <TableCell padding="normal">{row.consignee_org}</TableCell>
+                  {/* <TableCell padding="normal">{row.consignee_org}</TableCell> */}
                   <TableCell padding="normal">{row.customer}</TableCell>
-                  <TableCell padding="normal">{row.items}</TableCell>
+                  <TableCell padding="normal">{row.marketing_item}</TableCell>
                 </TableRow>
               ))
               : null}

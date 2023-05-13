@@ -16,16 +16,6 @@ import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { LinearProgress } from '@mui/material';
 
-function createData(name, calories, fat, carbs, protein) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-  };
-}
-
 const headCells = [
   {
     id: 'productid',
@@ -160,7 +150,7 @@ export default function ProductsTable({
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: '100%', bgcolor: '#f9f7f7' }}>
+    <Box sx={{ width: '100%' }}>
       <EnhancedTableToolbar numSelected={selected.length} />
       <TableContainer sx={{ width: '100%' }}>
         <Table

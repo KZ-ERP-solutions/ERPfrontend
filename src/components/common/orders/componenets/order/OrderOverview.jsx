@@ -28,6 +28,7 @@ export default function OrderOverview({ order }) {
   const [rowsItems, setRowsItems] = useState([]);
   const [rowsStatus, setRowsStatus] = useState([]);
   console.log(order);
+
   useEffect(() => {
     if (order) {
       let rows = [];
@@ -41,23 +42,23 @@ export default function OrderOverview({ order }) {
 
       rows = [];
       rows.push(createData('Customer', order?.customer));
-      rows.push(createData('Buyer organization', order?.buyer_addr[0].org));
-      rows.push(createData('Buyer phone no', order?.buyer_addr[0].phone_no));
+      rows.push(createData('Buyer organization', order?.address[0]?.org));
+      rows.push(createData('Buyer phone no', order?.address[0]?.phone_no));
       rows.push(
-        createData('Consignee organization', order?.consign_addr[0].org),
+        createData('Consignee organization', order?.address[1]?.org),
       );
       rows.push(
-        createData('Consignee phone no', order?.consign_addr[0].phone_no),
+        createData('Consignee phone no', order?.address[1]?.phone_no),
       );
       setRowsCustomer(rows);
 
-      rows = [];
-      rows.push(createData('Marketing', 'On going'));
-      rows.push(createData('Planning', 'Not started'));
-      rows.push(createData('Purchase', 'Not started'));
-      rows.push(createData('Design', 'Not started'));
-      rows.push(createData('Production', 'Not started'));
-      setRowsStatus(rows);
+      // rows = [];
+      // rows.push(createData('Marketing', 'On going'));
+      // rows.push(createData('Planning', 'Not started'));
+      // rows.push(createData('Purchase', 'Not started'));
+      // rows.push(createData('Design', 'Not started'));
+      // rows.push(createData('Production', 'Not started'));
+      // setRowsStatus(rows);
 
       rows = [];
       if (order?.items && order.items.length > 0) {
@@ -148,7 +149,7 @@ export default function OrderOverview({ order }) {
         )}
 
         {/* status  */}
-        <Box gridColumn="span 6">
+        {/* <Box gridColumn="span 6">
           <Typography variant="h6" sx={{ mb: 1 }}>
             Status
           </Typography>
@@ -172,7 +173,7 @@ export default function OrderOverview({ order }) {
               </TableBody>
             </Table>
           </TableContainer>
-        </Box>
+        </Box> */}
 
         {/* customer  */}
         <Box gridColumn="span 6">

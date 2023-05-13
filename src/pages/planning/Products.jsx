@@ -26,7 +26,7 @@ function Products() {
   const handlePageChange = (newPage) => setPage(newPage);
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box sx={{ p: 3, bgcolor: '#f9f7f7', height: '100vh' }}>
       <ProductsTable
         rows={products.results}
         page={page}

@@ -9,6 +9,7 @@ import OrderMainTable from './componenets/order/OrderMainTable';
 import OrderCustomerTable from './componenets/order/OrderCustomerTable';
 import OrderOverview from './componenets/order/OrderOverview';
 import OrderStatusTable from './componenets/order/OrderStatusTable';
+import api from '../../../utils/api';
 
 function TabPanel(props) {
   const {
@@ -46,8 +47,8 @@ const lastWordOfRoute = (route) => {
 
 function Order() {
   const params = useParams();
-  const { pathname, state } = useLocation();
-  const [data, setData] = useState({
+  const { pathname } = useLocation();
+  const [order, setOrder] = useState({
     order: null,
     orders: [],
     buyer_addr: [],
@@ -61,29 +62,20 @@ function Order() {
   const orderId = params.id;
 
   useEffect(() => {
-    // set data values
-    if (state !== null && state?.orders) {
-      if (state.orders.length > 0) {
-        const order = state.orders.find((item) => item.no === orderId);
-        const {
-          buyer_addr, consign_addr, items, ...orderMainTableData
-        } = order;
-        setData((prev) => ({
-          ...prev,
-          order,
-          buyer_addr,
-          consign_addr,
-          items,
-          orderMainTableData,
-          orders: state.orders,
-        }));
-      } else setData((prev) => ({ ...prev, orders: state.orders }));
-    }
-  }, [orderId, state]);
+    api.marketing.order
+      .getById(orderId)
+      .then((res) => {
+        setOrder(res)
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [orderId]);
 
   const handleCancelClick = () => {
     navigate(pathname.includes('/edit') ? pathname.replace('/edit', '') : '', {
-      state: { order: data.order },
+      state: { order: order.order },
     });
     setIsEdit(false);
   };
@@ -111,13 +103,13 @@ function Order() {
   }
 
   const handleEditClick = () => {
-    navigate('edit', { state: { order: data.order } });
+    navigate('edit', { state: { order: order.order } });
     setIsEdit(true);
   };
 
   const handleSaveClick = () => {
     navigate(pathname.includes('/edit') ? pathname.replace('/edit', '') : '', {
-      state: { order: data.order },
+      state: { order: order.order },
     });
     setIsEdit(false);
   };
@@ -208,24 +200,26 @@ function Order() {
           ) : null}
         </Box>
         <TabPanel value={currentTab} index={0}>
-          <OrderOverview order={data.order} />
+          <OrderOverview order={order} />
         </TabPanel>
-        <TabPanel value={currentTab} index={1}>
+        {/* <TabPanel value={currentTab} index={1}>
           <OrderStatusTable />
         </TabPanel>
         <TabPanel value={currentTab} index={2}>
-          <OrderMainTable order={data.orderMainTableData} editable={isEdit} />
+          <OrderMainTable order={order.orderMainTableData} editable={isEdit} />
         </TabPanel>
         <TabPanel value={currentTab} index={3}>
           Items
         </TabPanel>
         <TabPanel value={currentTab} index={4}>
           <OrderCustomerTable
-            buyer={data.buyer_addr.length > 0 ? data.buyer_addr[0] : []}
-            consignee={data.consign_addr.length > 0 ? data.consign_addr[0] : []}
+            buyer={order.buyer_addr.length > 0 ? order.buyer_addr[0] : []}
+            consignee={
+              order.consign_addr.length > 0 ? order.consign_addr[0] : []
+            }
             editable={isEdit}
           />
-        </TabPanel>
+        </TabPanel> */}
       </Box>
     </Container>
   );

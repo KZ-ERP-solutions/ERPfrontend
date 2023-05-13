@@ -3,8 +3,12 @@ import axios from './axios';
 const api = {
   marketing: {
     order: {
+      getById: (id) => {
+        const path = `/marketing/order/${id}`;
+        return axios.get(path).then((res) => res.data);
+      },
       list: async () => {
-        const path = '/marketing/list_order/';
+        const path = '/marketing/order/';
         return axios.get(path).then((res) => res.data);
       },
       create: async (order) => {
