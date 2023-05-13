@@ -13,6 +13,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import DataEntry from '../components/marketing/dataEntry/DataEntry';
 import BOM from '../components/planning/BOM';
 import api from '../utils/api';
+import AddOrder from '../components/marketing/add-order/AddOrder';
 
 function Dashboard() {
   const location = useLocation();
@@ -52,7 +53,8 @@ function Dashboard() {
       <Box sx={{ display: 'flex', justifyContent: 'end', gap: 2 }}>
         {/* Add other navigation tabs of dahboard here */}
         {deptName === 'planning' && <BOM />}
-        <DataEntry updateList={() => setForceUpdate((prev) => !prev)} />
+        {/* <DataEntry updateList={() => setForceUpdate((prev) => !prev)} /> */}
+        <AddOrder />
         <IconButton
           id="button"
           onClick={handleClick}
