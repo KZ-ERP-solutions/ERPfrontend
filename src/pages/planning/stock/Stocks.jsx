@@ -13,29 +13,36 @@ import {
   TableRow,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
 import api from '../../../utils/api';
 import Notification from './StockAlert';
 import StockAdd from './StockAdd';
+import StockEdit from './StockEdit';
 
 function Stocks() {
   const [stock, setStock] = useState([]);
   const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [info, setInfo] = useState([]);
   useEffect(() => {
     api.planning.stock
       .list()
       .then((res) => {
-        setLoading(true);
-        console.log(`stock is${res}`);
-        setStock(res);
         setLoading(false);
+        console.log(res);
+        setStock(res);
       })
       .catch((err) => {
         setLoading(false);
-        console.log(`stock has${err}`);
+        console.log(`stock has ${err}`);
       });
-  }, [api.planning.stock.list]);
+  }, []);
+
+  const handleEditClose = () => {
+    setEditOpen(false);
+  };
+  console.log(info);
+
   return (
     <Container maxWidth="100%" sx={{ bgcolor: '#f9f7f7', paddingTop: '1rem' }}>
       <Box
@@ -79,34 +86,17 @@ function Stocks() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell
-                sx={{
-                  bgcolor: '#c2c0d7',
-                  fontSize: '18px',
-                }}
-              >
+              <TableCell sx={{ bgcolor: '#c2c0d7', fontSize: '18px' }}>
                 Matcode
               </TableCell>
-              <TableCell
-                sx={{
-                  bgcolor: '#c2c0d7',
-                  fontSize: '18px',
-                }}
-              >
+              <TableCell sx={{ bgcolor: '#c2c0d7', fontSize: '18px' }}>
                 Title
               </TableCell>
-
-              <TableCell
-                sx={{
-                  bgcolor: '#c2c0d7',
-                  fontSize: '18px',
-                }}
-              >
+              <TableCell sx={{ bgcolor: '#c2c0d7', fontSize: '18px' }}>
                 Quantity
               </TableCell>
             </TableRow>
           </TableHead>
-
           {loading ? (
             <TableRow>
               <TableCell colSpan={5}>
@@ -116,20 +106,29 @@ function Stocks() {
           ) : (
             <TableBody>
               {stock.map((data) => (
-                <TableRow key={data.matcode}>
+                <TableRow
+                  key={data.matcode}
+                  onClick={() => {
+                    setEditOpen(true);
+
+                    setInfo(data);
+                  }}
+                >
                   <TableCell>{data.matcode}</TableCell>
                   <TableCell>{data.title}</TableCell>
 
                   <TableCell>{data.qty}</TableCell>
                 </TableRow>
               ))}
+              <Dialog open={editOpen} onClose={() => setEditOpen(false)}>
+                <DialogContent>
+                  <StockEdit info={info} />
+                </DialogContent>
+              </Dialog>
             </TableBody>
           )}
         </Table>
       </TableContainer>
-      {/* <div>
-        <DataGrid rows={stock} columns="5" />
-      </div> */}
     </Container>
   );
 }
