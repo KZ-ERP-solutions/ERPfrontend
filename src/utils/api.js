@@ -12,7 +12,7 @@ const api = {
         return axios.get(path).then((res) => res.data);
       },
       create: async (order) => {
-        const path = '/marketing/create_order/';
+        const path = '/marketing/order/';
         return axios.post(path, order).then((res) => res.data);
       },
     },

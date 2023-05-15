@@ -5,11 +5,12 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import OrderMainTable from './componenets/order/OrderMainTable';
+import OrderPayment from './componenets/order/OrderPayment';
 import OrderCustomerTable from './componenets/order/OrderCustomerTable';
 import OrderOverview from './componenets/order/OrderOverview';
 import OrderStatusTable from './componenets/order/OrderStatusTable';
 import api from '../../../utils/api';
+import OrderItems from './componenets/order/OrderItems';
 
 function TabPanel(props) {
   const {
@@ -48,14 +49,7 @@ const lastWordOfRoute = (route) => {
 function Order() {
   const params = useParams();
   const { pathname } = useLocation();
-  const [order, setOrder] = useState({
-    order: null,
-    orders: [],
-    buyer_addr: [],
-    consign_addr: [],
-    items: [],
-    orderMainTableData: null,
-  });
+  const [order, setOrder] = useState({});
   const [currentTab, setCurrentTab] = React.useState(0);
   const [isEdit, setIsEdit] = useState(lastWordOfRoute(pathname) === 'edit');
   const navigate = useNavigate();
@@ -65,7 +59,7 @@ function Order() {
     api.marketing.order
       .getById(orderId)
       .then((res) => {
-        setOrder(res)
+        setOrder(res);
         console.log(res);
       })
       .catch((err) => {
@@ -151,26 +145,26 @@ function Order() {
       </Box>
 
       <Box sx={{ width: '100%', mt: 2 }}>
-        <Box
+        {/* <Box
           sx={{
             borderBottom: 1,
             borderColor: 'divider',
             display: 'flex',
             justifyContent: 'space-between',
           }}
+        > */}
+        <Tabs
+          value={currentTab}
+          onChange={handleTabChange}
+          aria-label="order-tabs"
         >
-          <Tabs
-            value={currentTab}
-            onChange={handleTabChange}
-            aria-label="order-tabs"
-          >
-            <Tab label="Overview" {...a11yProps(0)} />
-            <Tab label="Status" {...a11yProps(1)} />
-            <Tab label="Basic details" {...a11yProps(2)} />
-            <Tab label="Items" {...a11yProps(3)} />
-            <Tab label="Customer Info" {...a11yProps(4)} />
-          </Tabs>
-          {![0, 1].some((value) => value === currentTab) ? (
+          <Tab label="Overview" {...a11yProps(0)} />
+          <Tab label="Status" {...a11yProps(1)} />
+          <Tab label="Payment & Tax" {...a11yProps(2)} />
+          <Tab label="Items" {...a11yProps(3)} />
+          <Tab label="Customer Info" {...a11yProps(4)} />
+        </Tabs>
+        {/* {![0, 1].some((value) => value === currentTab) ? (
             isEdit ? (
               <Box display="flex" alignItems="center" gap={1}>
                 <Typography
@@ -198,20 +192,20 @@ function Order() {
               </Box>
             )
           ) : null}
-        </Box>
+        </Box> */}
         <TabPanel value={currentTab} index={0}>
           <OrderOverview order={order} />
         </TabPanel>
-        {/* <TabPanel value={currentTab} index={1}>
+        <TabPanel value={currentTab} index={1}>
           <OrderStatusTable />
         </TabPanel>
         <TabPanel value={currentTab} index={2}>
-          <OrderMainTable order={order.orderMainTableData} editable={isEdit} />
+          <OrderPayment order={order} />
         </TabPanel>
         <TabPanel value={currentTab} index={3}>
-          Items
+          <OrderItems items={order?.items} />
         </TabPanel>
-        <TabPanel value={currentTab} index={4}>
+        {/* <TabPanel value={currentTab} index={4}>
           <OrderCustomerTable
             buyer={order.buyer_addr.length > 0 ? order.buyer_addr[0] : []}
             consignee={
