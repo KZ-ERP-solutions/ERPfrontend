@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { LinearProgress } from '@mui/material';
+import { LinearProgress, Typography } from '@mui/material';
 
 const headCells = [
   {
@@ -78,14 +78,25 @@ export default function MaterialsTable({
                 <TableCell colSpan={6} />
               </TableRow>
             )}
-            {filter && (
+            {filter && filteredMaterial ? (
               <TableRow hover sx={{ cursor: 'pointer' }}>
                 <TableCell>{filteredMaterial.matcode}</TableCell>
                 <TableCell>{filteredMaterial.matgroup}</TableCell>
                 {/* <TableCell>{row.standard ? 'Yes' : 'No'}</TableCell> */}
                 <TableCell>{filteredMaterial.title}</TableCell>
               </TableRow>
-            )}
+            ) : filter ? (
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                align="center"
+                sx={{ my: 2 }}
+              >
+                Failed to find material with code
+                {' '}
+                {filter}
+              </Typography>
+            ) : null}
           </TableBody>
         </Table>
       </TableContainer>

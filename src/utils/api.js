@@ -47,8 +47,8 @@ const api = {
       },
     },
     material: {
-      list: async () => {
-        const path = '/planning/Material_api/';
+      list: async (page) => {
+        const path = `/planning/Material_api/?page=${page}`;
         return axios.get(path).then((res) => res.data);
       },
       suggestions: async () => {

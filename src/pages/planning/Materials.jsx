@@ -28,6 +28,8 @@ function Products() {
   const handleSetFilter = (key) => setFilter(key);
   const handlePageChange = (newPage) => setPage(newPage);
 
+  console.log(page);
+
   return (
     <Box sx={{ p: 3, bgcolor: '#f9f7f7', height: '100vh' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-import { LinearProgress } from '@mui/material';
+import { LinearProgress, Typography } from '@mui/material';
 
 const headCells = [
   {
@@ -76,14 +76,25 @@ export default function ProductsTable({
                 <TableCell colSpan={6} />
               </TableRow>
             )}
-            {filter && (
+            {filter && filteredProduct ? (
               <TableRow hover>
                 <TableCell>{filteredProduct.productid}</TableCell>
                 <TableCell>{filteredProduct.productname}</TableCell>
                 <TableCell>{filteredProduct.standard ? 'Yes' : 'No'}</TableCell>
                 <TableCell>{filteredProduct.taxid}</TableCell>
               </TableRow>
-            )}
+            ) : filter ? (
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                align="center"
+                sx={{ my: 2 }}
+              >
+                Failed to find product with id
+                {' '}
+                {filter}
+              </Typography>
+            ) : null}
           </TableBody>
         </Table>
       </TableContainer>
