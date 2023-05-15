@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import MuiTable from './componenets/MuiTable';
 import api from '../../../utils/api';
-import OrderSearch from './componenets/OrderSearch';
+import SearchWrapper from './componenets/SearchWrapper';
 
 const columns = [
   { id: 'woso_no', label: 'WO/SO No' },
@@ -50,7 +50,7 @@ function Orders() {
         <Typography variant="h5" fontWeight={600} sx={{ mt: 2 }}>
           Orders
         </Typography>
-        <OrderSearch orders={orders} />
+        <SearchWrapper orders={orders} />
       </Box>
       <Box my={1}>
         <MuiTable columns={columns} rows={orders} />

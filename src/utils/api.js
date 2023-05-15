@@ -48,7 +48,11 @@ const api = {
     },
     material: {
       list: async () => {
-        const path = '/planning/list_materials';
+        const path = '/planning/Material_api/';
+        return axios.get(path).then((res) => res.data);
+      },
+      suggestions: async () => {
+        const path = '/planning/material_suggestion';
         return axios.get(path).then((res) => res.data);
       },
     },

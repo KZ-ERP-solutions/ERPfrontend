@@ -81,7 +81,7 @@ function OrderItems({ items = [] }) {
         ))
       ) : (
         <Typography color="text.secondary">
-          No items found for this item!
+          No items found for this order!
         </Typography>
       )}
     </Box>

@@ -2,25 +2,24 @@ import {
   Autocomplete, Box, InputAdornment, TextField,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
-function OrderSearch({ orders }) {
+function SearchBox({
+  suggestions = [],
+  setKey,
+  label = '',
+  notFoundLabel = '',
+}) {
   const [searchKey, setSearchKey] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [notFound, setNotFound] = useState(false);
-  const navigate = useNavigate();
-
-  const orderIds = orders.length > 0 ? orders.map((order) => order?.no) : [];
 
   const handleSearchClick = (e, newValue) => {
     setSearchKey(newValue);
     console.log(newValue);
 
-    if (newValue !== null && orderIds.find((orderId) => orderId === newValue)) {
-      console.log(orderIds.find((orderId) => orderId === newValue));
-
-      navigate(`/marketing/orders/order/${newValue}`);
+    if (suggestions.includes(newValue) || newValue === null) {
+      setKey(newValue);
     } else if (newValue !== null) setNotFound(true);
   };
 
@@ -37,12 +36,12 @@ function OrderSearch({ orders }) {
           setNotFound(false);
           setInputValue(newValue);
         }}
-        options={orderIds}
+        options={suggestions}
         renderInput={(params) => (
           <TextField
             {...params}
             InputLabelProps={{ sx: { pl: 4.5 }, shrink: false }}
-            label={inputValue === '' ? 'Search by wo/so no' : ''}
+            label={inputValue === '' ? label : ''}
             InputProps={{
               ...params.InputProps,
               type: 'search',
@@ -55,7 +54,7 @@ function OrderSearch({ orders }) {
                 </>
               ),
             }}
-            helperText={notFound ? 'Invalid wo/so no' : undefined}
+            helperText={notFound ? notFoundLabel : undefined}
           />
         )}
       />
@@ -63,4 +62,4 @@ function OrderSearch({ orders }) {
   );
 }
 
-export default OrderSearch;
+export default SearchBox;
