@@ -56,7 +56,7 @@ const api = {
         return axios.get(path).then((res) => res.data);
       },
       add: async (values) => {
-        const path = '/planning/Material_api';
+        const path = '/planning/Material_api/';
         return axios.post(path, values).then((res) => res.data);
       },
     },
