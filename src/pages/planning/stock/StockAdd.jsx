@@ -44,7 +44,7 @@ function StockAdd() {
       >
         Add
       </Button>
-      <Dialog onClick={() => setOpen(false)} open={open}>
+      <Dialog onClose={() => setOpen(false)} open={open}>
         <DialogTitle>Stock Data Entry Form</DialogTitle>
         <DialogContent>
           <Container sx={{ padding: '10px' }}>

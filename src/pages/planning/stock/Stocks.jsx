@@ -80,7 +80,7 @@ function Stocks() {
             </DialogContent>
           </Dialog>
           <StockAdd />
-          <StockLog/>
+          <StockLog />
         </div>
       </Box>
 

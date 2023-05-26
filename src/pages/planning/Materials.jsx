@@ -3,6 +3,8 @@ import { Box, Typography } from '@mui/material';
 import api from '../../utils/api';
 import MaterialsTable from '../../components/planning/materials/MaterialsTable';
 import SearchWrapper from '../../components/planning/materials/SearchWrapper';
+import Add from '../../components/planning/materials/Add';
+import Edit from '../../components/planning/materials/Edit';
 
 function Products() {
   const [materials, setMaterials] = useState({ results: [], count: 0 });
@@ -34,7 +36,11 @@ function Products() {
         <Typography variant="h4" fontWeight={600}>
           All Materials
         </Typography>
-        <SearchWrapper filter={(value) => handleSetFilter(value)} />
+        <Box sx={{ display: 'flex' }}>
+          <Add />
+          <Edit />
+          <SearchWrapper filter={(value) => handleSetFilter(value)} />
+        </Box>
       </Box>
       <MaterialsTable
         rows={materials.results}
