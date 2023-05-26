@@ -24,7 +24,7 @@ function StockEdit(info) {
     },
     onSubmit: async (values) => {
       await axios
-        .put('http://127.0.0.1:8000/api/planning/Stock_api/', values)
+        .put('http://localhost:8000/api/planning/Stock_api/', values)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
       location.reload();
