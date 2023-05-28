@@ -27,7 +27,9 @@ function StockEdit(info) {
         .put('http://localhost:8000/api/planning/Stock_api/', values)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
-      location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
       // api.planning.stock
       //   .edit(values)
       //   .then((res) => console.log(res))

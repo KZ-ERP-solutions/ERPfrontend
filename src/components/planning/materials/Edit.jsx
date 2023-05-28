@@ -4,15 +4,55 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  FormControl,
   TextField,
 } from '@mui/material';
 import axios from 'axios';
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Edit() {
   const [open, setOpen] = useState(false);
+  const [input, setInput] = useState('');
+  const [matcode, setMatcode] = useState('');
+  const [data, setData] = useState({});
+
+  const handleInputChange = (event) => {
+    setInput(event.target.value);
+  };
+
+  const handleMatcodeChange = () => {
+    setMatcode(input);
+  };
+
+  useEffect(() => {
+    if (matcode !== '') {
+      axios
+        .get(`http://localhost:8000/api/planning/Material_api/${matcode}/`)
+        .then((res) => {
+          console.log(res);
+          setData(res.data);
+
+          // Update the formik initial values
+          formik.setValues({
+            ...formik.values,
+            matcode: res.data.matcode,
+            title: res.data.title,
+            ref: res.data.ref,
+            au: res.data.au,
+            safstk: res.data.safstk,
+            ordercst: res.data.ordercst,
+            safty: res.data.safty,
+            spare: res.data.spare,
+            matgroup: res.data.matgroup,
+            abc: res.data.abc,
+            reorderqty: res.data.reorderqty,
+            unitrate: res.data.unitrate,
+            dwgno: res.data.dwgno,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [matcode]);
 
   const formik = useFormik({
     initialValues: {
@@ -26,8 +66,7 @@ function Edit() {
       spare: '',
       matgroup: '',
       abc: '',
-      reorder: '',
-      qty: '',
+      reorderqty: '',
       unitrate: '',
       dwgno: '',
     },
@@ -36,8 +75,10 @@ function Edit() {
       //   .add(values)
       //   .then((res) => console.log(res))
       //   .catch((err) => console.log(err));
+      const url = `http://localhost:8000/api/planning/Material_api/${formik.values.matcode}/`;
+
       await axios
-        .put('http://localhost:8000/api/planning/Material_api/', values)
+        .put(url, values)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     },
@@ -52,7 +93,7 @@ function Edit() {
         Edit
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>Material Item Content Editor</DialogTitle>
+        <DialogTitle>Material Editor</DialogTitle>
         <DialogContent>
           <TextField
             fullWidth
@@ -62,11 +103,15 @@ function Edit() {
             label="Matcode"
             variant="outlined"
             size="small"
-            // value={formik.values.matcode}
-            // onChange={formik.handleChange}
+            value={input}
+            onChange={handleInputChange}
           />
           <DialogActions sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Button type="submit" variant="contained">
+            <Button
+              type="submit"
+              variant="contained"
+              onClick={handleMatcodeChange}
+            >
               Search
             </Button>
           </DialogActions>
@@ -188,7 +233,20 @@ function Edit() {
               value={formik.values.abc}
               onChange={formik.handleChange}
             />
+
             <div style={{ display: 'flex', gap: '10px' }}>
+              <TextField
+                fullWidth
+                margin="dense"
+                id="reorderqty"
+                name="reorderqty"
+                label="reorderqty"
+                variant="outlined"
+                size="small"
+                value={formik.values.reorderqty}
+                onChange={formik.handleChange}
+              />
+
               <TextField
                 fullWidth
                 margin="dense"

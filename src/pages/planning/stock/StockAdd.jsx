@@ -32,7 +32,9 @@ function StockAdd() {
         .catch((err) => console.log(`add stock err: ${err}`));
 
       formik.resetForm();
-      location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     },
   });
   return (

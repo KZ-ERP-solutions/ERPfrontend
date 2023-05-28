@@ -26,8 +26,7 @@ function Add() {
       spare: '',
       matgroup: '',
       abc: '',
-      reorder: '',
-      qty: '',
+      reorderqty: '',
       unitrate: '',
       dwgno: '',
     },
@@ -165,23 +164,12 @@ function Add() {
               <TextField
                 fullWidth
                 margin="dense"
-                id="reorder"
-                name="reorder"
-                label="reorder"
+                id="reorderqty"
+                name="reorderqty"
+                label="reorderqty"
                 variant="outlined"
                 size="small"
-                value={formik.values.reorder}
-                onChange={formik.handleChange}
-              />
-              <TextField
-                fullWidth
-                margin="dense"
-                id="qty"
-                name="qty"
-                label="Quantity"
-                variant="outlined"
-                size="small"
-                value={formik.values.qty}
+                value={formik.values.reorderqty}
                 onChange={formik.handleChange}
               />
               <TextField
