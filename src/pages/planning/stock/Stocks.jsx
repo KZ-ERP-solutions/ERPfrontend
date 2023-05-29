@@ -16,15 +16,14 @@ import React, { useEffect, useState } from 'react';
 import api from '../../../utils/api';
 import Notification from './StockAlert';
 import StockAdd from './StockAdd';
-import StockEdit from './StockEdit';
 import StockLog from './StockLog';
+import Edit from './Edit';
 
 function Stocks() {
   const [stock, setStock] = useState([]);
   const [open, setOpen] = useState(false);
-  const [editOpen, setEditOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [info, setInfo] = useState([]);
+
   useEffect(() => {
     api.planning.stock
       .list()
@@ -38,11 +37,6 @@ function Stocks() {
         console.log(`stock has ${err}`);
       });
   }, []);
-
-  const handleEditClose = () => {
-    setEditOpen(false);
-  };
-  console.log(info);
 
   return (
     <Container maxWidth="100%" sx={{ bgcolor: '#f9f7f7', paddingTop: '1rem' }}>
@@ -71,6 +65,8 @@ function Stocks() {
             margin: '10px',
           }}
         >
+          <StockAdd />
+          <Edit />
           <Button onClick={() => setOpen(true)} variant="contained">
             Low Stock
           </Button>
@@ -79,7 +75,6 @@ function Stocks() {
               <Notification />
             </DialogContent>
           </Dialog>
-          <StockAdd />
           <StockLog />
         </div>
       </Box>
@@ -108,25 +103,13 @@ function Stocks() {
           ) : (
             <TableBody>
               {stock.map((data) => (
-                <TableRow
-                  key={data.matcode}
-                  onClick={() => {
-                    setEditOpen(true);
-
-                    setInfo(data);
-                  }}
-                >
+                <TableRow key={data.matcode}>
                   <TableCell>{data.matcode}</TableCell>
                   <TableCell>{data.title}</TableCell>
 
                   <TableCell>{data.qty}</TableCell>
                 </TableRow>
               ))}
-              <Dialog open={editOpen} onClose={() => setEditOpen(false)}>
-                <DialogContent>
-                  <StockEdit info={info} />
-                </DialogContent>
-              </Dialog>
             </TableBody>
           )}
         </Table>

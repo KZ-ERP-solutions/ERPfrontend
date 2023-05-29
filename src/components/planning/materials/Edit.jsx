@@ -309,11 +309,11 @@ function Edit() {
             variant="contained"
             onClick={() => {
               setOpen(false);
-              setOpen(false);
               formik.resetForm();
               setMatcode('');
               setLoading(false);
             }}
+            disabled={matcode.length < 6}
           >
             Close
           </Button>
@@ -321,6 +321,7 @@ function Edit() {
             variant="contained"
             type="submit"
             onClick={formik.handleSubmit}
+            disabled={matcode.length < 6}
           >
             Update
           </Button>

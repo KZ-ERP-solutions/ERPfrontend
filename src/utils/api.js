@@ -81,6 +81,10 @@ const api = {
         const path = '/planning/stock_log/';
         return axios.get(path).then((res) => res.data);
       },
+      suggestions: async () => {
+        const path = '/planning/material_suggestion';
+        return axios.get(path).then((res) => res.data);
+      },
     },
     notification: {
       list: async () => {
