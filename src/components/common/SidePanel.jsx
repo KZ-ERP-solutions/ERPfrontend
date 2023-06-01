@@ -15,15 +15,31 @@ function SidePanel() {
   ];
 
   return (
-    <Box height="100vh" width="10rem" sx={{ py: 2, bgcolor: 'white' }}>
+    <Box height="100vh" width="15rem" sx={{ bgcolor: '#0f1a34' }}>
       <Typography
         variant="h5"
-        sx={{ fontWeight: 600, textAlign: 'center', mb: 2 }}
+        sx={{
+          width: '100%',
+          height: '5rem',
+          fontWeight: 600,
+          color: 'white',
+          bgcolor: '#182444',
+          display: 'flex',
+          paddingLeft: '20px',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+        }}
       >
         {deptNameCased}
       </Typography>
 
-      <List>
+      {/* <img
+        src="https://i.postimg.cc/TY71f8sF/biterp-low-resolution-logo-color-on-transparent-background.png"
+        border="0"
+        alt="logo" style={{width:'15rem', height:"4rem",padding:'20px 30px'}}
+      /> */}
+
+      <List sx={{ padding: '0px' }}>
         {commonNavigationLinks.map((item) => (
           <ListItem key={item.name} disablePadding>
             <Link
@@ -32,20 +48,19 @@ function SidePanel() {
               to={item.path}
               component={RouterLink}
               sx={{
-                fontWeight: 500,
+                fontWeight: 300,
                 fontSize: '1.1rem',
-                color: 'text.primary',
+                color: 'white',
                 px: 4,
-                py: 1.5,
-                width: '12rem',
-                my: 0.5,
+                py: 1,
+                width: '100%',
                 bgcolor: String(location.pathname).includes(item.path)
-                  ? 'tertiary.light'
+                  ? '#091023'
                   : 'transparent',
                 '&:hover': {
                   bgcolor: String(location.pathname).includes(item.path)
-                    ? 'tertiary.main'
-                    : 'tertiary.light',
+                    ? '#091023'
+                    : '#091023',
                 },
               }}
             >
@@ -53,7 +68,7 @@ function SidePanel() {
             </Link>
           </ListItem>
         ))}
-        <Divider sx={{ my: 1 }} />
+        <Divider sx={{ bgcolor: '#182444', height: '3px' }} />
 
         {/* add rest of the dept menu link here as conditioned rendering */}
         {deptName === 'planning' && (
@@ -69,16 +84,15 @@ function SidePanel() {
                   fontSize: '1.1rem',
                   color: 'text.primary',
                   px: 4,
-                  py: 1.5,
-                  width: '12rem',
-                  my: 0.5,
+                  py: 1,
+                  width: '100%',
                   bgcolor: String(location.pathname).includes('/planning/bom')
-                    ? 'tertiary.light'
+                    ? '#091023'
                     : 'transparent',
                   '&:hover': {
                     bgcolor: String(location.pathname).includes('/planning/bom')
-                      ? 'tertiary.main'
-                      : 'tertiary.light',
+                      ? '#091023'
+                      : '#091023',
                   },
                 }}>
                 BOM
@@ -91,24 +105,23 @@ function SidePanel() {
                 to="/planning/products"
                 component={RouterLink}
                 sx={{
-                  fontWeight: 500,
+                  fontWeight: 300,
                   fontSize: '1.1rem',
-                  color: 'text.primary',
+                  color: 'white',
                   px: 4,
-                  py: 1.5,
-                  width: '12rem',
-                  my: 0.5,
+                  py: 1,
+                  width: '100%',
                   bgcolor: String(location.pathname).includes(
                     '/planning/products',
                   )
-                    ? 'tertiary.light'
+                    ? '#091023'
                     : 'transparent',
                   '&:hover': {
                     bgcolor: String(location.pathname).includes(
                       '/planning/products',
                     )
-                      ? 'tertiary.main'
-                      : 'tertiary.light',
+                      ? '#091023'
+                      : '#091023',
                   },
                 }}
               >
@@ -122,24 +135,23 @@ function SidePanel() {
                 to="/planning/materials"
                 component={RouterLink}
                 sx={{
-                  fontWeight: 500,
+                  fontWeight: 300,
                   fontSize: '1.1rem',
-                  color: 'text.primary',
+                  color: 'white',
                   px: 4,
-                  py: 1.5,
-                  width: '12rem',
-                  my: 0.5,
+                  py: 1,
+                  width: '100%',
                   bgcolor: String(location.pathname).includes(
                     '/planning/materials',
                   )
-                    ? 'tertiary.light'
+                    ? '#091023'
                     : 'transparent',
                   '&:hover': {
                     bgcolor: String(location.pathname).includes(
                       '/planning/materials',
                     )
-                      ? 'tertiary.main'
-                      : 'tertiary.light',
+                      ? '#091023'
+                      : '#091023',
                   },
                 }}
               >
@@ -153,24 +165,23 @@ function SidePanel() {
                 to="/planning/stocks"
                 component={RouterLink}
                 sx={{
-                  fontWeight: 500,
+                  fontWeight: 300,
                   fontSize: '1.1rem',
-                  color: 'text.primary',
+                  color: 'white',
                   px: 4,
-                  py: 1.5,
-                  width: '12rem',
-                  my: 0.5,
+                  py: 1,
+                  width: '100%',
                   bgcolor: String(location.pathname).includes(
                     '/planning/stocks',
                   )
-                    ? 'tertiary.light'
+                    ? '#091023'
                     : 'transparent',
                   '&:hover': {
                     bgcolor: String(location.pathname).includes(
                       '/planning/stocks',
                     )
-                      ? 'tertiary.main'
-                      : 'tertiary.light',
+                      ? '#091023'
+                      : '#091023',
                   },
                 }}
               >

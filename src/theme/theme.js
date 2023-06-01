@@ -22,6 +22,15 @@ const theme = createTheme({
       primary: '#222222',
     },
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#373063',
+        },
+      },
+    },
+  },
 });
 
 export default theme;
