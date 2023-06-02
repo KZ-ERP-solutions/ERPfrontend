@@ -39,7 +39,7 @@ function Stocks() {
   }, []);
 
   return (
-    <Container maxWidth="100%" sx={{ bgcolor: '#f9f7f7', paddingTop: '1rem' }}>
+    <Container maxWidth="100%" sx={{ bgcolor: '#fff', paddingTop: '1rem' }}>
       <Box
         sx={{
           display: 'flex',
@@ -83,15 +83,9 @@ function Stocks() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell sx={{ bgcolor: '#c2c0d7', fontSize: '18px' }}>
-                Matcode
-              </TableCell>
-              <TableCell sx={{ bgcolor: '#c2c0d7', fontSize: '18px' }}>
-                Title
-              </TableCell>
-              <TableCell sx={{ bgcolor: '#c2c0d7', fontSize: '18px' }}>
-                Quantity
-              </TableCell>
+              <TableCell>Matcode</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell>Quantity</TableCell>
             </TableRow>
           </TableHead>
           {loading ? (

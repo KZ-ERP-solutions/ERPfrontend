@@ -31,7 +31,7 @@ function Products() {
   const handlePageChange = (newPage) => setPage(newPage);
 
   return (
-    <Box sx={{ p: 3, bgcolor: '#f9f7f7', height: '100vh' }}>
+    <Box sx={{ p: 3, bgcolor: '#fff', height: '100vh' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant="h4" fontWeight={600}>
           All Materials
