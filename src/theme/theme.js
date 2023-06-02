@@ -22,6 +22,21 @@ const theme = createTheme({
       primary: '#222222',
     },
   },
+  typography: {
+    fontFamily: [
+      // 'Kanit',
+      'Lato',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
   // components: {
   //   MuiButton: {
   //     styleOverrides: {

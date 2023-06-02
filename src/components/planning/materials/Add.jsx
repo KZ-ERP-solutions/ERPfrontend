@@ -41,7 +41,6 @@ function Add() {
     <div>
       <Button
         variant="contained"
-        sx={{ marginRight: '10px' }}
         onClick={() => setOpen(true)}
       >
         Add

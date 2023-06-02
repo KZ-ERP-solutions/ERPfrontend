@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
+import { FaSitemap } from 'react-icons/fa';
 import api from '../../utils/api';
 import ProductsTable from '../../components/planning/products/ProductsTable';
 import SearchWrapper from '../../components/planning/products/SearchWrapper';
@@ -29,22 +30,26 @@ function Products() {
   const handlePageChange = (newPage) => setPage(newPage);
 
   return (
-    <Box sx={{ p: 3, bgcolor: 'white', height: '100vh' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="h4" fontWeight={600}>
-          All Products
-        </Typography>
-        <SearchWrapper filter={(value) => handleSetFilter(value)} />
+    <Box
+      sx={{ height: '100vh', p: 4, bgcolor: (theme) => theme.palette.grey[50] }}
+    >
+      <Box sx={{ p: 3, bgcolor: '#fff' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Typography variant="h4" fontWeight={600}>
+            All Products
+          </Typography>
+          <SearchWrapper filter={(value) => handleSetFilter(value)} />
+        </Box>
+        <ProductsTable
+          rows={products.results}
+          page={page}
+          rowsPerPage={products.results.length}
+          count={products.count}
+          loading={loading}
+          changePage={(event, newPage) => handlePageChange(newPage)}
+          filter={filter}
+        />
       </Box>
-      <ProductsTable
-        rows={products.results}
-        page={page}
-        rowsPerPage={products.results.length}
-        count={products.count}
-        loading={loading}
-        changePage={(event, newPage) => handlePageChange(newPage)}
-        filter={filter}
-      />
     </Box>
   );
 }

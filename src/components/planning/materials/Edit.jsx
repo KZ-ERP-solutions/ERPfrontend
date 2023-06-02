@@ -94,7 +94,6 @@ function Edit() {
       <Button
         variant="contained"
         onClick={() => setOpen(true)}
-        sx={{ marginRight: '10px' }}
       >
         Edit
       </Button>

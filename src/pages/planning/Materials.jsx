@@ -31,26 +31,30 @@ function Products() {
   const handlePageChange = (newPage) => setPage(newPage);
 
   return (
-    <Box sx={{ p: 3, bgcolor: '#fff', height: '100vh' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="h4" fontWeight={600}>
-          All Materials
-        </Typography>
-        <Box sx={{ display: 'flex' }}>
-          <Add />
-          <Edit />
-          <SearchWrapper filter={(value) => handleSetFilter(value)} />
+    <Box
+      sx={{ height: '100vh', p: 4, bgcolor: (theme) => theme.palette.grey[50] }}
+    >
+      <Box sx={{ p: 3, bgcolor: '#fff' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Typography variant="h4" fontWeight={600}>
+            All Materials
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <SearchWrapper filter={(value) => handleSetFilter(value)} />
+            <Add />
+            <Edit />
+          </Box>
         </Box>
+        <MaterialsTable
+          rows={materials.results}
+          page={page}
+          rowsPerPage={materials.results.length}
+          count={materials.count}
+          loading={loading}
+          changePage={(event, newPage) => handlePageChange(newPage)}
+          filter={filter}
+        />
       </Box>
-      <MaterialsTable
-        rows={materials.results}
-        page={page}
-        rowsPerPage={materials.results.length}
-        count={materials.count}
-        loading={loading}
-        changePage={(event, newPage) => handlePageChange(newPage)}
-        filter={filter}
-      />
     </Box>
   );
 }

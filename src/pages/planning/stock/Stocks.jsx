@@ -39,76 +39,80 @@ function Stocks() {
   }, []);
 
   return (
-    <Container maxWidth="100%" sx={{ bgcolor: '#fff', paddingTop: '1rem' }}>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <h2
-          style={{
+    <Box
+      sx={{ height: '100vh', p: 4, bgcolor: (theme) => theme.palette.grey[50] }}
+    >
+      <Box sx={{ p: 3, bgcolor: '#fff' }}>
+        <Box
+          sx={{
             display: 'flex',
-            justifyContent: 'flex-start',
-            textAlign: 'left',
-            margin: '0px',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
-          Stocks
-        </h2>
-        <div
-          style={{
-            textAlign: 'right',
-            display: 'flex',
-            justifyContent: 'flex-end',
-            margin: '10px',
-          }}
-        >
-          <StockAdd />
-          <Edit />
-          <Button onClick={() => setOpen(true)} variant="contained">
-            Low Stock
-          </Button>
-          <Dialog open={open} onClose={() => setOpen(false)}>
-            <DialogContent>
-              <Notification />
-            </DialogContent>
-          </Dialog>
-          <StockLog />
-        </div>
+          <h2
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              textAlign: 'left',
+              margin: '0px',
+            }}
+          >
+            Stocks
+          </h2>
+          <div
+            style={{
+              textAlign: 'right',
+              display: 'flex',
+              justifyContent: 'flex-end',
+              margin: '10px',
+            }}
+          >
+            <StockAdd />
+            <Edit />
+            <Button onClick={() => setOpen(true)} variant="contained">
+              Low Stock
+            </Button>
+            <Dialog open={open} onClose={() => setOpen(false)}>
+              <DialogContent>
+                <Notification />
+              </DialogContent>
+            </Dialog>
+            <StockLog />
+          </div>
+        </Box>
+
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Matcode</TableCell>
+                <TableCell>Title</TableCell>
+                <TableCell>Quantity</TableCell>
+              </TableRow>
+            </TableHead>
+            {loading ? (
+              <TableRow>
+                <TableCell colSpan={5}>
+                  <LinearProgress />
+                </TableCell>
+              </TableRow>
+            ) : (
+              <TableBody>
+                {stock.map((data) => (
+                  <TableRow key={data.matcode}>
+                    <TableCell>{data.matcode}</TableCell>
+                    <TableCell>{data.title}</TableCell>
+
+                    <TableCell>{data.qty}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            )}
+          </Table>
+        </TableContainer>
       </Box>
-
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Matcode</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Quantity</TableCell>
-            </TableRow>
-          </TableHead>
-          {loading ? (
-            <TableRow>
-              <TableCell colSpan={5}>
-                <LinearProgress />
-              </TableCell>
-            </TableRow>
-          ) : (
-            <TableBody>
-              {stock.map((data) => (
-                <TableRow key={data.matcode}>
-                  <TableCell>{data.matcode}</TableCell>
-                  <TableCell>{data.title}</TableCell>
-
-                  <TableCell>{data.qty}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          )}
-        </Table>
-      </TableContainer>
-    </Container>
+    </Box>
   );
 }
 
