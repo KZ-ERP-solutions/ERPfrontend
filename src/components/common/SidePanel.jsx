@@ -3,6 +3,13 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
+import {
+  MdOutlineDashboard,
+  MdOutlineAllInbox,
+  MdDesignServices,
+  MdOutlineCategory,
+  MdLeaderboard,
+} from 'react-icons/md';
 
 function SidePanel() {
   const location = useLocation();
@@ -15,7 +22,7 @@ function SidePanel() {
   ];
 
   return (
-    <Box height="100vh" width="15rem" sx={{ bgcolor: '#0f1a34' }}>
+    <Box height="100vh" width="17rem" sx={{ bgcolor: '#0f1a34' }}>
       <Typography
         variant="h5"
         sx={{
@@ -64,7 +71,31 @@ function SidePanel() {
                 },
               }}
             >
-              {item.name}
+              {/* <MdOutlineDashboard />
+              {item.name} */}
+              {item.name === 'Dashboard' ? (
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                  }}
+                >
+                  <MdOutlineDashboard />
+                  {item.name}
+                </div>
+              ) : (
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                  }}
+                >
+                  <MdOutlineAllInbox />
+                  {item.name}
+                </div>
+              )}
             </Link>
           </ListItem>
         ))}
@@ -125,7 +156,16 @@ function SidePanel() {
                   },
                 }}
               >
-                Products
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                  }}
+                >
+                  <MdOutlineCategory />
+                  Product
+                </div>
               </Link>
             </ListItem>
             <ListItem disablePadding>
@@ -155,7 +195,16 @@ function SidePanel() {
                   },
                 }}
               >
-                Materials
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                  }}
+                >
+                  <MdDesignServices />
+                  Materials
+                </div>
               </Link>
             </ListItem>
             <ListItem disablePadding>
@@ -185,7 +234,16 @@ function SidePanel() {
                   },
                 }}
               >
-                Stocks
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                  }}
+                >
+                  <MdLeaderboard />
+                  Stocks
+                </div>
               </Link>
             </ListItem>
           </>
