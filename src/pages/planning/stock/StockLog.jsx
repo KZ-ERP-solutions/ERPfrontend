@@ -59,12 +59,11 @@ function StockLog() {
       >
         Log
       </Button>
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      <Dialog maxWidth="auto" open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Stock Log</DialogTitle>
         <DialogContent sx={{ p: 4 }}>
           <div style={{ height: 400 }}>
             <DataGrid
-              sx={{ width: '700px' }}
               columns={columns}
               rows={rows}
               initialState={{
