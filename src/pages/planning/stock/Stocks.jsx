@@ -2,7 +2,7 @@ import {
   Box,
   Button,
   Container,
-  Dialog,
+  Dialog as MuiDialog,
   DialogContent,
   LinearProgress,
   Table,
@@ -11,6 +11,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  styled,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import api from '../../../utils/api';
@@ -18,6 +19,14 @@ import Notification from './StockAlert';
 import StockAdd from './StockAdd';
 import StockLog from './StockLog';
 import Edit from './Edit';
+
+const Dialog = styled(MuiDialog)(() => ({
+  '& .MuiDialog-paper': {
+    borderRadius: 16,
+    overflowX: 'hidden',
+  },
+}));
+
 
 function Stocks() {
   const [stock, setStock] = useState([]);

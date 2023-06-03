@@ -1,15 +1,23 @@
 import {
   Button,
-  Dialog,
+  Dialog as MuiDialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Skeleton,
   TextField,
+  styled,
 } from '@mui/material';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
+
+const Dialog = styled(MuiDialog)(() => ({
+  '& .MuiDialog-paper': {
+    borderRadius: 16,
+    overflowX: 'hidden',
+  },
+}));
 
 function Edit() {
   const [open, setOpen] = useState(false);
@@ -91,10 +99,7 @@ function Edit() {
   });
   return (
     <div>
-      <Button
-        variant="contained"
-        onClick={() => setOpen(true)}
-      >
+      <Button variant="contained" onClick={() => setOpen(true)}>
         Edit
       </Button>
       <Dialog
@@ -303,7 +308,7 @@ function Edit() {
             )
           )}
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ mb: 1, mr: 1 }}>
           <Button
             variant="contained"
             onClick={() => {

@@ -19,7 +19,7 @@ const validationSchema = yup.object({
   note: yup.string(),
 });
 
-function AddOrderForm({ handleSubmit }) {
+function AddOrderForm({ handleSubmit, close }) {
   const formik = useFormik({
     validationSchema,
     initialValues,
@@ -107,11 +107,15 @@ function AddOrderForm({ handleSubmit }) {
         />
       </FormControl>
 
-      <Box sx={{
-        mt: 0.5, display: 'flex', justifyContent: 'end', gap: 2,
-      }}
+      <Box
+        sx={{
+          mt: 0.5,
+          display: 'flex',
+          justifyContent: 'end',
+          gap: 2,
+        }}
       >
-        <Button variant="outlined" type="button">
+        <Button variant="outlined" type="button" onClick={close}>
           Cancel
         </Button>
         <Button variant="contained" type="submit">

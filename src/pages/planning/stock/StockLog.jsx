@@ -1,10 +1,21 @@
 import {
-  Button, Dialog, DialogContent, DialogTitle,
+  Button,
+  Dialog as MuiDialog,
+  DialogContent,
+  DialogTitle,
+  styled,
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import api from '../../../utils/api';
+
+const Dialog = styled(MuiDialog)(() => ({
+  '& .MuiDialog-paper': {
+    borderRadius: 16,
+    overflowX: 'hidden',
+  },
+}));
 
 function StockLog() {
   const [open, setOpen] = useState(false);
@@ -50,8 +61,8 @@ function StockLog() {
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Stock Log</DialogTitle>
-        <DialogContent>
-          <div style={{ height: 400, width: '100%' }}>
+        <DialogContent sx={{ p: 4 }}>
+          <div style={{ height: 400 }}>
             <DataGrid
               sx={{ width: '700px' }}
               columns={columns}

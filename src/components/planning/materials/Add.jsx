@@ -1,15 +1,23 @@
 import {
   Button,
   Container,
-  Dialog,
+  Dialog as MuiDialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   TextField,
+  styled,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import api from '../../../utils/api';
+
+const Dialog = styled(MuiDialog)(() => ({
+  '& .MuiDialog-paper': {
+    borderRadius: 16,
+    overflowX: 'hidden',
+  },
+}));
 
 function Add() {
   const [open, setOpen] = useState(false);
@@ -39,10 +47,7 @@ function Add() {
   });
   return (
     <div>
-      <Button
-        variant="contained"
-        onClick={() => setOpen(true)}
-      >
+      <Button variant="contained" onClick={() => setOpen(true)}>
         Add
       </Button>
       <Dialog onClose={() => setOpen(false)} open={open}>
@@ -196,7 +201,7 @@ function Add() {
             </form>
           </Container>
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ mb: 1, mr: 1 }}>
           <Button onClick={() => setOpen(false)} variant="contained">
             Cancel
           </Button>
