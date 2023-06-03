@@ -10,35 +10,71 @@ import {
   MdOutlineCategory,
   MdLeaderboard,
 } from 'react-icons/md';
+import Logout from './logout/Logout';
 
 function SidePanel() {
   const location = useLocation();
   const deptName = location.pathname.split('/')[1];
   const deptNameCased = deptName.charAt(0).toUpperCase() + deptName.slice(1); // has to be changed to a sentence case => title case fn
 
-  const commonNavigationLinks = [
-    { name: 'Dashboard', path: `/${deptName}/dashboard` },
-    { name: 'Orders', path: `/${deptName}/orders` },
+  const commonLinks = [
+    {
+      name: 'Dashboard',
+      path: `/${deptName}/dashboard`,
+      icon: <MdOutlineDashboard />,
+    },
+    {
+      name: 'Orders',
+      path: `/${deptName}/orders`,
+      icon: <MdOutlineAllInbox />,
+    },
+  ];
+
+  const planningLinks = [
+    {
+      name: 'Products',
+      path: '/planning/products',
+      icon: <MdOutlineCategory />,
+    },
+    {
+      name: 'Orders',
+      path: '/planning/materials',
+      icon: <MdDesignServices />,
+    },
+    {
+      name: 'Stocks',
+      path: '/planning/stocks',
+      icon: <MdLeaderboard />,
+    },
   ];
 
   return (
-    <Box height="100vh" width="17rem" sx={{ bgcolor: '#0f1a34' }}>
-      <Typography
-        variant="h5"
+    <Box
+      height="100vh"
+      width="17rem"
+      sx={{ bgcolor: 'secondary.main', position: 'relative' }}
+    >
+      <Box
         sx={{
           width: '100%',
           height: '5rem',
-          fontWeight: 600,
-          color: 'white',
-          bgcolor: '#182444',
+          bgcolor: 'secondary.main',
           display: 'flex',
-          paddingLeft: '20px',
-          justifyContent: 'flex-start',
           alignItems: 'center',
+          px: 4,
         }}
       >
-        {deptNameCased}
-      </Typography>
+        <Typography
+          variant="h3"
+          align="center"
+          fontFamily="Patua One"
+          fontWeight={400}
+          color="#fff"
+          letterSpacing="1px"
+        >
+          {deptNameCased}
+        </Typography>
+      </Box>
 
       {/* <img
         src="https://i.postimg.cc/TY71f8sF/biterp-low-resolution-logo-color-on-transparent-background.png"
@@ -47,7 +83,8 @@ function SidePanel() {
       /> */}
 
       <List sx={{ padding: '0px' }}>
-        {commonNavigationLinks.map((item) => (
+        {/* common links */}
+        {commonLinks.map((item) => (
           <ListItem key={item.name} disablePadding>
             <Link
               underline="none"
@@ -55,200 +92,82 @@ function SidePanel() {
               to={item.path}
               component={RouterLink}
               sx={{
-                fontWeight: 300,
+                fontWeight: String(location.pathname).includes(item.path)
+                  ? 500
+                  : 400,
                 fontSize: '1.1rem',
                 color: 'white',
                 px: 4,
                 py: 1,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
                 width: '100%',
                 bgcolor: String(location.pathname).includes(item.path)
-                  ? '#091023'
+                  ? 'secondary.dark'
                   : 'transparent',
                 '&:hover': {
                   bgcolor: String(location.pathname).includes(item.path)
-                    ? '#091023'
-                    : '#091023',
+                    ? 'secondary.dark'
+                    : 'secondary.dark',
                 },
               }}
             >
-              {/* <MdOutlineDashboard />
-              {item.name} */}
-              {item.name === 'Dashboard' ? (
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                  }}
-                >
-                  <MdOutlineDashboard />
-                  {item.name}
-                </div>
-              ) : (
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                  }}
-                >
-                  <MdOutlineAllInbox />
-                  {item.name}
-                </div>
-              )}
+              {item.icon}
+              {item.name}
             </Link>
           </ListItem>
         ))}
-        <Divider sx={{ bgcolor: '#182444', height: '3px' }} />
 
-        {/* add rest of the dept menu link here as conditioned rendering */}
-        {deptName === 'planning' && (
-          <>
-            {/* <ListItem disablePadding>
-             <Link
-                underline="none"
-                color="tertiary"
-                to={'/planning/bom'}
-                component={RouterLink}
-                sx={{
-                  fontWeight: 500,
-                  fontSize: '1.1rem',
-                  color: 'text.primary',
-                  px: 4,
-                  py: 1,
-                  width: '100%',
-                  bgcolor: String(location.pathname).includes('/planning/bom')
-                    ? '#091023'
-                    : 'transparent',
-                  '&:hover': {
-                    bgcolor: String(location.pathname).includes('/planning/bom')
-                      ? '#091023'
-                      : '#091023',
-                  },
-                }}>
-                BOM
-              </Link>
-            </ListItem> */}
-            <ListItem disablePadding>
-              <Link
-                underline="none"
-                color="tertiary"
-                to="/planning/products"
-                component={RouterLink}
-                sx={{
-                  fontWeight: 300,
-                  fontSize: '1.1rem',
-                  color: 'white',
-                  px: 4,
-                  py: 1,
-                  width: '100%',
-                  bgcolor: String(location.pathname).includes(
-                    '/planning/products',
-                  )
-                    ? '#091023'
-                    : 'transparent',
-                  '&:hover': {
-                    bgcolor: String(location.pathname).includes(
-                      '/planning/products',
-                    )
-                      ? '#091023'
-                      : '#091023',
-                  },
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                  }}
-                >
-                  <MdOutlineCategory />
-                  Product
-                </div>
-              </Link>
-            </ListItem>
-            <ListItem disablePadding>
-              <Link
-                underline="none"
-                color="tertiary"
-                to="/planning/materials"
-                component={RouterLink}
-                sx={{
-                  fontWeight: 300,
-                  fontSize: '1.1rem',
-                  color: 'white',
-                  px: 4,
-                  py: 1,
-                  width: '100%',
-                  bgcolor: String(location.pathname).includes(
-                    '/planning/materials',
-                  )
-                    ? '#091023'
-                    : 'transparent',
-                  '&:hover': {
-                    bgcolor: String(location.pathname).includes(
-                      '/planning/materials',
-                    )
-                      ? '#091023'
-                      : '#091023',
-                  },
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                  }}
-                >
-                  <MdDesignServices />
-                  Materials
-                </div>
-              </Link>
-            </ListItem>
-            <ListItem disablePadding>
-              <Link
-                underline="none"
-                color="tertiary"
-                to="/planning/stocks"
-                component={RouterLink}
-                sx={{
-                  fontWeight: 300,
-                  fontSize: '1.1rem',
-                  color: 'white',
-                  px: 4,
-                  py: 1,
-                  width: '100%',
-                  bgcolor: String(location.pathname).includes(
-                    '/planning/stocks',
-                  )
-                    ? '#091023'
-                    : 'transparent',
-                  '&:hover': {
-                    bgcolor: String(location.pathname).includes(
-                      '/planning/stocks',
-                    )
-                      ? '#091023'
-                      : '#091023',
-                  },
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                  }}
-                >
-                  <MdLeaderboard />
-                  Stocks
-                </div>
-              </Link>
-            </ListItem>
-          </>
-        )}
+        <Divider sx={{ bgcolor: 'secondary.light', height: '1px', my: 1 }} />
+
+        {/* planning links */}
+        {planningLinks.map((item) => (
+          <ListItem key={item.name} disablePadding>
+            <Link
+              underline="none"
+              color="tertiary"
+              to={item.path}
+              component={RouterLink}
+              sx={{
+                fontWeight: String(location.pathname).includes(item.path)
+                  ? 500
+                  : 400,
+                fontSize: '1.1rem',
+                color: 'white',
+                px: 4,
+                py: 1,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                width: '100%',
+                bgcolor: String(location.pathname).includes(item.path)
+                  ? 'secondary.dark'
+                  : 'transparent',
+                '&:hover': {
+                  bgcolor: String(location.pathname).includes(item.path)
+                    ? 'secondary.dark'
+                    : 'secondary.dark',
+                },
+              }}
+            >
+              {item.icon}
+              {item.name}
+            </Link>
+          </ListItem>
+        ))}
       </List>
+
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '1.5rem',
+          left: 0,
+          right: 0,
+        }}
+      >
+        <Logout />
+      </Box>
     </Box>
   );
 }
