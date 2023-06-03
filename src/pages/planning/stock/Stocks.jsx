@@ -12,6 +12,7 @@ import {
   TableHead,
   TableRow,
   styled,
+  Typography,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import api from '../../../utils/api';
@@ -59,16 +60,9 @@ function Stocks() {
             alignItems: 'center',
           }}
         >
-          <h2
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              textAlign: 'left',
-              margin: '0px',
-            }}
-          >
+          <Typography variant="h4" fontWeight={600}>
             Stocks
-          </h2>
+          </Typography>
           <div
             style={{
               textAlign: 'right',
