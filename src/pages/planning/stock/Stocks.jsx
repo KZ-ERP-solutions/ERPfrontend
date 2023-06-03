@@ -1,20 +1,16 @@
 import {
   Box,
   Button,
-  Container,
   Dialog as MuiDialog,
   DialogContent,
-  LinearProgress,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   styled,
   Typography,
+  LinearProgress,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { DataGrid } from '@mui/x-data-grid';
+
+import { v4 as uuidv4 } from 'uuid';
 import api from '../../../utils/api';
 import Notification from './StockAlert';
 import StockAdd from './StockAdd';
@@ -27,7 +23,6 @@ const Dialog = styled(MuiDialog)(() => ({
     overflowX: 'hidden',
   },
 }));
-
 
 function Stocks() {
   const [stock, setStock] = useState([]);
@@ -47,6 +42,24 @@ function Stocks() {
         console.log(`stock has ${err}`);
       });
   }, []);
+  const columns = [
+    { field: 'matcode', headerName: 'Matcode', type: 'number' },
+    { field: 'qty', headerName: 'Quantity', type: 'number' },
+    { field: 'date', headerName: 'Date' },
+    { field: 'grn_no', headerName: 'GRN No', type: 'number' },
+    { field: 'srn_no', headerName: 'SRN No', type: 'number' },
+    { field: 'remarks', headerName: 'Remarks' },
+  ];
+
+  const rows = stock.map((item) => ({
+    id: uuidv4(),
+    matcode: item.matcode,
+    qty: item.qty,
+    date: item.date,
+    grn_no: item.grn_no,
+    srn_no: item.srn_no,
+    remarks: item.remarks,
+  }));
 
   return (
     <Box
@@ -84,37 +97,23 @@ function Stocks() {
             <StockLog />
           </div>
         </Box>
-
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Matcode</TableCell>
-                <TableCell>Title</TableCell>
-                <TableCell>Quantity</TableCell>
-              </TableRow>
-            </TableHead>
-            {loading ? (
-              <TableRow>
-                <TableCell colSpan={5}>
-                  <LinearProgress />
-                </TableCell>
-              </TableRow>
-            ) : (
-              <TableBody>
-                {stock.map((data) => (
-                  <TableRow key={data.matcode}>
-                    <TableCell>{data.matcode}</TableCell>
-                    <TableCell>{data.title}</TableCell>
-
-                    <TableCell>{data.qty}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            )}
-          </Table>
-        </TableContainer>
       </Box>
+      {loading ? (
+        <LinearProgress />
+      ) : (
+        <DataGrid
+          sx={{ height: '47rem' }}
+          rows={rows}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 12 },
+            },
+          }}
+          pageSizeOptions={[6, 12]}
+          checkboxSelection
+        />
+      )}
     </Box>
   );
 }
