@@ -39,7 +39,7 @@ function SidePanel() {
       icon: <MdOutlineCategory />,
     },
     {
-      name: 'Orders',
+      name: 'Materials',
       path: '/planning/materials',
       icon: <MdDesignServices />,
     },
