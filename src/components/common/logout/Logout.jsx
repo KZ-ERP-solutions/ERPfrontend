@@ -45,10 +45,10 @@ function Logout() {
     //   message: 'Logged out successfully',
     // });
     handleClose();
-    // setTimeout(() => {
-    //   navigate('/admin-login');
-    //   window.location.reload();
-    // }, [1000]);
+    setTimeout(() => {
+      navigate('/login');
+      window.location.reload();
+    }, [1000]);
   };
 
   return (
