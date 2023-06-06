@@ -92,6 +92,12 @@ const api = {
         return axios.get(path).then((res) => res.data);
       },
     },
+    pi: {
+      list: async () => {
+        const path = '/planning/pi_api/';
+        return axios.get(path).then((res) => res.data);
+      },
+    },
   },
 };
 

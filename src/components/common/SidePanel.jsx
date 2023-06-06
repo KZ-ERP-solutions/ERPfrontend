@@ -9,6 +9,8 @@ import {
   MdDesignServices,
   MdOutlineCategory,
   MdLeaderboard,
+  MdLocalAtm,
+  MdShoppingCart,
 } from 'react-icons/md';
 import Logout from './logout/Logout';
 
@@ -45,6 +47,16 @@ function SidePanel() {
       name: 'Stocks',
       path: '/planning/stocks',
       icon: <MdLeaderboard />,
+    },
+    {
+      name: 'Purchase Intent',
+      path: '/planning/pi',
+      icon: <MdLocalAtm />,
+    },
+    {
+      name: 'Purchase Order',
+      path: '/planning/po',
+      icon: <MdShoppingCart />,
     },
   ];
 
