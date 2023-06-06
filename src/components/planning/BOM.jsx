@@ -4,16 +4,24 @@ import {
   Box,
   Button,
   CircularProgress,
-  Dialog,
+  Dialog as MuiDialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
   TextField,
   Typography,
+  styled,
 } from '@mui/material';
 import fileDownload from 'js-file-download';
 import api from '../../utils/api';
+
+const Dialog = styled(MuiDialog)(() => ({
+  '& .MuiDialog-paper': {
+    borderRadius: 16,
+    overflowX: 'hidden',
+  },
+}));
 
 function BOM() {
   const [open, setOpen] = React.useState(false);

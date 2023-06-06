@@ -63,7 +63,7 @@ export default function ProductsTable({
           <TableBody>
             {rows.length > 0 && !filter
               ? rows.map((row) => (
-                <TableRow hover key={row.productid}>
+                <TableRow key={row.productid}>
                   <TableCell>{row.productid}</TableCell>
                   <TableCell>{row.productname}</TableCell>
                   <TableCell>{row.standard ? 'Yes' : 'No'}</TableCell>
@@ -77,7 +77,7 @@ export default function ProductsTable({
               </TableRow>
             )}
             {filter && filteredProduct ? (
-              <TableRow hover>
+              <TableRow>
                 <TableCell>{filteredProduct.productid}</TableCell>
                 <TableCell>{filteredProduct.productname}</TableCell>
                 <TableCell>{filteredProduct.standard ? 'Yes' : 'No'}</TableCell>

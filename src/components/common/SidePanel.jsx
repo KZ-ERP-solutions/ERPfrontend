@@ -3,28 +3,100 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
+import {
+  MdOutlineDashboard,
+  MdOutlineAllInbox,
+  MdDesignServices,
+  MdOutlineCategory,
+  MdLeaderboard,
+  MdLocalAtm,
+  MdShoppingCart,
+} from 'react-icons/md';
+import Logout from './logout/Logout';
 
 function SidePanel() {
   const location = useLocation();
   const deptName = location.pathname.split('/')[1];
   const deptNameCased = deptName.charAt(0).toUpperCase() + deptName.slice(1); // has to be changed to a sentence case => title case fn
 
-  const commonNavigationLinks = [
-    { name: 'Dashboard', path: `/${deptName}/dashboard` },
-    { name: 'Orders', path: `/${deptName}/orders` },
+  const commonLinks = [
+    {
+      name: 'Dashboard',
+      path: `/${deptName}/dashboard`,
+      icon: <MdOutlineDashboard />,
+    },
+    {
+      name: 'Orders',
+      path: `/${deptName}/orders`,
+      icon: <MdOutlineAllInbox />,
+    },
+  ];
+
+  const planningLinks = [
+    {
+      name: 'Products',
+      path: '/planning/products',
+      icon: <MdOutlineCategory />,
+    },
+    {
+      name: 'Orders',
+      path: '/planning/materials',
+      icon: <MdDesignServices />,
+    },
+    {
+      name: 'Stocks',
+      path: '/planning/stocks',
+      icon: <MdLeaderboard />,
+    },
+    {
+      name: 'Purchase Intent',
+      path: '/planning/pi',
+      icon: <MdLocalAtm />,
+    },
+    {
+      name: 'Purchase Order',
+      path: '/planning/po',
+      icon: <MdShoppingCart />,
+    },
   ];
 
   return (
-    <Box height="100vh" width="10rem" sx={{ py: 2, bgcolor: 'white' }}>
-      <Typography
-        variant="h5"
-        sx={{ fontWeight: 600, textAlign: 'center', mb: 2 }}
+    <Box
+      height="100vh"
+      width="17rem"
+      sx={{ bgcolor: 'secondary.main', position: 'relative' }}
+    >
+      <Box
+        sx={{
+          width: '100%',
+          height: '5rem',
+          bgcolor: 'secondary.main',
+          display: 'flex',
+          alignItems: 'center',
+          px: 4,
+        }}
       >
-        {deptNameCased}
-      </Typography>
+        <Typography
+          variant="h3"
+          align="center"
+          fontFamily="Patua One"
+          fontWeight={400}
+          color="#fff"
+          letterSpacing="1px"
+        >
+          {deptNameCased}
+        </Typography>
+      </Box>
 
-      <List>
-        {commonNavigationLinks.map((item) => (
+      {/* <img
+        src="https://i.postimg.cc/TY71f8sF/biterp-low-resolution-logo-color-on-transparent-background.png"
+        border="0"
+        alt="logo" style={{width:'15rem', height:"4rem",padding:'20px 30px'}}
+      /> */}
+
+      <List sx={{ padding: '0px' }}>
+        {/* common links */}
+        {commonLinks.map((item) => (
           <ListItem key={item.name} disablePadding>
             <Link
               underline="none"
@@ -32,154 +104,84 @@ function SidePanel() {
               to={item.path}
               component={RouterLink}
               sx={{
-                fontWeight: 500,
+                fontWeight: String(location.pathname).includes(item.path)
+                  ? 500
+                  : 400,
                 fontSize: '1.1rem',
-                color: 'text.primary',
+                color: 'white',
                 px: 4,
-                py: 1.5,
-                width: '12rem',
-                my: 0.5,
+                py: 1,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                width: '100%',
                 bgcolor: String(location.pathname).includes(item.path)
-                  ? 'tertiary.light'
+                  ? 'secondary.dark'
                   : 'transparent',
                 '&:hover': {
                   bgcolor: String(location.pathname).includes(item.path)
-                    ? 'tertiary.main'
-                    : 'tertiary.light',
+                    ? 'secondary.dark'
+                    : 'secondary.dark',
                 },
               }}
             >
+              {item.icon}
               {item.name}
             </Link>
           </ListItem>
         ))}
-        <Divider sx={{ my: 1 }} />
 
-        {/* add rest of the dept menu link here as conditioned rendering */}
+        <Divider sx={{ bgcolor: 'secondary.light', height: '1px', my: 1 }} />
         {deptName === 'planning' && (
-          <>
-            {/* <ListItem disablePadding>
-             <Link
-                underline="none"
-                color="tertiary"
-                to={'/planning/bom'}
-                component={RouterLink}
-                sx={{
-                  fontWeight: 500,
-                  fontSize: '1.1rem',
-                  color: 'text.primary',
-                  px: 4,
-                  py: 1.5,
-                  width: '12rem',
-                  my: 0.5,
-                  bgcolor: String(location.pathname).includes('/planning/bom')
-                    ? 'tertiary.light'
-                    : 'transparent',
-                  '&:hover': {
-                    bgcolor: String(location.pathname).includes('/planning/bom')
-                      ? 'tertiary.main'
-                      : 'tertiary.light',
-                  },
-                }}>
-                BOM
-              </Link>
-            </ListItem> */}
-            <ListItem disablePadding>
-              <Link
-                underline="none"
-                color="tertiary"
-                to="/planning/products"
-                component={RouterLink}
-                sx={{
-                  fontWeight: 500,
-                  fontSize: '1.1rem',
-                  color: 'text.primary',
-                  px: 4,
-                  py: 1.5,
-                  width: '12rem',
-                  my: 0.5,
-                  bgcolor: String(location.pathname).includes(
-                    '/planning/products',
-                  )
-                    ? 'tertiary.light'
-                    : 'transparent',
-                  '&:hover': {
-                    bgcolor: String(location.pathname).includes(
-                      '/planning/products',
-                    )
-                      ? 'tertiary.main'
-                      : 'tertiary.light',
-                  },
-                }}
-              >
-                Products
-              </Link>
-            </ListItem>
-            <ListItem disablePadding>
-              <Link
-                underline="none"
-                color="tertiary"
-                to="/planning/materials"
-                component={RouterLink}
-                sx={{
-                  fontWeight: 500,
-                  fontSize: '1.1rem',
-                  color: 'text.primary',
-                  px: 4,
-                  py: 1.5,
-                  width: '12rem',
-                  my: 0.5,
-                  bgcolor: String(location.pathname).includes(
-                    '/planning/materials',
-                  )
-                    ? 'tertiary.light'
-                    : 'transparent',
-                  '&:hover': {
-                    bgcolor: String(location.pathname).includes(
-                      '/planning/materials',
-                    )
-                      ? 'tertiary.main'
-                      : 'tertiary.light',
-                  },
-                }}
-              >
-                Materials
-              </Link>
-            </ListItem>
-            <ListItem disablePadding>
-              <Link
-                underline="none"
-                color="tertiary"
-                to="/planning/stocks"
-                component={RouterLink}
-                sx={{
-                  fontWeight: 500,
-                  fontSize: '1.1rem',
-                  color: 'text.primary',
-                  px: 4,
-                  py: 1.5,
-                  width: '12rem',
-                  my: 0.5,
-                  bgcolor: String(location.pathname).includes(
-                    '/planning/stocks',
-                  )
-                    ? 'tertiary.light'
-                    : 'transparent',
-                  '&:hover': {
-                    bgcolor: String(location.pathname).includes(
-                      '/planning/stocks',
-                    )
-                      ? 'tertiary.main'
-                      : 'tertiary.light',
-                  },
-                }}
-              >
-                Stocks
-              </Link>
-            </ListItem>
-          </>
+          <div>
+            {/* planning links */}
+            {planningLinks.map((item) => (
+              <ListItem key={item.name} disablePadding>
+                <Link
+                  underline="none"
+                  color="tertiary"
+                  to={item.path}
+                  component={RouterLink}
+                  sx={{
+                    fontWeight: String(location.pathname).includes(item.path)
+                      ? 500
+                      : 400,
+                    fontSize: '1.1rem',
+                    color: 'white',
+                    px: 4,
+                    py: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1,
+                    width: '100%',
+                    bgcolor: String(location.pathname).includes(item.path)
+                      ? 'secondary.dark'
+                      : 'transparent',
+                    '&:hover': {
+                      bgcolor: String(location.pathname).includes(item.path)
+                        ? 'secondary.dark'
+                        : 'secondary.dark',
+                    },
+                  }}
+                >
+                  {item.icon}
+                  {item.name}
+                </Link>
+              </ListItem>
+            ))}
+          </div>
         )}
       </List>
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '1.5rem',
+          left: 0,
+          right: 0,
+        }}
+      >
+        <Logout />
+      </Box>
     </Box>
   );
 }

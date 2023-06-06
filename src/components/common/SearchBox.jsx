@@ -40,14 +40,15 @@ function SearchBox({
         renderInput={(params) => (
           <TextField
             {...params}
-            InputLabelProps={{ sx: { pl: 4.5 }, shrink: false }}
+            InputLabelProps={{ sx: { pl: 5 }, shrink: false }}
             label={inputValue === '' ? label : ''}
             InputProps={{
               ...params.InputProps,
+              sx: { borderRadius: 5 },
               type: 'search',
               startAdornment: (
                 <>
-                  <InputAdornment position="start">
+                  <InputAdornment position="start" sx={{ ml: 1 }}>
                     <SearchIcon />
                   </InputAdornment>
                   {params.InputProps.startAdornment}

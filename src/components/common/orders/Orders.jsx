@@ -43,11 +43,10 @@ function Orders() {
         height: '100vh',
         maxHeight: '100vh',
         overflowY: 'auto',
-        backgroundColor: (theme) => theme.palette.background.paper,
       }}
     >
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography variant="h5" fontWeight={600} sx={{ mt: 2 }}>
+        <Typography variant="h3" fontWeight={600} sx={{ mt: 2 }}>
           Orders
         </Typography>
         <SearchWrapper orders={orders} />

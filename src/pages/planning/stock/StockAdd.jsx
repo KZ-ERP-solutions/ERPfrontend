@@ -1,15 +1,23 @@
 import {
   Button,
   Container,
-  Dialog,
+  Dialog as MuiDialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   TextField,
+  styled,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import api from '../../../utils/api';
+
+const Dialog = styled(MuiDialog)(() => ({
+  '& .MuiDialog-paper': {
+    borderRadius: 16,
+    overflowX: 'hidden',
+  },
+}));
 
 function StockAdd() {
   const [open, setOpen] = useState(false);
@@ -32,7 +40,9 @@ function StockAdd() {
         .catch((err) => console.log(`add stock err: ${err}`));
 
       formik.resetForm();
-      location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     },
   });
   return (
@@ -44,7 +54,7 @@ function StockAdd() {
       >
         Add
       </Button>
-      <Dialog onClick={() => setOpen(false)} open={open}>
+      <Dialog onClose={() => setOpen(false)} open={open}>
         <DialogTitle>Stock Data Entry Form</DialogTitle>
         <DialogContent>
           <Container sx={{ padding: '10px' }}>
@@ -87,7 +97,7 @@ function StockAdd() {
             </form>
           </Container>
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ mr: 1, mb: 1 }}>
           <Button onClick={() => setOpen(false)} variant="contained">
             Close
           </Button>

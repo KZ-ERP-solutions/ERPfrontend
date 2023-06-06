@@ -55,6 +55,14 @@ const api = {
         const path = '/planning/material_suggestion';
         return axios.get(path).then((res) => res.data);
       },
+      add: async (values) => {
+        const path = '/planning/Material_api/';
+        return axios.post(path, values).then((res) => res.data);
+      },
+      edit: async (values) => {
+        const path = './planning/Material_api/';
+        return axios.put(path, values).then((res) => res.data);
+      },
     },
     stock: {
       list: async () => {
@@ -73,10 +81,20 @@ const api = {
         const path = '/planning/stock_log/';
         return axios.get(path).then((res) => res.data);
       },
+      suggestions: async () => {
+        const path = '/planning/material_suggestion';
+        return axios.get(path).then((res) => res.data);
+      },
     },
     notification: {
       list: async () => {
         const path = '/planning/notify_limit/';
+        return axios.get(path).then((res) => res.data);
+      },
+    },
+    pi: {
+      list: async () => {
+        const path = '/planning/pi_api/';
         return axios.get(path).then((res) => res.data);
       },
     },

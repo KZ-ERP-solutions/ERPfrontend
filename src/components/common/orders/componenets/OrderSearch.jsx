@@ -41,7 +41,7 @@ function OrderSearch({ orders }) {
         renderInput={(params) => (
           <TextField
             {...params}
-            InputLabelProps={{ sx: { pl: 4.5 }, shrink: false }}
+            InputLabelProps={{ sx: { pl: 3 }, shrink: false }}
             label={inputValue === '' ? 'Search by wo/so no' : ''}
             InputProps={{
               ...params.InputProps,

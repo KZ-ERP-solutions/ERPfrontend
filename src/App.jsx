@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Marketing from './pages/Marketing';
 import Planning from './pages/planning/Planning';
 import SuperAdmin from './pages/SuperAdmin';
+import './components/common/table.css';
 
 function App() {
   return (

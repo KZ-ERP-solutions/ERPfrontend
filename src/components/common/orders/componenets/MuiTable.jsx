@@ -2,13 +2,12 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { visuallyHidden } from '@mui/utils';
-import { styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 function descendingComparator(a, b, orderBy) {
@@ -39,12 +38,6 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const TableHeadCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.tertiary.light,
-  },
-}));
-
 function EnhancedTableHead(props) {
   const {
     order, orderBy, onRequestSort, columns,
@@ -54,11 +47,11 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead sx={{}}>
+    <TableHead>
       <TableRow>
         {columns.length > 0
           && columns.map((column) => (
-            <TableHeadCell
+            <TableCell
               key={column.id}
               padding="normal"
               sortDirection={orderBy === column.id ? order : false}
@@ -77,7 +70,7 @@ function EnhancedTableHead(props) {
                   </Box>
                 ) : null}
               </TableSortLabel>
-            </TableHeadCell>
+            </TableCell>
           ))}
       </TableRow>
     </TableHead>
@@ -100,11 +93,7 @@ export default function MuiTable({ columns = [], rows = [] }) {
         <Table
           sx={{
             minWidth: 750,
-            borderLeft: 1,
-            borderRight: 1,
-            borderColor: 'tertiary.light',
           }}
-          aria-labelledby="tableTitle"
           size="medium"
         >
           <EnhancedTableHead
@@ -119,8 +108,6 @@ export default function MuiTable({ columns = [], rows = [] }) {
               ? stableSort(rows, getComparator(order, orderBy)).map((row) => (
                 <TableRow
                   key={row?.orderId}
-                  hover
-                  sx={{ bgcolor: 'background.paper' }}
                   onClick={() => navigate(`${row?.no ? `order/${row.no}` : ''}`)}
                   tabIndex={-1}
                 >

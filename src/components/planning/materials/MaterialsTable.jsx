@@ -61,11 +61,7 @@ export default function MaterialsTable({
           <TableBody>
             {rows.length > 0 && !filter
               ? rows.map((row) => (
-                <TableRow
-                  hover
-                  key={row.productid}
-                  sx={{ cursor: 'pointer' }}
-                >
+                <TableRow key={row.productid} sx={{ cursor: 'pointer' }}>
                   <TableCell>{row.matcode}</TableCell>
                   <TableCell>{row.matgroup}</TableCell>
                   {/* <TableCell>{row.standard ? 'Yes' : 'No'}</TableCell> */}
@@ -78,8 +74,9 @@ export default function MaterialsTable({
                 <TableCell colSpan={6} />
               </TableRow>
             )}
+
             {filter && filteredMaterial ? (
-              <TableRow hover sx={{ cursor: 'pointer' }}>
+              <TableRow sx={{ cursor: 'pointer' }}>
                 <TableCell>{filteredMaterial.matcode}</TableCell>
                 <TableCell>{filteredMaterial.matgroup}</TableCell>
                 {/* <TableCell>{row.standard ? 'Yes' : 'No'}</TableCell> */}
