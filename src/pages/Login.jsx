@@ -42,7 +42,7 @@ function Login() {
     dispatch(login({ username, password }))
       .unwrap()
       .then(() => {
-        navigate('/admin');
+        navigate('/planning');
         window.location.reload();
         setLoading(false);
       })
