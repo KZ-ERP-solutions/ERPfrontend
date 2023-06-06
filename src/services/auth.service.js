@@ -19,7 +19,6 @@ const login = (username, password) => axios
         JSON.stringify({ token: response.data.token }),
       );
     }
-
     return response.data;
   });
 

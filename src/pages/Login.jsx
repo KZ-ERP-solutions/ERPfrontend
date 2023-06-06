@@ -23,7 +23,7 @@ const initialValues = {
 const validationSchema = Yup.object().shape({
   username: Yup.string()
     .required('Username is required')
-    .min(6, 'Username must be at least 6 characters')
+    .min(5, 'Username must be at least 6 characters')
     .max(20, 'Username must not exceed 20 characters'),
   password: Yup.string().required('This field is required!'),
 });
@@ -33,17 +33,23 @@ function Login() {
   const navigate = useNavigate();
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
-  const handleLogin = (formValue) => {
-    const { username, password } = formValue;
-    // console.log(formValue)
+  const handleLogin = () => {
     setLoading(true);
 
-    dispatch(login({ username, password }))
-      .unwrap()
+    const { username, password } = formik.values;
+
+    dispatch(login(username, password))
       .then(() => {
-        navigate('/planning');
-        window.location.reload();
+        if (username === 'rejil' && password === 'marketing') {
+          navigate('/marketing');
+        } else if (username === 'rajesh' && password === 'planning') {
+          navigate('/planning');
+        } else {
+          setShowAlert(true);
+        }
+        
         setLoading(false);
       })
       .catch((err) => {
@@ -170,6 +176,20 @@ function Login() {
             </Button>
           </div>
         </form>
+        {showAlert && (
+          <Typography
+            variant="body2"
+            color="error"
+            sx={{
+              mt: 1,
+              textAlign: 'center',
+              backgroundColor: 'red',
+              color: 'black',
+            }}
+          >
+            Invalid username/password. Please try again.
+          </Typography>
+        )}
       </Box>
     </Container>
   );
