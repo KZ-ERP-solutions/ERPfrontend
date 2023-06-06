@@ -183,8 +183,7 @@ function Login() {
             sx={{
               mt: 1,
               textAlign: 'center',
-              backgroundColor: 'red',
-              color: 'black',
+              color: 'red',
             }}
           >
             Invalid username/password. Please try again.

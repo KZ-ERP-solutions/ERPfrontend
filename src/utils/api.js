@@ -15,6 +15,10 @@ const api = {
         const path = '/marketing/order/';
         return axios.post(path, order).then((res) => res.data);
       },
+      status: async () => {
+        const path = '/planning/status/';
+        return axios.get(path).then((res) => res.data);
+      },
     },
   },
   planning: {

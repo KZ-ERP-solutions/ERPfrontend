@@ -197,7 +197,7 @@ function Order() {
           <OrderOverview order={order} />
         </TabPanel>
         <TabPanel value={currentTab} index={1}>
-          <OrderStatusTable />
+          <OrderStatusTable orderNo={order.no} />
         </TabPanel>
         <TabPanel value={currentTab} index={2}>
           <OrderPayment order={order} />

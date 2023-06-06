@@ -8,29 +8,40 @@ import {
   TableRow,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function createData(dept, status, remarks) {
   return { dept, status, remarks };
 }
 
-function OrderStatusTable() {
+function OrderStatusTable({ orderNo }) {
   const [rows, setRows] = useState([]);
+  const [status, setStatus] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/planning/status/${orderNo}`)
+      .then((res) => {
+        setStatus(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     const rowsTemp = [];
     rowsTemp.push(
       createData(
         'Marketing',
-        'On going',
-        'Need to have a discussion with Planning head',
+        status.status,
+        '',
       ),
     );
-    rowsTemp.push(createData('Planning', 'Not started', ''));
-    rowsTemp.push(createData('Purchase', 'Not started', ''));
-    rowsTemp.push(createData('Design', 'Not started', ''));
-    rowsTemp.push(createData('Production', 'Not started', ''));
+    rowsTemp.push(createData('Planning', status.status, ''));
+    rowsTemp.push(createData('Purchase', status.status, ''));
+    rowsTemp.push(createData('Design', status.status, ''));
+    rowsTemp.push(createData('Production', status.status, ''));
     setRows(rowsTemp);
-  }, []);
+  }, [status]);
 
   return (
     <Box>

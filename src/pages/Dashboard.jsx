@@ -53,7 +53,9 @@ function Dashboard() {
       <Box sx={{ display: 'flex', justifyContent: 'end', gap: 2 }}>
         {/* Add other navigation tabs of dahboard here */}
         {deptName === 'planning' && <BOM />}
-        {/* <DataEntry updateList={() => setForceUpdate((prev) => !prev)} /> */}
+        {deptName === 'marketing' && (
+          <DataEntry updateList={() => setForceUpdate((prev) => !prev)} />
+        )}
         <AddOrder />
         <IconButton
           id="button"
