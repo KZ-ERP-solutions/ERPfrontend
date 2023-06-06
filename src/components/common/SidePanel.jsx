@@ -9,6 +9,8 @@ import {
   MdDesignServices,
   MdOutlineCategory,
   MdLeaderboard,
+  MdLocalAtm,
+  MdShoppingCart,
 } from 'react-icons/md';
 import Logout from './logout/Logout';
 
@@ -45,6 +47,16 @@ function SidePanel() {
       name: 'Stocks',
       path: '/planning/stocks',
       icon: <MdLeaderboard />,
+    },
+    {
+      name: 'Purchase Intent',
+      path: '/planning/pi',
+      icon: <MdLocalAtm />,
+    },
+    {
+      name: 'Purchase Order',
+      path: '/planning/po',
+      icon: <MdShoppingCart />,
     },
   ];
 
@@ -120,44 +132,46 @@ function SidePanel() {
         ))}
 
         <Divider sx={{ bgcolor: 'secondary.light', height: '1px', my: 1 }} />
-
-        {/* planning links */}
-        {planningLinks.map((item) => (
-          <ListItem key={item.name} disablePadding>
-            <Link
-              underline="none"
-              color="tertiary"
-              to={item.path}
-              component={RouterLink}
-              sx={{
-                fontWeight: String(location.pathname).includes(item.path)
-                  ? 500
-                  : 400,
-                fontSize: '1.1rem',
-                color: 'white',
-                px: 4,
-                py: 1,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 1,
-                width: '100%',
-                bgcolor: String(location.pathname).includes(item.path)
-                  ? 'secondary.dark'
-                  : 'transparent',
-                '&:hover': {
-                  bgcolor: String(location.pathname).includes(item.path)
-                    ? 'secondary.dark'
-                    : 'secondary.dark',
-                },
-              }}
-            >
-              {item.icon}
-              {item.name}
-            </Link>
-          </ListItem>
-        ))}
+        {deptName === 'planning' && (
+          <div>
+            {/* planning links */}
+            {planningLinks.map((item) => (
+              <ListItem key={item.name} disablePadding>
+                <Link
+                  underline="none"
+                  color="tertiary"
+                  to={item.path}
+                  component={RouterLink}
+                  sx={{
+                    fontWeight: String(location.pathname).includes(item.path)
+                      ? 500
+                      : 400,
+                    fontSize: '1.1rem',
+                    color: 'white',
+                    px: 4,
+                    py: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1,
+                    width: '100%',
+                    bgcolor: String(location.pathname).includes(item.path)
+                      ? 'secondary.dark'
+                      : 'transparent',
+                    '&:hover': {
+                      bgcolor: String(location.pathname).includes(item.path)
+                        ? 'secondary.dark'
+                        : 'secondary.dark',
+                    },
+                  }}
+                >
+                  {item.icon}
+                  {item.name}
+                </Link>
+              </ListItem>
+            ))}
+          </div>
+        )}
       </List>
-
       <Box
         sx={{
           position: 'absolute',

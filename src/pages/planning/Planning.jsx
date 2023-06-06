@@ -10,6 +10,8 @@ import Materials from './Materials';
 import Products from './Products';
 import Dashboard from '../Dashboard';
 import Stocks from './stock/Stocks';
+import PurchaseIntent from './PurchaseIntent';
+import PurchaseOrder from './PurchaseOrder';
 
 function Planning() {
   const location = useLocation();
@@ -32,6 +34,8 @@ function Planning() {
           <Route exact path="/products" element={<Products />} />
           <Route exact path="/materials" element={<Materials />} />
           <Route exact path="/stocks" element={<Stocks />} />
+          <Route exact path="/pi" element={<PurchaseIntent />} />
+          <Route exact path="/po" element={<PurchaseOrder />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Box>

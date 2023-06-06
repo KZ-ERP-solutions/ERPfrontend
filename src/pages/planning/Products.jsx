@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
-import { FaSitemap } from 'react-icons/fa';
 import api from '../../utils/api';
 import ProductsTable from '../../components/planning/products/ProductsTable';
 import SearchWrapper from '../../components/planning/products/SearchWrapper';
