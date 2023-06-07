@@ -36,8 +36,10 @@ function StockAdd() {
       //   .catch((err) => console.log(` stock api error:${err}`));
       api.planning.stock
         .add(values)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(`add stock err: ${err}`));
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
 
       formik.resetForm();
       setTimeout(() => {

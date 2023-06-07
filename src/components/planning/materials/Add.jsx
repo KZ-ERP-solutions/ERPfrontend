@@ -41,10 +41,14 @@ function Add() {
     onSubmit: async (values) => {
       api.planning.material
         .add(values)
-        .then((res) => console.log(res))
+        .then((res) => {
+          console.log(res);
+          setOpen(false);
+        })
         .catch((err) => console.log(err));
     },
   });
+
   return (
     <div>
       <Button variant="contained" onClick={() => setOpen(true)}>
