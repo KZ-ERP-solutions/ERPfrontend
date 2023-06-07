@@ -1,5 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import { Button, TextField } from '@mui/material';
+import { Alert, Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -7,6 +7,8 @@ import api from '../../../utils/api';
 
 function StockEdit(info) {
   const [data, setData] = useState('');
+  const [success, setSuccess] = useState(true);
+  const [alert, setAlert] = useState(false);
 
   useEffect(() => {
     api.planning.stock
@@ -25,8 +27,20 @@ function StockEdit(info) {
     onSubmit: async (values) => {
       await axios
         .put('http://localhost:8000/api/planning/Stock_api/', values)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          console.log(res);
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+          }, 4000);
+        })
+        .catch((err) => {
+          console.log(err);
+          setAlert(true);
+          setTimeout(() => {
+            setAlert(false);
+          });
+        });
       setTimeout(() => {
         window.location.reload();
       }, 500);
@@ -100,6 +114,7 @@ function StockEdit(info) {
           Update
         </Button>
       </form>
+      
     </div>
   );
 }

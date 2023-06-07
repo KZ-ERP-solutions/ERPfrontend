@@ -7,6 +7,7 @@ import {
   DialogTitle,
   TextField,
   styled,
+  Alert,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
@@ -21,6 +22,8 @@ const Dialog = styled(MuiDialog)(() => ({
 
 function Add() {
   const [open, setOpen] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -43,9 +46,19 @@ function Add() {
         .add(values)
         .then((res) => {
           console.log(res);
-          setOpen(false);
+          setSuccess(true);
+          formik.resetForm();
+          setTimeout(() => {
+            setSuccess(false);
+          }, 4000);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setAlert(true);
+          setTimeout(() => {
+            setAlert(false);
+          }, 4000);
+        });
     },
   });
 
@@ -54,7 +67,13 @@ function Add() {
       <Button variant="contained" onClick={() => setOpen(true)}>
         Add
       </Button>
-      <Dialog onClose={() => setOpen(false)} open={open}>
+      <Dialog
+        onClose={() => {
+          setOpen(false);
+          formik.resetForm();
+        }}
+        open={open}
+      >
         <DialogTitle>Add Materials</DialogTitle>
         <DialogContent>
           <Container>
@@ -206,7 +225,13 @@ function Add() {
           </Container>
         </DialogContent>
         <DialogActions sx={{ mb: 1, mr: 1 }}>
-          <Button onClick={() => setOpen(false)} variant="contained">
+          <Button
+            onClick={() => {
+              setOpen(false);
+              formik.resetForm();
+            }}
+            variant="contained"
+          >
             Cancel
           </Button>
           <Button
@@ -217,6 +242,16 @@ function Add() {
             Submit
           </Button>
         </DialogActions>
+        {success && (
+          <Alert variant="filled" severity="success">
+            Material is successfully added
+          </Alert>
+        )}
+        {alert && (
+          <Alert variant="filled" severity="error">
+            Material failed to added
+          </Alert>
+        )}
       </Dialog>
     </div>
   );

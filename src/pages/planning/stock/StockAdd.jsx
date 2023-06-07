@@ -7,6 +7,7 @@ import {
   DialogTitle,
   TextField,
   styled,
+  Alert,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
@@ -21,6 +22,8 @@ const Dialog = styled(MuiDialog)(() => ({
 
 function StockAdd() {
   const [open, setOpen] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -38,13 +41,19 @@ function StockAdd() {
         .add(values)
         .then((res) => {
           console.log(res);
+          formik.resetForm();
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+          }, 4000);
         })
-        .catch((err) => console.log(err));
-
-      formik.resetForm();
-      setTimeout(() => {
-        window.location.reload();
-      }, 500);
+        .catch((err) => {
+          console.log(err);
+          setAlert(true);
+          setTimeout(() => {
+            setAlert(false);
+          }, 4000);
+        });
     },
   });
   return (
@@ -56,7 +65,13 @@ function StockAdd() {
       >
         Add
       </Button>
-      <Dialog onClose={() => setOpen(false)} open={open}>
+      <Dialog
+        onClose={() => {
+          setOpen(false);
+          formik.resetForm();
+        }}
+        open={open}
+      >
         <DialogTitle>Stock Data Entry Form</DialogTitle>
         <DialogContent>
           <Container sx={{ padding: '10px' }}>
@@ -100,7 +115,13 @@ function StockAdd() {
           </Container>
         </DialogContent>
         <DialogActions sx={{ mr: 1, mb: 1 }}>
-          <Button onClick={() => setOpen(false)} variant="contained">
+          <Button
+            onClick={() => {
+              setOpen(false);
+              formik.resetForm();
+            }}
+            variant="contained"
+          >
             Close
           </Button>
           <Button
@@ -111,6 +132,16 @@ function StockAdd() {
             Submit
           </Button>
         </DialogActions>
+        {success && (
+          <Alert variant="filled" severity="success">
+            Stock is successfully added
+          </Alert>
+        )}
+        {alert && (
+          <Alert variant="filled" severity="error">
+            Stock failed to added
+          </Alert>
+        )}
       </Dialog>
     </>
   );

@@ -7,6 +7,7 @@ import {
   Skeleton,
   TextField,
   styled,
+  Alert,
 } from '@mui/material';
 import axios from 'axios';
 import { useFormik } from 'formik';
@@ -25,6 +26,8 @@ function Edit() {
   const [matcode, setMatcode] = useState('');
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
@@ -93,8 +96,21 @@ function Edit() {
 
       await axios
         .put(url, values)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          console.log(res);
+          formik.resetForm();
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+          }, 4000);
+        })
+        .catch((err) => {
+          console.log(err);
+          setAlert(true);
+          setTimeout(() => {
+            setAlert(false);
+          }, 4000);
+        });
     },
   });
   return (
@@ -329,6 +345,16 @@ function Edit() {
             Update
           </Button>
         </DialogActions>
+        {success && (
+          <Alert variant="filled" severity="success">
+            Material is successfully edited
+          </Alert>
+        )}
+        {alert && (
+          <Alert variant="filled" severity="error">
+            Material failed to edited
+          </Alert>
+        )}
       </Dialog>
     </div>
   );
