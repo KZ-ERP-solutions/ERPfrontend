@@ -310,14 +310,13 @@ function Edit() {
         </DialogContent>
         <DialogActions sx={{ mb: 1, mr: 1 }}>
           <Button
-            variant="contained"
+            variant="outlined"
             onClick={() => {
               setOpen(false);
               formik.resetForm();
               setMatcode('');
               setLoading(false);
             }}
-            disabled={matcode.length < 6}
           >
             Close
           </Button>

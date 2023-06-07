@@ -38,7 +38,7 @@ function AddOrder() {
   return (
     <>
       <Button
-        startIcon={<AddIcon />}
+        endIcon={<AddIcon />}
         variant="contained"
         onClick={handleClickOpen}
       >

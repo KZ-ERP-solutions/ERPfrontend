@@ -46,8 +46,8 @@ function OrderStatusTable({ orderNo }) {
   return (
     <Box>
       <TableContainer sx={{ borderRadius: 1 }}>
-        <Table sx={{ minWidth: 300, bgcolor: 'background.paper' }}>
-          <TableHead sx={{ bgcolor: 'tertiary.light' }}>
+        <Table sx={{ minWidth: 300, }}>
+          <TableHead >
             <TableRow>
               <TableCell>Department</TableCell>
               <TableCell>Status</TableCell>
@@ -59,11 +59,8 @@ function OrderStatusTable({ orderNo }) {
               && rows.map((row) => (
                 <TableRow
                   key={row.dept}
-                  sx={{
-                    '&:last-child td, &:last-child th': { border: 0 },
-                  }}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell >
                     {row.dept}
                   </TableCell>
                   <TableCell>{row.status}</TableCell>

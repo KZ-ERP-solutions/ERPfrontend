@@ -14,12 +14,12 @@ function createData(parameter, value) {
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-child(7n), &:first-child': {
-    backgroundColor: theme.palette.tertiary.light,
+    // backgroundColor: theme.palette.tertiary.light,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
+  // '&:last-child td, &:last-child th': {
+  //   border: 0,
+  // },
 }));
 
 export default function OrderOverview({ order }) {
@@ -98,18 +98,16 @@ export default function OrderOverview({ order }) {
           <Typography variant="h6" sx={{ mb: 1 }}>
             Details
           </Typography>
-          <TableContainer component={Paper}>
+          <TableContainer >
             <Table sx={{ minWidth: 300 }}>
               <TableBody>
                 {rowsDetails.length > 0
                   && rowsDetails.map((row) => (
                     <TableRow
                       key={row.name}
-                      sx={{
-                        '&:last-child td, &:last-child th': { border: 0 },
-                      }}
+                      
                     >
-                      <TableCell component="th" scope="row">
+                      <TableCell>
                         {row.parameter}
                       </TableCell>
                       <TableCell>{row.value}</TableCell>
@@ -126,13 +124,13 @@ export default function OrderOverview({ order }) {
             <Typography variant="h6" sx={{ mb: 1 }}>
               Items
             </Typography>
-            <TableContainer component={Paper}>
+            <TableContainer >
               <Table sx={{ minWidth: 300 }}>
                 <TableBody>
                   {rowsItems.length > 0
                     && rowsItems.map((row) => (
                       <StyledTableRow key={row.name}>
-                        <TableCell component="th" scope="row">
+                        <TableCell >
                           {row.parameter}
                         </TableCell>
                         <TableCell>{row.value}</TableCell>
@@ -158,18 +156,16 @@ export default function OrderOverview({ order }) {
           <Typography variant="h6" sx={{ mb: 1 }}>
             Status
           </Typography>
-          <TableContainer component={Paper}>
+          <TableContainer >
             <Table sx={{ minWidth: 300 }}>
               <TableBody>
                 {rowsStatus.length > 0
                   && rowsStatus.map((row) => (
                     <TableRow
                       key={row.name}
-                      sx={{
-                        '&:last-child td, &:last-child th': { border: 0 },
-                      }}
+                      
                     >
-                      <TableCell component="th" scope="row">
+                      <TableCell >
                         {row.parameter}
                       </TableCell>
                       <TableCell>{row.value}</TableCell>
@@ -185,18 +181,16 @@ export default function OrderOverview({ order }) {
           <Typography variant="h6" sx={{ mb: 1 }}>
             Customer
           </Typography>
-          <TableContainer component={Paper}>
+          <TableContainer >
             <Table sx={{ minWidth: 300 }}>
               <TableBody>
                 {rowsCustomer.length > 0
                   && rowsCustomer.map((row) => (
                     <TableRow
                       key={row.name}
-                      sx={{
-                        '&:last-child td, &:last-child th': { border: 0 },
-                      }}
+                      
                     >
-                      <TableCell component="th" scope="row">
+                      <TableCell >
                         {row.parameter}
                       </TableCell>
                       <TableCell>{row.value}</TableCell>
