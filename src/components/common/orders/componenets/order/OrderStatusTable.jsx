@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { yellow } from '@mui/material/colors';
 
 function createData(dept, status, remarks) {
   return { dept, status, remarks };
@@ -29,13 +30,7 @@ function OrderStatusTable({ orderNo }) {
 
   useEffect(() => {
     const rowsTemp = [];
-    rowsTemp.push(
-      createData(
-        'Marketing',
-        status.status,
-        '',
-      ),
-    );
+    rowsTemp.push(createData('Marketing', status.status, ''));
     rowsTemp.push(createData('Planning', status.status, ''));
     rowsTemp.push(createData('Purchase', status.status, ''));
     rowsTemp.push(createData('Design', status.status, ''));
@@ -46,8 +41,8 @@ function OrderStatusTable({ orderNo }) {
   return (
     <Box>
       <TableContainer sx={{ borderRadius: 1 }}>
-        <Table sx={{ minWidth: 300, }}>
-          <TableHead >
+        <Table sx={{ minWidth: 300 }}>
+          <TableHead>
             <TableRow>
               <TableCell>Department</TableCell>
               <TableCell>Status</TableCell>
@@ -57,13 +52,22 @@ function OrderStatusTable({ orderNo }) {
           <TableBody>
             {rows.length > 0
               && rows.map((row) => (
-                <TableRow
-                  key={row.dept}
-                >
-                  <TableCell >
-                    {row.dept}
+                <TableRow key={row.dept}>
+                  <TableCell>{row.dept}</TableCell>
+                  <TableCell
+                    sx={{
+                      color:
+                        row.status === 1
+                          ? 'red'
+                          : row.status === 2
+                            ? 'yellow'
+                            : row.status === 3
+                              ? 'red'
+                              : 'black',
+                    }}
+                  >
+                    {row.status}
                   </TableCell>
-                  <TableCell>{row.status}</TableCell>
                   <TableCell>{row.remarks}</TableCell>
                 </TableRow>
               ))}
