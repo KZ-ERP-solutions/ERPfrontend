@@ -77,7 +77,7 @@ function Add() {
         <DialogTitle>Add Materials</DialogTitle>
         <DialogContent>
           <Container>
-            <form>
+            <form onSubmit={formik.handleSubmit}>
               <TextField
                 fullWidth
                 margin="dense"
@@ -234,22 +234,18 @@ function Add() {
           >
             Cancel
           </Button>
-          <Button
-            type="submit"
-            onClick={formik.handleSubmit}
-            variant="contained"
-          >
+          <Button type="submit" variant="contained">
             Submit
           </Button>
         </DialogActions>
         {success && (
           <Alert variant="filled" severity="success">
-            Material is successfully added
+            Material is successfully add
           </Alert>
         )}
         {alert && (
           <Alert variant="filled" severity="error">
-            Material failed to added
+            Material failed to add
           </Alert>
         )}
       </Dialog>
