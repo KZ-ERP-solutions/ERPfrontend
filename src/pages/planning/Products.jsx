@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
-import api from "../../utils/api";
-import ProductsTable from "../../components/planning/products/ProductsTable";
-import SearchWrapper from "../../components/planning/products/SearchWrapper";
+import React, { useEffect, useState } from 'react';
+import { Box, Typography } from '@mui/material';
+import api from '../../utils/api';
+import ProductsTable from '../../components/planning/products/ProductsTable';
+import SearchWrapper from '../../components/planning/products/SearchWrapper';
+import ProductAdd from '../../components/planning/products/ProductAdd';
+import ProductEdit from '../../components/planning/products/ProductEdit';
 
 function Products() {
   const [products, setProducts] = useState({ results: [], count: 0 });
@@ -46,14 +48,18 @@ function Products() {
 
   return (
     <Box
-      sx={{ height: "100vh", p: 4, bgcolor: (theme) => theme.palette.grey[50] }}
+      sx={{ height: '100vh', p: 4, bgcolor: (theme) => theme.palette.grey[50] }}
     >
-      <Box sx={{ p: 3, bgcolor: "#fff" }}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ p: 3, bgcolor: '#fff' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="h4" fontWeight={600}>
             All Products
           </Typography>
-          <SearchWrapper filter={(value) => handleSetFilter(value)} />
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <SearchWrapper filter={(value) => handleSetFilter(value)} />
+            <ProductAdd />
+            <ProductEdit />
+          </Box>
         </Box>
         <ProductsTable
           rows={products.results}
