@@ -5,22 +5,31 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
+// import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+
 import { LinearProgress, Typography } from '@mui/material';
 
 const headCells = [
   {
-    id: 'matcode',
-    label: 'Material code',
+    id: 'pono',
+    label: 'PO No',
   },
   {
-    id: 'matgroup',
-    label: 'Material group',
+    id: 'prno',
+    label: 'PR No',
   },
   {
-    id: 'title',
-    label: 'Material name',
+    id: 'pryear',
+    label: 'PR Year',
+  },
+  {
+    id: 'srlno',
+    label: 'SRL No',
+  },
+  {
+    id: 'submitted',
+    label: 'Submitted',
   },
 ];
 
@@ -36,51 +45,48 @@ function EnhancedTableHead() {
   );
 }
 
-export default function MaterialsTable({
-  rows,
-  page,
-  count,
-  changePage,
+export default function PIsTable({
+  rows = [],
+  //   page,
+  //   count,
+  //   changePage,
   loading,
-  rowsPerPage = 10,
+  //   rowsPerPage = 10,
   filter,
 }) {
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  //   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const filteredMaterial = rows.find((mat) => mat.matcode === filter);
+  const filteredProduct = rows.find((prod) => prod.productid === filter);
 
   return (
     <Box sx={{ width: '100%' }}>
       <TableContainer sx={{ width: '100%' }}>
-        <Table
-          sx={{ minWidth: 750, width: '100%' }}
-          aria-labelledby="tableTitle"
-        >
-          <EnhancedTableHead rowCount={rows.length} />
+        <Table sx={{ minWidth: 750, width: '100%' }}>
+          <EnhancedTableHead />
           <TableBody>
             {rows.length > 0 && !filter
               ? rows.map((row) => (
-                <TableRow key={row.productid} sx={{ cursor: 'pointer' }}>
-                  <TableCell>{row.matcode}</TableCell>
-                  <TableCell>{row.matgroup}</TableCell>
-                  {/* <TableCell>{row.standard ? 'Yes' : 'No'}</TableCell> */}
-                  <TableCell>{row.title}</TableCell>
+                <TableRow key={row.pono}>
+                  <TableCell>{row.pono}</TableCell>
+                  <TableCell>{row.prno}</TableCell>
+                  <TableCell>{row.pryear}</TableCell>
+                  <TableCell>{row.srlno}</TableCell>
+                  <TableCell>{row.standard ? 'Yes' : 'No'}</TableCell>
                 </TableRow>
               ))
               : null}
-            {emptyRows > 0 && (
+            {/* {emptyRows > 0 && (
               <TableRow>
                 <TableCell colSpan={6} />
               </TableRow>
-            )}
-
-            {filter && filteredMaterial ? (
-              <TableRow sx={{ cursor: 'pointer' }}>
-                <TableCell>{filteredMaterial.matcode}</TableCell>
-                <TableCell>{filteredMaterial.matgroup}</TableCell>
-                {/* <TableCell>{row.standard ? 'Yes' : 'No'}</TableCell> */}
-                <TableCell>{filteredMaterial.title}</TableCell>
+            )} */}
+            {filter && filteredProduct ? (
+              <TableRow>
+                <TableCell>{filteredProduct.productid}</TableCell>
+                <TableCell>{filteredProduct.productname}</TableCell>
+                <TableCell>{filteredProduct.standard ? 'Yes' : 'No'}</TableCell>
+                <TableCell>{filteredProduct.taxid}</TableCell>
               </TableRow>
             ) : filter ? (
               <Typography
@@ -89,7 +95,7 @@ export default function MaterialsTable({
                 align="center"
                 sx={{ my: 2 }}
               >
-                Failed to find material with code
+                Failed to find product with id
                 {' '}
                 {filter}
               </Typography>
@@ -98,7 +104,7 @@ export default function MaterialsTable({
         </Table>
       </TableContainer>
       {loading && <LinearProgress />}
-      {!filter && (
+      {/* {!filter && (
         <TablePagination
           rowsPerPageOptions={[]}
           component="div"
@@ -107,7 +113,7 @@ export default function MaterialsTable({
           page={page}
           onPageChange={changePage}
         />
-      )}
+      )} */}
     </Box>
   );
 }
