@@ -7,6 +7,7 @@ import {
   DialogTitle,
   TextField,
   styled,
+  Alert,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
@@ -25,6 +26,8 @@ function Edit() {
   const [matcode, setMatcode] = useState([]);
   const [selectValue, setSelectedValue] = useState(null);
   const [list, setList] = useState([]);
+  const [success, setSuccess] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   useEffect(() => {
     api.planning.stock
@@ -77,8 +80,21 @@ function Edit() {
     onSubmit: async (values) => {
       await axios
         .put('http://localhost:8000/api/planning/Stock_api/', values)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          console.log(res);
+          formik.resetForm();
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+          }, 4000);
+        })
+        .catch((err) => {
+          console.log(err);
+          setAlert(true);
+          setTimeout(() => {
+            setAlert(false);
+          }, 4000);
+        });
     },
   });
 
@@ -91,7 +107,13 @@ function Edit() {
       >
         Edit
       </Button>
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      <Dialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+          formik.resetForm();
+        }}
+      >
         <DialogTitle>Stock Edit</DialogTitle>
         <DialogContent>
           <Autocomplete
@@ -164,7 +186,13 @@ function Edit() {
           </form>
         </DialogContent>
         <DialogActions sx={{ mr: 1, mb: 1 }}>
-          <Button variant="contained" onClick={() => setOpen(false)}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              setOpen(false);
+              formik.resetForm();
+            }}
+          >
             Close
           </Button>
           <Button
@@ -175,6 +203,16 @@ function Edit() {
             Update
           </Button>
         </DialogActions>
+        {success && (
+          <Alert variant="filled" severity="success">
+            Stock is successfully edited
+          </Alert>
+        )}
+        {alert && (
+          <Alert variant="filled" severity="error">
+            Stock failed to edited
+          </Alert>
+        )}
       </Dialog>
     </div>
   );

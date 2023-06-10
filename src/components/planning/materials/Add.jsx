@@ -7,6 +7,7 @@ import {
   DialogTitle,
   TextField,
   styled,
+  Alert,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
@@ -21,6 +22,8 @@ const Dialog = styled(MuiDialog)(() => ({
 
 function Add() {
   const [open, setOpen] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -41,20 +44,40 @@ function Add() {
     onSubmit: async (values) => {
       api.planning.material
         .add(values)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          console.log(res);
+          setSuccess(true);
+          formik.resetForm();
+          setTimeout(() => {
+            setSuccess(false);
+          }, 4000);
+        })
+        .catch((err) => {
+          console.log(err);
+          setAlert(true);
+          setTimeout(() => {
+            setAlert(false);
+          }, 4000);
+        });
     },
   });
+
   return (
     <div>
       <Button variant="contained" onClick={() => setOpen(true)}>
         Add
       </Button>
-      <Dialog onClose={() => setOpen(false)} open={open}>
+      <Dialog
+        onClose={() => {
+          setOpen(false);
+          formik.resetForm();
+        }}
+        open={open}
+      >
         <DialogTitle>Add Materials</DialogTitle>
         <DialogContent>
           <Container>
-            <form>
+            <form onSubmit={formik.handleSubmit}>
               <TextField
                 fullWidth
                 margin="dense"
@@ -202,17 +225,29 @@ function Add() {
           </Container>
         </DialogContent>
         <DialogActions sx={{ mb: 1, mr: 1 }}>
-          <Button onClick={() => setOpen(false)} variant="contained">
-            Cancel
-          </Button>
           <Button
-            type="submit"
-            onClick={formik.handleSubmit}
+            onClick={() => {
+              setOpen(false);
+              formik.resetForm();
+            }}
             variant="contained"
           >
+            Cancel
+          </Button>
+          <Button type="submit" variant="contained">
             Submit
           </Button>
         </DialogActions>
+        {success && (
+          <Alert variant="filled" severity="success">
+            Material is successfully add
+          </Alert>
+        )}
+        {alert && (
+          <Alert variant="filled" severity="error">
+            Material failed to add
+          </Alert>
+        )}
       </Dialog>
     </div>
   );

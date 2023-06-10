@@ -15,6 +15,10 @@ const api = {
         const path = '/marketing/order/';
         return axios.post(path, order).then((res) => res.data);
       },
+      status: async () => {
+        const path = '/planning/status/';
+        return axios.get(path).then((res) => res.data);
+      },
     },
   },
   planning: {
@@ -45,8 +49,16 @@ const api = {
         const path = '/planning/product_suggestions';
         return axios.get(path).then((res) => res.data);
       },
+      add: async (values) => {
+        const path = 'planning/Product_api/';
+        return axios.post(path, values).then((res) => res.data);
+      },
     },
     material: {
+      getById: (id) => {
+        const path = `/planning/Material_api/${id}`;
+        return axios.get(path).then((res) => res.data);
+      },
       list: async (page) => {
         const path = `/planning/Material_api/?page=${page}`;
         return axios.get(path).then((res) => res.data);
@@ -60,11 +72,15 @@ const api = {
         return axios.post(path, values).then((res) => res.data);
       },
       edit: async (values) => {
-        const path = './planning/Material_api/';
+        const path = '/planning/Material_api/';
         return axios.put(path, values).then((res) => res.data);
       },
     },
     stock: {
+      getById: (id) => {
+        const path = `/planning/Stock_api/${id}`;
+        return axios.get(path).then((res) => res.data);
+      },
       list: async () => {
         const path = '/planning/Stock_api/';
         return axios.get(path).then((res) => res.data);

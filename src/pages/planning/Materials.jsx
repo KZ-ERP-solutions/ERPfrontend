@@ -11,21 +11,37 @@ function Products() {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState(null);
-
+  console.log(filter);
   useEffect(() => {
-    setLoading(true);
-    api.planning.material
-      .list(page + 1)
-      .then((res) => {
-        console.log(res);
-        setMaterials(res);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
-  }, [page]);
+    if (filter) {
+      setLoading(true);
+      api.planning.material
+        .getById(filter)
+        .then((res) => {
+          console.log(res);
+          setLoading(false);
+
+          setMaterials({ results: [res], count: 1 });
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    } else {
+      setLoading(true);
+      api.planning.material
+        .list(page + 1)
+        .then((res) => {
+          console.log(res);
+          setMaterials(res);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    }
+  }, [page, filter]);
 
   const handleSetFilter = (key) => setFilter(key);
   const handlePageChange = (newPage) => setPage(newPage);
@@ -54,7 +70,7 @@ function Products() {
           count={materials.count}
           loading={loading}
           changePage={(event, newPage) => handlePageChange(newPage)}
-          filter={filter}
+          // filter={filter}
         />
       </Box>
     </Box>
