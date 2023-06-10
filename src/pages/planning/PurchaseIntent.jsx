@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import api from '../../utils/api';
-import ProductsTable from '../../components/planning/products/ProductsTable';
-import SearchWrapper from '../../components/planning/products/SearchWrapper';
 import PIsTable from '../../components/planning/PIs/PIsTable';
+import SearchWrapper from '../../components/planning/PIs/SearchWrapper';
 
 function PurchaseIntent() {
   const [pis, setPIs] = useState([]);
@@ -38,7 +37,7 @@ function PurchaseIntent() {
           <Typography variant="h4" fontWeight={600}>
             All Purchase Intents
           </Typography>
-          {/* <SearchWrapper filter={(value) => handleSetFilter(value)} /> */}
+          <SearchWrapper filter={(value) => handleSetFilter(value)} />
         </Box>
         <PIsTable
           rows={pis}
